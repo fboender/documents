@@ -1,0 +1,77 @@
+body {
+	font-family:'Times new roman', serif;
+	max-width:52.666em;
+}
+
+div#header {
+	text-align: center;
+}
+
+h1,h2,h3,h4,h5 {
+	font-family:'Times new roman', serif;
+	font-weight: normal;
+}
+
+h1 {
+	font-size:40px;
+	margin-bottom: 150px;
+}
+
+div#toc {
+	text-align: left;
+}
+
+h2, div#toctitle {
+	font-size:28.3px;
+	line-height:1.413;
+	margin-top: 100px;
+}
+
+div#toctitle {
+	margin-bottom: 40px;
+}
+
+h3 {
+	font-size:20px;
+	line-height:1;
+	margin-top: 25px;
+}
+
+h4 {
+	font-size:15px;
+	line-height:1.5;
+}
+
+p {
+	margin-left: 20px;
+	text-align: justify;
+	line-height: 1.2em;
+}
+
+pre {
+	margin-left: 40px;
+	border-left: 1px solid #D0D0D0;
+	padding-left: 5px;
+}
+
+ul {
+	margin-left: 20px;
+}
+
+div.toclevel1 {
+	margin-left: 20px;
+}
+
+div.toclevel2 {
+	margin-left: 40px;
+}
+
+div.toclevel3 {
+	margin-left: 60px;
+}
+
+div.toclevel4 {
+	margin-left: 80px;
+}
+
+/* vim: set ft=css ts=4 sw=4 noexpandtab: */
