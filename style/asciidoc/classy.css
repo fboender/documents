@@ -42,10 +42,17 @@ h4 {
 	line-height:1.5;
 }
 
-p {
+p, dl {
 	margin-left: 20px;
 	text-align: justify;
 	line-height: 1.2em;
+}
+
+dl dt {
+	font-style: italic;
+}
+dl dd p {
+	margin-top: 0px;
 }
 
 pre {
@@ -72,6 +79,11 @@ div.toclevel3 {
 
 div.toclevel4 {
 	margin-left: 80px;
+}
+
+div.admonitionblock div.title {
+	font-weight: bold;
+	margin-right: 20px;
 }
 
 /* vim: set ft=css ts=4 sw=4 noexpandtab: */
