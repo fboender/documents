@@ -1,0 +1,1242 @@
+<html>
+<head>
+	<style>
+		body { font-family: verdana, arial, helvetica, times new roman; font-size: 12px; }
+		table   { margin-left: 10px; font-size: small; }
+		p    { margin-left: 10px;}
+		pre  { margin-left: 10px; background-color: #D0D0D0; font-size: 12px; }
+		code { font-size: 12px; background-color: #D0D0D0;}
+		a    { text-decoration: none; }
+		hr   { heigth: 1px; }
+	</style>
+	<title>BitchX tutorial</title>
+</head>
+<body bgcolor="#ffffff">
+
+<h1>BitchX Tutorial</h1>
+<h3>version 0.2</h3>
+<h3><font color="#FF0000">This document has been discontinued</font></h3>
+Copyright (C), 2001 by Ferry Boender. See the bottom of this document
+for more information. 		 
+
+<h1>1. Contents</h1>
+<p>
+<img src="" height="1" width="00">1. <a href="#1">Contents</a><br>
+<img src="" height="1" width="00">2. <a href="#2">About this document</a><br>
+<img src="" height="1" width="20">	2.1 <a href="#2.1">What's it about?</a><br>
+<img src="" height="1" width="20">	2.2 <a href="#2.2">What it's not about</a><br>
+<img src="" height="1" width="00">3. <a href="#3">About BitchX</a><br>
+<img src="" height="1" width="20">	3.1 <a href="#3.1">What is BitchX</a><br>
+<img src="" height="1" width="20">	3.2 <a href="#3.2">Obtaining BitchX</a><br>
+<img src="" height="1" width="20">	3.3 <a href="#3.3">More documentation on BitchX</a><br>
+<img src="" height="1" width="00">4. <a href="#4">Chatting</a><br>
+<img src="" height="1" width="20">	4.1 <a href="#4.1">Connecting to a server</a><br>
+<img src="" height="1" width="20">	4.2 <a href="#4.2">Chatting on a channel (public)</a><br>
+<img src="" height="1" width="40">		4.2.1 <a href="#4.2.1">Joining the channel</a><br>
+<img src="" height="1" width="40">		4.2.2 <a href="#4.2.2">Leaving the channel</a><br>
+<img src="" height="1" width="20">	4.3 <a href="#4.3">Chatting on multiple channels (public)</a><br>
+<img src="" height="1" width="20">	4.4 <a href="#4.4">Chatting to a user (private)</a><br>
+<img src="" height="1" width="20">	4.5 <a href="#4.5">Protecting yourself</a><br>
+<img src="" height="1" width="20">	4.6 <a href="#4.6">Quiting BitchX</a><br>
+<img src="" height="1" width="20">	4.7 <a href="#4.7">Other chatting thingies</a><br>
+<img src="" height="1" width="00">5. <a href="#5">Windows</a><br>
+<img src="" height="1" width="20">	5.1 <a href="#5.1">Creating a new window</a><br>
+<img src="" height="1" width="20">	5.2 <a href="#5.2">Changing windows</a><br>
+<img src="" height="1" width="20">	5.3 <a href="#5.3">Using a window</a><br>
+<img src="" height="1" width="40">		5.3.1 <a href="#5.3.1">Channel (public)</a><br>
+<img src="" height="1" width="40">		5.3.2 <a href="#5.3.2">User (private)</a><br>
+<img src="" height="1" width="40">		5.3.3 <a href="#5.3.3">Multiple servers</a><br>
+<img src="" height="1" width="20">	5.4 <a href="#5.4">Settings a window's level</a><br>
+<img src="" height="1" width="20">	5.5 <a href="#5.5">Removing a window</a><br>
+<img src="" height="1" width="20">	5.6 <a href="#5.6">Other window options</a><br>
+<img src="" height="1" width="20">	5.7 <a href="#5.7">Usefull aliases</a><br>
+<img src="" height="1" width="00">6. <a href="#6">Customizing BitchX</a><br>
+<img src="" height="1" width="20">	6.1 <a href="#6.1">Aliases</a><br>
+<img src="" height="1" width="20">	6.2 <a href="#6.2">Keybindings</a><br>
+<img src="" height="1" width="40">		6.2.1 <a href="#6.2.1">Keys</a><br>
+<img src="" height="1" width="40">		6.2.2 <a href="#6.2.2">Functions</a><br>
+<img src="" height="1" width="20">	6.3 <a href="#6.3">Settings</a><br>
+<img src="" height="1" width="20">	6.4 <a href="#6.4">Changing formats</a><br>
+<img src="" height="1" width="40">		6.4.1 <a href="#6.4.1">About formats</a><br>
+<img src="" height="1" width="40">		6.4.2 <a href="#6.4.2">Formats</a><br>
+<img src="" height="1" width="40">		6.4.3 <a href="#6.4.3">Timestamps</a><br>
+<img src="" height="1" width="40">		6.4.4 <a href="#6.4.4">Colors</a><br>
+<img src="" height="1" width="20">	6.5 <a href="#6.5">Misc settings</a><br>
+<img src="" height="1" width="00">7. <a href="#7">Operator options</a><br>
+<img src="" height="1" width="20">	7.1 <a href="#7.1">Setting channel modes</a><br>
+<img src="" height="1" width="20">	7.2 <a href="#7.2">Protecting your channel</a><br>
+<img src="" height="1" width="20">		7.2.1 <a href="#7.2.1">Kicking users</a><br>
+<img src="" height="1" width="20">		7.2.2 <a href="#7.2.2">Banning users</a><br>
+<img src="" height="1" width="20">		7.2.3 <a href="#7.2.3">Modes for channel protection</a><br>
+<img src="" height="1" width="20">	7.3 <a href="#7.3">Automatically protecting other users</a><br>
+<img src="" height="1" width="00">8. <a href="#8">References</a><br>
+<img src="" height="1" width="00">9. <a href="#9">Document information</a><br>
+<img src="" height="1" width="20">	9.1 <a href="#9.1">History</a><br>
+<img src="" height="1" width="20">	9.2 <a href="#9.2">To Do</a><br>
+<img src="" height="1" width="20">	9.3 <a href="#9.3">Contributing</a><br>
+<img src="" height="1" width="00">10. <a href="#10">Copyright</a><br>
+</p>
+
+<hr noshade size="1">
+<h1><a name="2">2. About this document.</a></h1>
+<h2><a name="2.1">2.1 What's it about?</a></h2>
+	<p>BitchX can be a real Bitch to work with. The documentation 
+	is poorly written, or so it seams if you do not know where to look for the 
+	right documentation. It the interface can be complicated and do one thing 
+	at one time and another the next day. Due to my dissatisfaction with current 
+	documentations, I decided to write up this small document in the hope of providing
+	some usefull information to the newbie bitchx users out there. But even if
+	you've been using BitchX for quite some time, you might still find this document
+	usefull.</p>
+<h2><a name="2.2">2.2 What it's not about.</a></h2>
+	<p>Please note that this is <b>not</b> an installation guide to BitchX, and 
+	neither is it a tutorial for IRC. A working BitchX client and some knowledge 
+	about what IRC is, and how it generally works is needed in order to understand 
+	this document. This document is about BitchX, the commandline client. It's
+	not about the Gtk version of BitchX, though most (if not all) features discussed
+	here, will probably also work with gtk-bitchx.</p>
+
+
+<hr noshade size="1">
+<h1><a name="3">3. About BitchX.</a></h1>
+<h2><a name="3.1">3.1 What is BitchX</a></h2>
+	*** INSERT ABOUT BITCHX INFORMATION
+	<p>BitchX is based on another very popular IRC client, named 
+	IrcII, one of the first irc clients. Since ircII is open source software, they were 
+	able to take it's sourcecode, and simply extend it with various elements. 
+	BitchX is sometimes known as the 'hackers irc client', mainly because of it's
+	advanced IRC features/hacks and because of it's cryptic interface.</p>
+<h2><a name="3.2">3.2 Obtaining BitchX</a></h2>
+	*** INSERT INFO ABOUT OBTAINING BITCHX. URLS, FTP'S, DEBIAN PACKACKES, REDHAT
+	*** PACKAGES
+<h2><a name="3.3">3.3 More documentation on BitchX</a></h2>
+	<p>Because most of BitchX's code base lies in ircII, most of ircII's documentation 
+	can also be applied on BitchX. Knowing this will put you one step further 
+	into getting to know BitchX. Many documents and tutorials can be found on 
+	the internet about ircII, as well as the documents distributed with ircII. 
+	At the end of this document, I have put a couple of links which refer to more
+	documentation about ircII and BitchX in the hope that you may use them to
+	extend your knowledge about BitchX.</p>
+
+
+<hr noshade size="1">
+<h1><a name="4">4. Chatting.</a></h1>
+	<p>First of all, I'll teach you some basic IRC-ing features of BitchX.</p>
+<h2><a name="4.1">4.1 Connecting to a server</a></h2>
+	<p>Connecting to an IRC server is easy. In this example, we'll connect to the 
+	irc.nl.uu.net server (IRCNet) with the username toDDie:</p>
+	<pre>[todsah@sharky]~$ bitchx toDDie irc.nl.uu.net</pre>
+	<p>You'll now see bitchx being started, and connecting to the specified server,
+	namely irc.nl.uu.net:</p>
+	<pre>-:- Connecting to port 6667 of server irc.nl.uu.net [refnum 0]</pre>
+	<p>After a while, the client will connect to the server, and some information
+	will fly over the screen. Some modes will be changed, and the client will
+	then wait for input from the user (that's you). In some cases, it will take
+	extremely long before bitchx can connect to the server. Waiting for about
+	10 to 20 seconds is not unusual in these cases. If this also happens to you,
+	your ident may be the problem. When connecting to an IRC server, the server
+	requests your ident. For this to work, the machine you are connecting from
+	(please note that this is the machine through which you connect to the internet,
+	and may not be the machine you are running bitchx from. It might also be
+	your networks gateway) must run an ident server. You can check if it is running
+	this by either running the following command on the commandline :</p>
+	<pre>[todsah@sharky]~$ ps ax | grep identd</pre>
+	<p>When you don't see a line like this:</p>
+	<pre>   283 ?     S     0:01 identd</pre>
+	<p>something is wrong, and you should start/fix your identd server. Identd seems
+	to have some difficulties when running from inetd (the internet super server).
+	This was at least the case with my Debian GNU/Linux v2.2 machine. The fix
+	was to not start identd from inetd, but as a normal daemon.</p>
+<h2><a name="4.2">4.2 Chatting on a channel (public)</a></h2>
+	<p>In order to start chatting, you will either need to join a channel, or 
+	know some usernames. To find out what channels are on the current IRC server,
+	just type the IRC command:</p> 
+	<pre>/list</pre>
+	<p>The bitchx client will now tell you that this is not a good idea, and that
+	you should add -YES to the command of you really want to run this command.
+	BitchX isn't kidding when it said this wasn't a good idea. Why? Because most
+	public IRC servers have so many channels, that it'll take forever to list
+	them all. Neither you, nor the IRC server you are connected to will like
+	it if you do this. You might even be disconnected.</p>
+	<p>It's easier to just ask somebody who's already on IRC on which channel they
+	reside, and join that channel. For instance: #toktok. 
+<h3><a name="4.2.1">4.2.1 Joining the channel</a></h3>
+	To join a channel named #toktok channel, simply type:</p>
+	<pre>/j #toktok</pre>
+	<p>BitchX will join the channel, and show you some information about the 
+	channel:</p>
+	<pre>
+	-:- Topic (#toktok): Welcome to #toktok.
+	-:- [Users(#toktok:10)] 
+	[ toDDie&nbsp;&nbsp;&nbsp; ] [ BirdSgool ] [@Crasp&nbsp;&nbsp;&nbsp;&nbsp; ] [@toDSaH&nbsp;&nbsp;&nbsp; ] [ DoingK|Na ] 
+	[ AczWeg&nbsp;&nbsp;&nbsp; ] [ Zew[AWAY] ] [ Fluxi&nbsp;&nbsp;&nbsp;&nbsp; ] [ tribbel&nbsp;&nbsp; ] [@Ztn-na&nbsp;&nbsp;&nbsp; ]
+	-:- BitchX: Join to #toktok was synched in 5.656 secs!!
+	</pre>
+	<p>Each channel can have a topic. In order to set the topic, you can use the
+	/topic command:</p>
+	<pre>[#toktok] /topic Hey, I'm the new guy! Grtz, toDDie.</pre>
+	<p>Some channels will not allow you to change the topic. In this case the 
+	channel operators (the people with an @ infront of their name) have set the 
+	mode of the channel '-t', which means that only other operators may change the
+	topic.</p>
+	<p>When joining the channel, bitchx will automatically show you the number of
+	users currently on the channel, and a list of their nicknames. You can get
+	this list yourself at anytime (as long as you are on the channel) by 
+	typing:</p>
+	<pre>/scan</pre>
+	<p>A more extensive list can be retrieved by typing:</p>
+	<pre>/who</pre>
+	<p>This will also show the users mode, hostname and realname. Yet another method
+	is pressing F2 and F3. F2 shows which operators are on the channel, and F3
+	shows which non-operators are on the channel.</p>
+	<p>If you want to say something to the channel, just type it at the prompt. The
+	text you typed will then appear on the channel, for everybody on the channel to 
+	see. If you want to see something on the channel to which you say to someone 
+	specific, it's general to type in their nickname, followed by a colon (':"), 
+	or a comma (','):</p>
+	<pre>[#toktok] Zetion: Hey, how are you doing?</pre>
+	<p>The receiving user (in this case user 'Zetion') will see his nickname 
+	highlighted in this sentence. BitchX has tab-completion, which means that you
+	only have to enter part of the name, i.e 'Ze' and then can press the tab key, 
+	and bitchx will complete the name from 'Ze' to 'Zetion' if possible. If 
+	you're on a slow channel, and your already talking to a specific user, and 
+	he's talking to you, this isn't neccesary. Just use your common sence. If 
+	the user will know you're talkin to him/her, there's no need to prefix your 
+	sentence with their nickname. (Also see the Netiquette chapter somewhere else
+	in this document)</p>
+	<p>If you want to express somehthing, you can use the /me command (talk in 
+	the third person about yourself):</p>
+	<pre>[#toktok] /me doesn't like it here</pre>
+	<p>This will be shown on the channel as:</p>
+	<pre>* toDSaH doesn't like it here</pre>
+<h3><a name="4.2.2">4.2.2 Leaving the channel</a></h3>
+	<p>If you get tired of the channel, you can leave it by typing:</p>
+	<pre>[#toktok] /part #toktok</pre>
+	<p>or:</p>
+	<pre>[#toktok] /part #toktok I'm tired of you people</pre>
+	<p>In which case the users which remain on the channel will see something
+	like:</p>
+	<pre>-:- toDDie has left #toktok: I'm tired of you people</pre>
+<h2><a name="4.3">4.3 Chatting on multiple channels (public)</a></h2>
+	<p>Most users don't just wanna chat on one channel, but on several channels at the same time. This is possible 
+	in bitchx. There are multiple ways in which you can do this. If you want to
+	join, for example, channels #channel1 and #channel2, you can simply type:</p>
+	<pre>[0] /j #channel1
+	[#channel1] /j #channel2</pre>
+	<p>You can now talk on both channel1 and channel2. Things said on the 
+	channel will appear on the same screen, pre- or appended with the channel 
+	it was said on. You can tell to which channel things you type will be sent 
+	by looking at the name of the channel in front of the prompt 
+	( [#channel1] ). You can change channels by pressing Ctrl-x.</p>
+	<p>This method can be quite confusing. When somebody says something on 
+	#channel1, it's not uncommon to make the mistake of replying on #channel2. 
+	You'll probably get used to it, but there are better ways of doing it.
+	To do it better, you'll have to read the Windows section elsewhere in this
+	document.</p>
+<h2><a name="4.4">4.4 Chatting to a user (private)</a></h2>
+	<p>The time will come at which you will want to gossip about a user, but 
+	that user just happens to be on the channel you're on too. In this case you
+	can send a user a private message, which only they will see. To do this, you
+	use the /msg command. Just type:</p>
+	<pre>[#channel1] /msg joe Hey joe, I think John is such a loser, don't you?</pre>
+	<p>Only user 'joe' will see this message</p>
+	*** INSERT EXAMPLES OF BITCHX FORMATS FOR PRIVATE MESSAGES.
+	<p>Tab completion also works in this case. When typing '/msg jo', followed
+	by the tab key, the name will be completed. But be carefull, because user
+	'joe' starts with 'jo', but user 'john' does too! It's only a guess to 
+	which username bitchx will complete the 'jo' part. It might very well
+	complete it to 'john'. Upon recieving a private message from someone, it's
+	possible to simply press the 'tab' key right away, and bitchx will 
+	automatically generate a command to send a private message to the last
+	person from whom you recieved a private message.</p>
+	<p>Hitting tab can become teadeous after a while. If you're planning long
+	private conversations with someone, you might want to use the /query 
+	command. The /query command allows you to talk privately to a user like you
+	would publically to a channel. When used like this:</p>
+	<pre>[#toktok] /query Zetion</pre>
+	You'll see a message notifiyng you of the fact that you have now started
+	a conversation with Zetion. [Query: Zetion] will appear in the status bar.
+	Everything you now type will be sent to user Zetion (eventhough your 
+	commandprompt may still say: [#toktok] ). To end the conversation, type
+	/query without a nickname. Note that if the user you are querying changes
+	his or her nickname, you will still send the messages to the old nickname.
+	BitchX will tell you that 'no such nickname' exists. If you want to quickly
+	say something to the channel instead of the person you have a conversation
+	with, you don't need to end the query, say what's on your mind and restart
+	the query. You can also send a message to the channel, just like you would
+	to a user:</p>
+	<pre>[#toktok] /msg #toktok Hey new guy. Wait a minute okay? I'm talking to zetion right now</pre>
+	*** ADD /WINDOW NEW QUERY INFORMATION
+<h2><a name="4.5">4.5 Protecting yourself</a></h2>
+	<p>Just as in real life, IRC also has irritating persons whom like to annoy
+	you, send you virusses and stalk you. BitchX has some built in protection
+	agianst such activities.</p>
+	<p><b>ctcp cloacking</b>: If you press the 'del' key, you'll turn on (or 
+	off) ctcp cloacking. This will prevent other users from getting extended
+	information about i.e your bitchx version and stuff.</p>
+	*** ADD MORE OPTIONS LIKE FLOODING, IGNORING, SHITLISTS, ETC
+<h2><a name="4.6">4.6 Quiting BitchX</a></h2>
+	<p>When you've had it with IRCing, you can quit the client by using the 
+	/quit command.  This will also quit any channels you were on at the time.</p>
+	<pre>[#toktok] /quit I'm off again.</pre>
+	<p>This will make you leave all channels you were on with the quit message
+	"I'm off again.", and quit the bitchX client. Sometimes you'll not be able
+	to type anything at the commandprompt, because i.e you are connecting to an
+	IRC server. At this moment BitchX will not seem to respond to what you type.
+	If you still wish to quit BitchX at this moment, you can type 'Ctrl-c' 5 
+	times. You're quit message will be 'User aborted with 5 Ctrl-c's'.</p>
+<h2><a name="4.7">4.7 Other chatting thingies</a></h2>
+	*** NOT YET COMPLETED
+
+
+
+<hr noshade size="1">
+<h1><a name="5">5. Windows</a></h1>
+	<p>BitchX supports (just like ircII does) chatting in multiple windows. 
+	Do mind, that a 'window' is nota window as you probably know it. If you 
+	are using a terminal emulator under i.e the X windowing System, a 'window'
+	does not mean a new terminal emulator window will be brougt up. BitchX 
+	windows  all remain in the same X window.</p>
+	<p>Using BitchX windows can be used quite nicely to keep your chatting
+	sessions clean. I.e. you can chat on different channels in different 
+	windows.</p>
+<h2><a name="5.1">5.1 Creating a new window</a></h2>
+	<p>To create a new BitchX window, you generally type:</p>
+	<pre>[#channel1] /window new double on hide</pre>
+	<p>All windowing commands start with /window. 'new' means a new window will
+	be created. 'double on' means that the command prompt will be the same as 
+	the first window (a 2 lined command prompt which shows information about 
+	you and the current channel). 'hide' means the new window should be 
+	fullscreen (according to the size of the terminal emulator window of 
+	working under X) and should not be visible immediately. If you do not 
+	specify 'hide', the current screen will be split, and the new 'window' will
+	be on the same screen as the current one. You can create as many new 
+	windows as you'd like. (<i>*** FIXME:</i>might be limited to about 10??)</p>
+<h2><a name="5.2">5.2 Changing windows</a></h2>
+	<p>Now that you've created a new window, you'd like to change to that window
+	, so that you may use it. For this there are also a number of ways to do it.
+	There are many ways of doing many thing in BitchX, aren't there?).</p>
+	<p>
+	<ul>
+		<li><b>/window next</b> (/window prev)</li>
+		<li><b>Pressing Ctrl-w n </b></li>
+		<li><b>Pressing Alt-# </b> (Where # is the corrisponding window number,
+		    i.e alt-1, alt-2, etc)</li>
+	</ul>
+	Some methods may not work in your window manager. If you've got 
+	difficulties using alt-# and your using xterm, I suggest trying aterm 
+	(which also supports transparent backgrounds, and you ain't l337 until 
+	you've got transparant backgrounds)</p>
+<h2><a name="5.3">5.3 Using a window</a></h2>
+	<p>When changed to the new window, you can use it like you would normally. 
+	Just type in commands at the command prompt, and the'll be run in the 
+	current window (most of the time, anyway).</p>
+<h3><a name="5.3.1">5.3.1 Channel (public)</a></h3>
+	<p>Typing /j #foobar joins #foobar. Consequentely, typing something will 
+	appear on #foobar. Changing back the previous window (/window prev, or 
+	ctrl-w p, or alt-1) allows you to talk to the channel which you joined in 
+	that window.</p>
+<h3><a name="5.3.2">5.3.2 User (private)</a></h3>
+	<p>If you want to talk to a user privately in the new window, just use the
+	/query command. Remember, you don't have to be on the same channel as the
+	user you want to chat privately with. 
+<h3><a name="5.3.3">5.3.3 Multiple servers</a></h3>
+	<p>It may sometimes be desirable to chat on different IRC networks (or
+	differenent IRC servers, it's all the same). In this case, BitchX allows
+	you to connect to a different IRC server in the new window. This won't work
+	with the normal /server command, but you'll have to tell bitchx to only
+	connect to the other server in the current window. You can do it like this:</p>
+	<pre>[0] /window server irc.nl.undernet.org</pre>
+	<p>This will connect you to the Undernet IRC network, but only in the 
+	current channel. Do be aware that it can sometimes become a bit messy when
+	using multiple servers. Especially when you create new windows when you're
+	already connected to two different servers.</p>
+	<p>If you want to quit the chatting on a specific server, you can switch
+	to that server's window, and type /window discon. You will now be disconnected
+	from the current server.</p>
+<h2><a name="5.4">5.4 Setting a window's level</a></h2>
+	<p>You can tell BitchX what information you want in a window, by adjusting
+	it's level. When BitchX recieves information (i.e: a private message from
+	another user) it will (by default) display it in the current window. All
+	messages recieved from the IRC server (like splits and the like) are by 
+	default displayed in the current window. This can be anoyying, because it
+	will generate a lot of random crap in between the normal channel flow. (this
+	is especially the case when you're IRCing in Undernet, which generated
+	enormous amounts of server messages)</p>
+	<p>If you only want to have all things said to #channel1 in the window for
+	#channel1, you can use the '/window level' command:</p>
+	<pre>[#channel1] /window level public</pre>
+	<p>This will only allow public messages in the current window. Do note, that
+	if another window is not present with a level which will allow other 
+	messages (like server message) the messages will still be shown in the 
+	current window. A list of available levels:</p>
+	<table border="0" cellspacing="0" cellpadding="0">
+		<tr><td>PUBLIC </td><td> : Everything said publically on a channel. (<code>/me</code> amonst other commands)</td></tr>
+		<tr><td>CRAP </td><td> : Random crap, like errors when switching channels and stuff.</td></tr>
+		<tr><td>MSGS </td><td> : All private messages which are sent to you. (<code>/msg</code> command)</td></tr>
+		<tr><td>NOTICES </td><td> : All notices send to you (<code>/notice</code> command)</td></tr>
+		<tr><td>WALLS </td><td> : All wall messages from channel operators (<code>/wall</code>, <code>/wallmsg</code> commands)</td></tr>
+		<tr><td>WALLOPS </td><td> : All wallop messages from IRC operators (NOT channel operators). (<code>/wallops</code> command)</td></tr>
+		<tr><td>NOTES </td><td> : ?? Notes you have recieved. Notes are not in common use anymore. (<code>/note</code> command)</td></tr>
+		<tr><td>OPNOTES </td><td> : ??</td></tr>
+		<tr><td>SNOTES </td><td> : ??</td></tr>
+		<tr><td>ACTIONS </td><td> : CTCP actions sent to you. (<code>/ctcp [user] action</code> command)</td></tr>
+		<tr><td>DCC </td><td> : DCC information (<code>/dcc</code> command)</td></tr>
+		<tr><td>CTCP </td><td> : CTCP requests from other persons (<code>/ctcp</code> command)</td></tr>
+		<tr><td>USERLOG1 </td><td> : ??</td></tr>
+		<tr><td>USERLOG2 </td><td> : ??</td></tr>
+		<tr><td>USERLOG3 </td><td> : ??</td></tr>
+		<tr><td>USERLOG4 </td><td> : ??</td></tr>
+		<tr><td>USERLOG5 </td><td> : ??</td></tr>
+		<tr><td>BEEP </td><td> : ?? (Should be beeps, but doesn't seem to work?)</td></tr>
+		<tr><td>TCL </td><td> : ?? (tcl scripting errors/debugging?)</td></tr>
+		<tr><td>SEND_MSG </td><td> : ?? (messages you sent out, but doesn't seem to work?)</td></tr>
+		<tr><td>KILL </td><td> : ?? (server kills, but doesn't seem to work?)</td></tr>
+		<tr><td>MODEUSER </td><td> : Changes in user modes done by other users. If you change a mode yourself, it will still be shown.</td></tr>
+		<tr><td>MODECHAN </td><td> : Changes in channel modes done by other users. If you change a mode yourself, it will still be shown.</td></tr>
+		<tr><td>KICK </td><td> : ?? (kicks on a channel (perhaps by other users only), but doesn't seem to work)</td></tr>
+		<tr><td>KICKUSER </td><td> : ?? (kicks on a channel (perhaps by other users only), but doesn't seem to work)</td></tr>
+		<tr><td>PARTS </td><td> : ?? (Parts on a channel, but doesn't seem to work)</td></tr>
+		<tr><td>INVITES </td><td> : Recieved invites to channels. (<code>/invite</code> command)</td></tr>
+		<tr><td>JOIN </td><td> : ?? (joins on channels, but doesn't seem to work)</td></tr>
+		<tr><td>TOPIC </td><td> : ?? (topic changes on channels, but doesn't seem to work)</td></tr>
+		<tr><td>HELP </td><td> : Bitchx help information (<code>/help</code>, <code>/bhelp</code>, <code>/window help</code> commands.Not <code>/ehelp</code>) </td></tr>
+		<tr><td>NOTIFY </td><td> : Notices which you send and which are sent to you (<code>/notice</code> command)</td></tr>
+		<tr><td>&nbsp; </td><td> &nbsp;</td></tr>
+		<tr><td>ALL </td><td> : All of the above levels.</td></tr>
+		<tr><td>NONE </td><td> : None of the above levels.</td></tr>
+	</table>
+	<p>Please note that (like so 
+	many things in BitchX) window levels are not consistent or logical. When, 
+	for instance, setting window #1's level to ALL (which includes CRAP), and 
+	window #2's level to just PUBLIC, CRAP will still appear on window #2. This
+	I call 'The BitchX uncertainty principle': Your milage may vary.</p>
+<h2><a name="5.5">5.5 Removing a window</a></h2>
+	<p>To remove a window, you can do the following:</p>
+	<ul>
+		<li>/window kill
+		<li>(ctrl-w k)
+	</ul>
+	<p>Mind you, that you will not quit any channels you were on in that window.
+	You can still send messages to the channels you were on in the window, by
+	using the '/msg' command or sometimes by changing to the channel with ctrl-x
+	. With Ctrl-x, you're millage may vary though. BitchX is quite random with
+	this.</p>
+<h2><a name="5.6">5.6 Other window options</a></h2>
+	<p>To get a list of things you can do with windows, type:</p>
+	<pre>[#channel2] /window help</pre>
+	<p>I'll cover a couple of neat options:</p>
+	<ul>
+		<li><b>/window hide</b> (ctrl-w h) Hides the current window (in split screen)</li>
+		<li><b>/window list</b> (ctrl-w l) Lists all windows with their channels and more info</li>
+	</ul>
+	*** ADD MORE
+<h2><a name="5.7">5.7 Usefull aliases</a></h2>
+	<p>I myself use some aliases quite frequently, because I'm just too lazy to
+	type '/window new double on hide' everytime. With the following alias, you
+	can simply type '/wnq joe' to start a new query with user 'joe' in a new
+	hidden window:</p>
+	<pre>/alias wnq window new double on;query $0;window hide</pre>
+	<p>(for a detailed description of the /alias command, see the 'Customizing
+	BitchX' chapter)</p>
+                    
+<h1><a name="6">6. Customizing BitchX</a></h1>
+	<p>On of BitchX's strongest features is it's custumizability. Almost 
+	everything shown can be adapted to your liking. The interface can be changed
+	and adapted to how you want it to work and look. Scripting commands can be 
+	used to make a 'link' between the system you're working on and the BitchX
+	client. Speed up your daily chatting with aliases and keybindings and more.</p>
+<h2><a name="6.1">6.1 Aliases</a></h2>
+	<p>An alias is a kind of macro. It replaces another command (or set of 
+	commands) and it's (their) parameter(s) with a single command. This will 
+	greatly improve the usage of bitchx, because some commands can be quite
+	tedious to type everytime (see the Windows chapter). New aliases can be 
+	created by using the /alias command. To get a list of current aliases which
+	have been defined type:</p>
+	<pre>
+	[#toktok] /alias
+	WNQ     window new double on;query $0;window hide
+	</pre>
+	<p>This shows one alias, named WNQ. It runs three commands: 'window', 'query'
+	and the 'window' command again. This alias takes 1 argument ($0) and creates
+	a new window with the nickname, (or channel, or whatever) given as the 
+	paramter to WNQ, in a query. It then hides the window.</p>
+	<p>Aliases are not case sensetive. So you may say both /wnq joe, or /WNQ joe
+	. Multple commands in aliases must be seperated by a ';'. Do mind that you
+	may not have a space in front or after that ';'. Parameters are passed as
+	$0, $1 .. $9. $* contains all parameters which where passed to the alias.
+	Aliases are entered as follows: <code>/alias [name] [command];[command]</code>
+	To remove an alias, you can prepend it's name with a '-' (hyphen). So:</p>
+	<pre>[#toktok] /alias -wnq</pre>
+	<p>Will remove the wnq alias.</p>
+<h2><a name="6.2">6.2 Keybindings</a></h2>
+	<p>Keybindings give you the ability to change the default keys used in 
+	bitchx for editing, changing windows, scrolling, etc. These keybindings are
+	controlled via the /bind command. If /bind is run without any parameters,
+	a list with current keybindings will be shown. To add new keybindings (or 
+	change existing ones, use the following command: <code>/bind &lt;key&gt;
+	&lt;function&gt; [&lt;string&gt;]</code></p>
+<h3><a name="6.2.1">6.2.1 Keys</a></h3>
+	<p>Allowed key sequences (taken directly from the ircII manual):</p>
+	<table>
+		<tr><td>c       </td><td>where c is any key (case sensitive)</td></tr>
+		<tr><td>^c      </td><td>where c is one of A thru Z or one of the following quoted set '?[]\^@' (^? == delete key)</td></tr>
+  		<tr><td>METAn-c </td><td>where n is 1, 2, 3 or 4 and c is the same as the first form above</td></tr>
+		<tr><td>METAn-^c</td><td>where n is 1, 2, 3 or 4 and c is the same as the second form above</td></tr>
+		<tr><td>mc      </td><td>where m has been previously bound to META1_CHARACTER, META2_CHARACTER, META3_CHARACTER, or META4_CHARACTER and c is the same as the first form above.  m may be either of the first two forms above (m or ^m).</td></tr>
+		<tr><td>m^c     </td><td>where m has been previously bound to META1_CHARACTER, META2_CHARACTER, META3_CHARACTER, or META4_CHARACTER and c is the same as the second form above.  m may be either of the first two forms above (m or ^m).</td></tr>
+	</table>
+	*** MAKE UNOFFICIAL DOCUMENTATION ABOUT META KEYS AND BINDINGS
+<h3><a name="6.2.2">6.2.2 Functions</a></h3>
+	<p>Allowed functions which can be binded on keys (taken directly from the ircII manual):</p>
+	<table>
+		<tr><td>BACKSPACE</td></tr>
+		<tr><td>BACKWARD_CHARACTER</td></tr>
+		<tr><td>BACKWARD_HISTORY</td></tr>
+		<tr><td>BACKWARD_WORD</td></tr>
+		<tr><td>BEGINNING_OF_LINE</td></tr>
+		<tr><td>CLEAR_SCREEN</td></tr>
+		<tr><td>COMMAND_COMPLETION</td></tr>
+		<tr><td>DELETE_CHARACTER</td></tr>
+		<tr><td>DELETE_NEXT_WORD</td></tr>
+		<tr><td>DELETE_PREVIOUS_WORD</td></tr>
+		<tr><td>END_OF_LINE</td></tr>
+		<tr><td>ENTER_DIGRAPH</td></tr>
+		<tr><td>ENTER_MENU</td></tr>
+		<tr><td>ERASE_LINE</td></tr>
+		<tr><td>ERASE_TO_BEG_OF_LINE</td></tr>
+		<tr><td>ERASE_TO_END_OF_LINE</td></tr>
+		<tr><td>FORWARD_CHARACTER</td></tr>
+		<tr><td>FORWARD_HISTORY</td></tr>
+		<tr><td>FORWARD_WORD</td></tr>
+		<tr><td>HELP_CHARACTER</td></tr>
+		<tr><td>META1_CHARACTER</td></tr>
+		<tr><td>META2_CHARACTER</td></tr>
+		<tr><td>META3_CHARACTER</td></tr>
+		<tr><td>META4_CHARACTER</td></tr>
+		<tr><td>NEXT_WINDOW</td></tr>
+		<tr><td>NOTHING</td></tr>
+		<tr><td>PARSE_COMMAND</td></tr>
+		<tr><td>PREVIOUS_WINDOW</td></tr>
+		<tr><td>QUIT_IRC</td></tr>
+		<tr><td>QUOTE_CHARACTER</td></tr>
+		<tr><td>REFRESH_INPUTLINE</td></tr>
+		<tr><td>REFRESH_SCREEN</td></tr>
+		<tr><td>SCROLL_BACKWARD</td></tr>
+		<tr><td>SCROLL_END</td></tr>
+		<tr><td>SCROLL_FORWARD</td></tr>
+		<tr><td>SCROLL_START</td></tr>
+		<tr><td>SELF_INSERT</td></tr>
+		<tr><td>SEND_LINE</td></tr>
+		<tr><td>STOP_IRC</td></tr>
+		<tr><td>SWITCH_CHANNELS</td></tr>
+		<tr><td>TOGGLE_INSERT_MODE</td></tr>
+		<tr><td>TOGGLE_STOP_SCREEN</td></tr>
+		<tr><td>TRANSPOSE_CHARACTERS</td></tr>
+		<tr><td>TYPE_TEXT</td></tr>
+		<tr><td>UNSTOP_ALL_WINDOWS</td></tr>
+		<tr><td>YANK_FROM_CUTBUFFER</td></tr>
+	</table>
+	*** ADD INFO ABOUT ALL FUNCTIONS<br>
+	*** ADD INFO ABOUT OTHER FUNCTIONS LIKE PLAINTEXT AND (MULTIPLE) COMMANDS
+<h2><a name="6.3">6.3 Settings</a></h2>
+	<p>Possible settings:</p>
+	<table>
+	<tr><td>
+		<table>
+		<tr><td>AINV</td></tr>
+		<tr><td>ALTNICK</td></tr>
+		<tr><td>ALT_CHARSET</td></tr>
+		<tr><td>ALWAYS_SPLIT_BIGGEST</td></tr>
+		<tr><td>ANNOY_KICK</td></tr>
+		<tr><td>AOP</td></tr>
+		<tr><td>APPEND_LOG</td></tr>
+		<tr><td>AUTOKICK_ON_VERSION</td></tr>
+		<tr><td>AUTO_AWAY</td></tr>
+		<tr><td>AUTO_AWAY_TIME</td></tr>
+		<tr><td>AUTO_JOIN_ON_INVITE</td></tr>
+		<tr><td>AUTO_LIMIT</td></tr>
+		<tr><td>AUTO_NSLOOKUP</td></tr>
+		<tr><td>AUTO_RECONNECT</td></tr>
+		<tr><td>AUTO_REJOIN</td></tr>
+		<tr><td>AUTO_RESPONSE</td></tr>
+		<tr><td>AUTO_RESPONSE_STR</td></tr>
+		<tr><td>AUTO_UNBAN</td></tr>
+		<tr><td>AUTO_UNMARK_AWAY</td></tr>
+		<tr><td>AUTO_WHOWAS</td></tr>
+		<tr><td>BANTIME</td></tr>
+		<tr><td>BEEP</td></tr>
+		<tr><td>BEEP_ALWAYS</td></tr>
+		<tr><td>BEEP_MAX</td></tr>
+		<tr><td>BEEP_ON_MSG</td></tr>
+		<tr><td>BEEP_WHEN_AWAY</td></tr>
+		<tr><td>BITCH</td></tr>
+		<tr><td>BITCHX_HELP</td></tr>
+		<tr><td>BLINK_VIDEO</td></tr>
+		<tr><td>BOLD_VIDEO</td></tr>
+		<tr><td>BOT_LOG</td></tr>
+		<tr><td>BOT_LOGFILE</td></tr>
+		<tr><td>BOT_MODE</td></tr>
+		<tr><td>BOT_PASSWD</td></tr>
+		<tr><td>BOT_RETURN</td></tr>
+		<tr><td>BOT_TCL</td></tr>
+		<tr><td>CDCC</td></tr>
+		<tr><td>CDCC_FLOOD_AFTER</td></tr>
+		<tr><td>CDCC_FLOOD_RATE</td></tr>
+		<tr><td>CDCC_PROMPT</td></tr>
+		<tr><td>CDCC_SECURITY</td></tr>
+		<tr><td>CD_DEVICE</td></tr>
+		<tr><td>CHANGE_NICK_ON_KILL</td></tr>
+		<tr><td>CHANMODE</td></tr>
+		<tr><td>CHANNEL_NAME_WIDTH</td></tr>
+		<tr><td>CHECK_BEEP_USERS</td></tr>
+		<tr><td>CLIENT_INFORMATION</td></tr>
+		<tr><td>CLOAK</td></tr>
+		<tr><td>CLOCK</td></tr>
+		<tr><td>CLOCK_24HOUR</td></tr>
+		<tr><td>CLOCK_FORMAT</td></tr>
+		<tr><td>CLONE_CHECK</td></tr>
+		<tr><td>CLONE_COUNT</td></tr>
+		<tr><td>CMDCHARS</td></tr>
+		<tr><td>COLOR</td></tr>
+		<tr><td>COMMAND_MODE</td></tr>
+		<tr><td>COMMENT_BREAKAGE</td></tr>
+		<tr><td>COMPRESS_MODES</td></tr>
+		<tr><td>CONNECT_TIMEOUT</td></tr>
+		<tr><td>CONTINUED_LINE</td></tr>
+		<tr><td>CPU_SAVER_AFTER</td></tr>
+		<tr><td>CPU_SAVER_EVERY</td></tr>
+		<tr><td>CTCP_DELAY</td></tr>
+		<tr><td>CTCP_FLOOD_AFTER</td></tr>
+		<tr><td>CTCP_FLOOD_BAN</td></tr>
+		<tr><td>CTCP_FLOOD_PROTECTION</td></tr>
+		<tr><td>CTCP_FLOOD_RATE</td></tr>
+		<tr><td>CTCP_VERBOSE</td></tr>
+		<tr><td>CTOOLZ_DIR</td></tr>
+		<tr><td>DCC_AUTOGET</td></tr>
+		<tr><td>DCC_AUTORENAME</td></tr>
+		<tr><td>DCC_BAR_TYPE</td></tr>
+		<tr><td>DCC_BLOCK_SIZE</td></tr>
+		<tr><td>DCC_DLDIR</td></tr>
+		<tr><td>DCC_FAST</td></tr>
+		<tr><td>DCC_GET_LIMIT</td></tr>
+		<tr><td>DCC_MAX_AUTOGET_SIZE</td></tr>
+		<tr><td>DCC_QUEUE_LIMIT</td></tr>
+		<tr><td>DCC_SEND_LIMIT</td></tr>
+		<tr><td>DCC_TIMEOUT</td></tr>
+		<tr><td>DCC_ULDIR</td></tr>
+		<tr><td>DCC_USE_GATEWAY_ADDR</td></tr>
+		<tr><td>DEBUG</td></tr>
+		<tr><td>DEFAULT_FONT</td></tr>
+		<tr><td>DEFAULT_MENU</td></tr>
+		<tr><td>DEFAULT_NICK</td></tr>
+		<tr><td>DEFAULT_REASON</td></tr>
+		<tr><td>DEOPFLOOD</td></tr>
+		<tr><td>DEOPFLOOD_TIME</td></tr>
+		<tr><td>DEOP_ON_DEOPFLOOD</td></tr>
+		<tr><td>DEOP_ON_KICKFLOOD</td></tr>
+		<tr><td>DETACH_ON_HUP</td></tr>
+		<tr><td>DISPATCH_UNKNOWN_COMMANDS</td></tr>
+		<tr><td>DISPLAY</td></tr>
+		<tr><td>DISPLAY_ANSI</td></tr>
+		<tr><td>DISPLAY_PC_CHARACTERS</td></tr>
+		<tr><td>DOUBLE_STATUS_LINE</td></tr>
+		<tr><td>EIGHT_BIT_CHARACTERS</td></tr>
+		<tr><td>EXEC_PROTECTION</td></tr>
+		<tr><td>FAKE_SPLIT_PATTERNS</td></tr>
+		<tr><td>FLOATING_POINT_MATH_VAR</td></tr>
+		<tr><td>FLOOD_AFTER</td></tr>
+		<tr><td>FLOOD_KICK</td></tr>
+		<tr><td>FLOOD_PROTECTION</td></tr>
+		<tr><td>FLOOD_RATE</td></tr>
+		<tr><td>FLOOD_USERS</td></tr>
+		<tr><td>FLOOD_WARNING</td></tr>
+		<tr><td>FTP_GRAB</td></tr>
+		<tr><td>FULL_STATUS_LINE</td></tr>
+		<tr><td>HACKING</td></tr>
+		<tr><td>HACK_OPS</td></tr>
+		<tr><td>HEBREW_TOGGLE</td></tr>
+		<tr><td>HELP_PAGER</td></tr>
+		<tr><td>HELP_PATH</td></tr>
+		<tr><td>HELP_PROMPT</td></tr>
+		<tr><td>HELP_WINDOW</td></tr>
+		<tr><td>HIDE_PRIVATE_CHANNELS</td></tr>
+		<tr><td>HIGHLIGHT_CHAR</td></tr>
+		<tr><td>HIGH_BIT_ESCAPE</td></tr>
+		<tr><td>HISTORY</td></tr>
+		<tr><td>HOLD_MODE</td></tr>
+		<tr><td>HOLD_MODE_MAX</td></tr>
+		<tr><td>HTTP_GRAB</td></tr>
+		<tr><td>IDENT_HACK</td></tr>
+		<tr><td>IDLE_CHECK</td></tr>
+		<tr><td>IGNORE_TIME</td></tr>
+		<tr><td>INDENT</td></tr>
+		<tr><td>INPUT_ALIASES</td></tr>
+		<tr><td>INPUT_GLOB</td></tr>
+		<tr><td>INPUT_PROMPT</td></tr>
+		<tr><td>INSERT_MODE</td></tr>
+		<tr><td>INVERSE_VIDEO</td></tr>
+		<tr><td>JOINFLOOD</td></tr>
+		<tr><td>JOINFLOOD_TIME</td></tr>
+		<tr><td>JOIN_NEW_WINDOW</td></tr>
+		<tr><td>JOIN_NEW_WINDOW_TYPE</td></tr>
+		<tr><td>KICKFLOOD</td></tr>
+		<tr><td>KICKFLOOD_TIME</td></tr>
+		<tr><td>KICK_IF_BANNED</td></tr>
+		<tr><td>KICK_ON_DEOPFLOOD</td></tr>
+		<tr><td>KICK_ON_JOINFLOOD</td></tr>
+		<tr><td>KICK_ON_KICKFLOOD</td></tr>
+		<tr><td>KICK_ON_NICKFLOOD</td></tr>
+		<tr><td>KICK_ON_PUBFLOOD</td></tr>
+		<tr><td>KICK_OPS</td></tr>
+		<tr><td>LAMEIDENT</td></tr>
+		<tr><td>LAMELIST</td></tr>
+		<tr><td>LASTLOG</td></tr>
+		<tr><td>LASTLOG_ANSI</td></tr>
+		<tr><td>LASTLOG_LEVEL</td></tr>
+		<tr><td>LLOOK</td></tr>
+		<tr><td>LLOOK_DELAY</td></tr>
+		<tr><td>LOAD_PATH</td></tr>
+		<tr><td>LOG</td></tr>
+		<tr><td>LOGFILE</td></tr>
+		<tr><td>MAIL</td></tr>
+		</table>
+	</td>
+	<td>
+		<table>
+		<tr><td>MANGLE_INBOUND</td></tr>
+		<tr><td>MANGLE_LOGFILES</td></tr>
+		<tr><td>MANGLE_OPERLOG</td></tr>
+		<tr><td>MANGLE_OUTBOUND</td></tr>
+		<tr><td>MAX_DEOPS</td></tr>
+		<tr><td>MAX_IDLEKICKS</td></tr>
+		<tr><td>MAX_SERVER_RECONNECT</td></tr>
+		<tr><td>MAX_URLS</td></tr>
+		<tr><td>MDI</td></tr>
+		<tr><td>META_STATES_VAR</td></tr>
+		<tr><td>MIRCS</td></tr>
+		<tr><td>MODE_STRIPPER</td></tr>
+		<tr><td>MSGCOUNT</td></tr>
+		<tr><td>MSGLOG</td></tr>
+		<tr><td>MSGLOG_FILE</td></tr>
+		<tr><td>MSGLOG_LEVEL</td></tr>
+		<tr><td>NAMES_COLUMNS</td></tr>
+		<tr><td>NAT_ADDRESS</td></tr>
+		<tr><td>ND_SPACE_MAX</td></tr>
+		<tr><td>NEW_SERVER_LASTLOG_LEVEL</td></tr>
+		<tr><td>NEXT_SERVER_ON_LOCAL_KILL</td></tr>
+		<tr><td>NICKFLOOD</td></tr>
+		<tr><td>NICKFLOOD_TIME</td></tr>
+		<tr><td>NICKLIST</td></tr>
+		<tr><td>NICK_COMPLETION</td></tr>
+		<tr><td>NICK_COMPLETION_CHAR</td></tr>
+		<tr><td>NICK_COMPLETION_LEN</td></tr>
+		<tr><td>NICK_COMPLETION_TYPE</td></tr>
+		<tr><td>NOTIFY</td></tr>
+		<tr><td>NOTIFY_HANDLER</td></tr>
+		<tr><td>NOTIFY_LEVEL</td></tr>
+		<tr><td>NOTIFY_ON_TERMINATION</td></tr>
+		<tr><td>NO_CTCP_FLOOD</td></tr>
+		<tr><td>NO_FAIL_DISCONNECT</td></tr>
+		<tr><td>NUM_BANMODES</td></tr>
+		<tr><td>NUM_KICKS</td></tr>
+		<tr><td>NUM_KILLS</td></tr>
+		<tr><td>NUM_OF_WHOWAS</td></tr>
+		<tr><td>NUM_OPMODES</td></tr>
+		<tr><td>OPER_MODES</td></tr>
+		<tr><td>ORIGNICK_TIME</td></tr>
+		<tr><td>OV</td></tr>
+		<tr><td>PAD_CHAR</td></tr>
+		<tr><td>PING_TYPE</td></tr>
+		<tr><td>PROTECT_CHANNELS</td></tr>
+		<tr><td>PUBFLOOD</td></tr>
+		<tr><td>PUBFLOOD_TIME</td></tr>
+		<tr><td>QUERY_NEW_WINDOW</td></tr>
+		<tr><td>QUERY_NEW_WINDOW_TYPE</td></tr>
+		<tr><td>QUEUE_SENDS</td></tr>
+		<tr><td>RANDOM_LOCAL_PORTS</td></tr>
+		<tr><td>RANDOM_SOURCE</td></tr>
+		<tr><td>REALNAME</td></tr>
+		<tr><td>REVERSE_STATUS</td></tr>
+		<tr><td>SAVEFILE</td></tr>
+		<tr><td>SCREEN_OPTIONS</td></tr>
+		<tr><td>SCRIPT_HELP</td></tr>
+		<tr><td>SCROLLBACK</td></tr>
+		<tr><td>SCROLLBACK_RATIO</td></tr>
+		<tr><td>SCROLL_LINES</td></tr>
+		<tr><td>SEND_AWAY_MSG</td></tr>
+		<tr><td>SEND_CTCP_MSG</td></tr>
+		<tr><td>SEND_IGNORE_MSG</td></tr>
+		<tr><td>SEND_OP_MSG</td></tr>
+		<tr><td>SERVER_GROUPS</td></tr>
+		<tr><td>SERVER_PROMPT</td></tr>
+		<tr><td>SHELL</td></tr>
+		<tr><td>SHELL_FLAGS</td></tr>
+		<tr><td>SHELL_LIMIT</td></tr>
+		<tr><td>SHITLIST</td></tr>
+		<tr><td>SHITLIST_REASON</td></tr>
+		<tr><td>SHOW_AWAY_ONCE</td></tr>
+		<tr><td>SHOW_CHANNEL_NAMES</td></tr>
+		<tr><td>SHOW_END_OF_MSGS</td></tr>
+		<tr><td>SHOW_NUMERICS</td></tr>
+		<tr><td>SHOW_NUMERICS_STR</td></tr>
+		<tr><td>SHOW_STATUS_ALL</td></tr>
+		<tr><td>SHOW_WHO_HOPCOUNT</td></tr>
+		<tr><td>SOCKS_HOST</td></tr>
+		<tr><td>SOCKS_PORT</td></tr>
+		<tr><td>STATUS_AWAY</td></tr>
+		<tr><td>STATUS_CDCCCOUNT</td></tr>
+		<tr><td>STATUS_CHANNEL</td></tr>
+		<tr><td>STATUS_CHANOP</td></tr>
+		<tr><td>STATUS_CLOCK</td></tr>
+		<tr><td>STATUS_CPU_SAVER</td></tr>
+		<tr><td>STATUS_DCCCOUNT</td></tr>
+		<tr><td>STATUS_DOES_EXPANDOS</td></tr>
+		<tr><td>STATUS_FLAG</td></tr>
+		<tr><td>STATUS_FORMAT</td></tr>
+		<tr><td>STATUS_FORMAT1</td></tr>
+		<tr><td>STATUS_FORMAT2</td></tr>
+		<tr><td>STATUS_FORMAT3</td></tr>
+		<tr><td>STATUS_HALFOP</td></tr>
+		<tr><td>STATUS_HOLD</td></tr>
+		<tr><td>STATUS_HOLD_LINES</td></tr>
+		<tr><td>STATUS_INSERT</td></tr>
+		<tr><td>STATUS_LAG</td></tr>
+		<tr><td>STATUS_MAIL</td></tr>
+		<tr><td>STATUS_MODE</td></tr>
+		<tr><td>STATUS_MSGCOUNT</td></tr>
+		<tr><td>STATUS_NICK</td></tr>
+		<tr><td>STATUS_NOTIFY</td></tr>
+		<tr><td>STATUS_NO_REPEAT</td></tr>
+		<tr><td>STATUS_OPER</td></tr>
+		<tr><td>STATUS_OPER_KILLS</td></tr>
+		<tr><td>STATUS_OVERWRITE</td></tr>
+		<tr><td>STATUS_QUERY</td></tr>
+		<tr><td>STATUS_SCROLLBACK</td></tr>
+		<tr><td>STATUS_SERVER</td></tr>
+		<tr><td>STATUS_TOPIC</td></tr>
+		<tr><td>STATUS_UMODE</td></tr>
+		<tr><td>STATUS_USER0</td></tr>
+		<tr><td>STATUS_USER1</td></tr>
+		<tr><td>STATUS_USER10</td></tr>
+		<tr><td>STATUS_USER11</td></tr>
+		<tr><td>STATUS_USER12</td></tr>
+		<tr><td>STATUS_USER13</td></tr>
+		<tr><td>STATUS_USER14</td></tr>
+		<tr><td>STATUS_USER15</td></tr>
+		<tr><td>STATUS_USER16</td></tr>
+		<tr><td>STATUS_USER17</td></tr>
+		<tr><td>STATUS_USER18</td></tr>
+		<tr><td>STATUS_USER19</td></tr>
+		<tr><td>STATUS_USER2</td></tr>
+		<tr><td>STATUS_USER3</td></tr>
+		<tr><td>STATUS_USER4</td></tr>
+		<tr><td>STATUS_USER5</td></tr>
+		<tr><td>STATUS_USER6</td></tr>
+		<tr><td>STATUS_USER7</td></tr>
+		<tr><td>STATUS_USER8</td></tr>
+		<tr><td>STATUS_USER9</td></tr>
+		<tr><td>STATUS_USERS</td></tr>
+		<tr><td>STATUS_VOICE</td></tr>
+		<tr><td>STATUS_WINDOW</td></tr>
+		<tr><td>SUPPRESS_SERVER_MOTD</td></tr>
+		<tr><td>SWATCH</td></tr>
+		<tr><td>TAB</td></tr>
+		<tr><td>TAB_MAX</td></tr>
+		<tr><td>TIMESTAMP</td></tr>
+		<tr><td>TIMESTAMP_STRING</td></tr>
+		<tr><td>TRANSLATION</td></tr>
+		<tr><td>UNDERLINE_VIDEO</td></tr>
+		<tr><td>USERLIST</td></tr>
+		<tr><td>USERMODE</td></tr>
+		<tr><td>USER_FLAG_OPS</td></tr>
+		<tr><td>USER_FLAG_PROT</td></tr>
+		<tr><td>USER_INFORMATION</td></tr>
+		<tr><td>WINDOW_DESTROY_PART</td></tr>
+		<tr><td>WINDOW_QUIET</td></tr>
+		<tr><td>WORD_BREAK</td></tr>
+		<tr><td>XTERM</td></tr>
+		<tr><td>XTERM_OPTIONS</td></tr>
+		<tr><td>XTERM_TITLE</td></tr>
+		<tr><td>_CDCC_CLOSE_IDLE_SENDS_TIME</td></tr>
+		<tr><td>_CDCC_MINSPEED_TIME</td></tr>
+		<tr><td>_CDCC_PACKS_OFFERED</td></tr>
+		</table>
+	</td></tr>
+	</table>
+	*** DESCRIBE EACH SETTING. ADD TYPE OF SETTING (TOGGLE, TEXT, ETC)
+<h2><a name="6.4">6.4 Changing formats</a></h2>
+<h3><a name="6.4.1">6.4.1 About formats</a></h3>
+	<p>BitchX's look can be changed by altering something called Formats. The
+	client keeps a table of how things should look like. These formats can be
+	changed by using <code>/fset</code>. You can change anything from how the
+	status bar looks like to how messages are displayed. I.e: when something
+	is said on the channel, bitchx internally takes this as a couple of fields,
+	namely the time it was said, the nickname of who said it and the hostname of
+	who said it. The rest is everything that was said. These fields can be used
+	in the formats as a sort of parameters. $0 is the always the time, the other
+	parameters differ. So, when something is said, BitchX takes (in this case)
+	the <code>format_public</code> format, reads it, substitutes all parameters
+	found in the format with the internal fields, renders the colors and then 
+	displays it. So if user 'Flunk' said 'Hey man!' at 10:40, and <code>
+	format_public</code> is: <code>[$0|$1> $3-</code>, this will be displayed
+	as: <code>[10:40|Flunk> Hey man!</code>. When a '-' is appended to a 
+	parameter, this means 'this parameter and all that follows'. 'Hey man!' 
+	would be broken up in $3 ('Hey') and $4 ('man!'), but $3- would become 'Hey
+	man'. Colors can be inserted in the formats by using the '%' in formats. 
+	I.e: <code>%B$0%n$1</code> would show the time in blue and the nickname in 
+	the normal color. More about colors in the Color section of this chapter.</p>
+<h3><a name="6.4.2">6.4.2 Formats</a></h3>
+	<p>The following formats are available in bitchx:</p>
+	<table>
+		<tr><td>ACTION </td><td> : Description somebody else sends to you privately (/describe)</td><td> ( [time] [nick] [hostname] [your nick] [text] )</td></tr>
+		<tr><td>ACTION_AR </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>ACTION_CHANNEL </td><td> : Description somebody else sends to a channel (/me) </td><td> ( [time] [nick] [hostname] [channel] [text] )</td></tr>
+		<tr><td>ACTION_OTHER </td><td> : Description you send to somebody else privately (/describe) </td><td> ( [time] [your nick] [reciever nick] [text] )</td></tr>
+		<tr><td>ACTION_OTHER_AR </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>ACTION_USER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>ACTION_USER_AR </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>ALIAS </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>ASSIGN </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>AWAY </td><td> : Shown when you go away (/away) </td><td> ( [time] [message] )</td></tr>
+		<tr><td>BACK </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>BANS </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>BANS_FOOTER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>BANS_HEADER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>BITCH </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>BOT </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>BOT_FOOTER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>BOT_HEADER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>BWALL </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>CHANNEL_SIGNOFF </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>COMPLETE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>CONNECT </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>CSET </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>CTCP </td><td> : When someone sends you a CTCP request. </td><td> ( [time] [nick] [hostname] [your nick] [ CTCP request] )</td></tr>
+		<tr><td>CTCP_CLOAK </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>CTCP_CLOAK_FUNC </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>CTCP_CLOAK_FUNC_USER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>CTCP_CLOAK_UNKNOWN </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>CTCP_CLOAK_UNKNOWN_USER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>CTCP_CLOAK_USER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>CTCP_FUNC </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>CTCP_FUNC_USER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>CTCP_REPLY </td><td> : When somebody replies to a CTCP request you sent them. </td><td> ( [time] [nick] [host] [CTCP request] [response])</td></tr>
+		<tr><td>CTCP_UNKNOWN </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>CTCP_UNKNOWN_USER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>CTCP_USER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>DCC </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>DCC_CHAT </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>DCC_CONNECT </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>DCC_ERROR </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>DCC_LOST </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>DCC_REQUEST </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>DESYNC </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>DISCONNECT </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>EBANS </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>EBANS_FOOTER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>EBANS_HEADER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>ENCRYPTED_NOTICE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>ENCRYPTED_PRIVMSG </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>FLOOD </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>FRIEND_JOIN </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>HELP </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>HOOK </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>IGNORE_INVITE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>IGNORE_MSG </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>IGNORE_MSG_AWAY </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>IGNORE_NOTICE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>IGNORE_WALL </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>INVITE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>INVITE_USER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>JOIN </td><td> : When you or another user joins a channel </td><td> ( [time] [nick] [hostname] [channel] )</td></tr>
+		<tr><td>KICK </td><td> : When a user is kicked from a channel </td><td> ( [time] [nick of kicker] [channel] [nick of kicked] [reason]  )</td></tr>
+		<tr><td>KICK_USER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>KILL </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>LASTLOG </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>LEAVE </td><td> : Whe you or another user leaves a channel </td><td> ( [time] [nick] [host] [channel] [reason] )</td></tr>
+		<tr><td>LINKS </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>LIST </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>MAIL </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>MODE </td><td> : When a users mode is changed on a channel </td><td> ( [time] [nick of changer] [hostname of changer] [channel] [mode change] ([nickname]) )</td></tr>
+		<tr><td>MODE_CHANNEL </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>MSG </td><td> : Private messages sent to you </td><td> ( [time] [nick] [hostname] [text] )</td></tr>
+		<tr><td>MSGCOUNT </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>MSGLOG </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>MSG_GROUP </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NAMES </td><td> : Shows number of users on channel on join </td><td> ( [time] [channel] [nr of users] )</td></tr>
+		<tr><td>NAMES_BANNER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NAMES_BOT </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NAMES_BOTCOLOR </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NAMES_FOOTER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NAMES_FRIEND </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NAMES_FRIENDCOLOR </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NAMES_IRCOP </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NAMES_NICKCOLOR </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NAMES_NONOP </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NAMES_OP </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NAMES_OPCOLOR </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NAMES_SHIT </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NAMES_SHITCOLOR </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NAMES_VOICE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NAMES_VOICECOLOR </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NETADD </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NETJOIN </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NETSPLIT </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NETSPLIT_HEADER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NICKNAME </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NICKNAME_OTHER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NICKNAME_USER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NICK_AUTO </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NICK_COMP </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NICK_MSG </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NONICK </td><td> : When the server tells you that the nick doesn't exist </td><td> ( [time] [nick] [server] [failure reason] )</td></tr>
+		<tr><td>NOTE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NOTICE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NOTIFY_OFF </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NOTIFY_ON </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NOTIFY_SIGNOFF </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>NOTIFY_SIGNON </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>OPER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>OV </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>PASTE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>PUBLIC </td><td> : Everything others say on channels. </td><td> ( [time] [nick] [channel] [text])</td></tr>
+		<tr><td>PUBLIC_AR </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>PUBLIC_MSG </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>PUBLIC_MSG_AR </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>PUBLIC_NOTICE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>PUBLIC_NOTICE_AR </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>PUBLIC_OTHER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>PUBLIC_OTHER_AR </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>REL </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>RELM </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>RELN </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>RELS </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>RELSM </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>RELSN </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SEND_ACTION </td><td> : Description you send (to a channel), or make (/me, also away)) </td><td> ( [time] [your nick] [channel] [text])</td></tr>
+		<tr><td>SEND_ACTION_OTHER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SEND_AWAY </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SEND_CTCP </td><td> : When you send a CTCP command to a user </td><td> ( [time] [nick] [ctcp request] )</td></tr>
+		<tr><td>SEND_DCC_CHAT </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SEND_ENCRYPTED_MSG </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SEND_ENCRYPTED_NOTICE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SEND_MSG </td><td> : Private messages you send </td><td> ( [time] [recieving nick] [your nick] [text] )</td></tr>
+		<tr><td>SEND_NOTICE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SEND_PUBLIC </td><td> : Everthing you say on channels </td><td> ( [time] [channel] [nick] [text])</td></tr>
+		<tr><td>SEND_PUBLIC_OTHER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_MSG1 </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_MSG1_FROM </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_MSG2 </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_MSG2_FROM </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE_BOT </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE_BOT1 </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE_BOT_ALARM </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE_CLIENT_CONNECT </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE_CLIENT_EXIT </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE_CLIENT_INVALID </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE_CLIENT_TERM </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE_FAKE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE_GLINE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE_KILL </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE_KILL_LOCAL </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE_KLINE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE_NICKC </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE_OPER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE_REHASH </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE_STATS </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE_TRAFFIC_HIGH </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE_TRAFFIC_NORM </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SERVER_NOTICE_UNAUTH </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SET </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SET_NOVALUE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SHITLIST </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SHITLIST_FOOTER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SHITLIST_HEADER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SIGNOFF </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SILENCE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>SMODE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>STATUS </td><td> : Top bar of bottom status lines (double bars and single bar) </td><td> ( )</td></tr>
+		<tr><td>STATUS1 </td><td> : Bottom bar of bottom status lines (double bars) first update after refresh </td><td> ( )</td></tr>
+		<tr><td>STATUS2 </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>STATUS3 </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>TIMER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>TOPIC </td><td> : Displayed when requesting the topic with /topic command </td><td> ( [time] [channel] [topic] )</td></tr>
+		<tr><td>TOPIC_CHANGE </td><td> :  </td><td> ( [time] [nick of changer] [channel] [topic] )</td></tr>
+		<tr><td>TOPIC_CHANGE_HEADER </td><td> : Header displayed before the new topic when topic changed </td><td> ( [time] [nick of changer] [channel] [topic] )</td></tr>
+		<tr><td>TOPIC_SETBY </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>TOPIC_UNSET </td><td> : When somebody unsets the topic (/untopic) </td><td> ( [time] [nick] [channel] )</td></tr>
+		<tr><td>TRACE_OPER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>TRACE_SERVER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>TRACE_USER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>USAGE </td><td> : Shown when usage help is given on command </td><td> ( [text] )</td></tr>
+		<tr><td>USERLIST </td><td> : Line of userlist info (/userlist) </td><td> ( [binary repr. of modes for user] [username] [password?] [usermask] [channel] )</td></tr>
+		<tr><td>USERLIST_FOOTER </td><td> : Shown after userlist output (/userlist) </td><td> ( [time] [nr of users])</td></tr>
+		<tr><td>USERLIST_HEADER </td><td> : Shown before userlist output (/userlist) </td><td> ( )</td></tr>
+		<tr><td>USERMODE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>USERS </td><td> : One line of output from /users command </td><td> ( [?] [channel] [nickname] [hostname] [?] [mode(@)] )</td></tr>
+		<tr><td>USERS_HEADER </td><td> : Shown before /user output and after USER_TITLE </td><td> ( [time] [channel])</td></tr>
+		<tr><td>USERS_SHIT </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>USERS_TITLE </td><td> : Shown before /user output and USER_HEADER</td><td> ( [channel] )</td></tr>
+		<tr><td>USERS_USER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>VERSION </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WALL </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WALLOP </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WALL_AR </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WATCH_SIGNON </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WATCH_SIGNOFF </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WHO </td><td> : One line (containing 1 user) when you issue a /who command </td><td> ( [channel] [nick] [mode] [ident username] [hostname] [server] [fullname] )</td></tr>
+		<tr><td>WHOIS_ADMIN </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WHOIS_AWAY </td><td> : /Whois output line: If user is away </td><td> ( [text] )</td></tr>
+		<tr><td>WHOIS_BOT </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WHOIS_CHANNELS </td><td> : /Whois output line: channels user is on. Also if a user is in userlist: channels a user is allowed on. </td><td> ( [channels] )</td></tr>
+		<tr><td>WHOIS_FOOTER </td><td> : Shown after /whois command output </td><td> ( none )</td></tr>
+		<tr><td>WHOIS_FRIEND </td><td> : /Whois output line: When user is in userlist shows info </td><td> ( [friend-modes] [hostmask] )</td></tr>
+		<tr><td>WHOIS_HEADER </td><td> : Shown before /whois output </td><td> ( none )</td></tr>
+		<tr><td>WHOIS_HELP </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WHOIS_IDLE </td><td> : /Whois output line: Idle time (time user hasn't sent anything to the server </td><td> ( [hours] [minutes] [seconds] ['seconds idle'] )</td></tr>
+		<tr><td>WHOIS_NAME </td><td> : /Whois output line: full name </td><td> ( [Fullname] )</td></tr>
+		<tr><td>WHOIS_NICK </td><td> : /Whois output line: nickname </td><td> ( [nickname] [username] [hostname] [tld countryname] )</td></tr>
+		<tr><td>WHOIS_OPER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WHOIS_REGISTER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WHOIS_SERVER </td><td> : /Whois output line: Server user is on </td><td> ( [hostname] [Description] )</td></tr>
+		<tr><td>WHOIS_SERVICE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WHOIS_SHIT </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WHOIS_SIGNON </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WHOLEFT_FOOTER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WHOLEFT_HEADER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WHOLEFT_USER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WHOWAS_HEADER </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WHOWAS_NICK </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WIDELIST </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>WINDOW_SET </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>XTERM_TITLE </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>381 </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>471 </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>473 </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>474 </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>475 </td><td> :  </td><td> ( )</td></tr>
+		<tr><td>476 </td><td> :  </td><td> ( )</td></tr>
+	</table>
+<h3><a name="6.4.3">6.4.3 Timestamps</a></h3>
+	<p>Adding timestamps can be done in two ways. You can either set the 
+	<code>TIMESTAMP</code> option to '<code>ON</code>', which will give you
+	some limited timestamps. For instance, public messages will be 
+	timestamped, but things you say yourself won't. The other method is 
+	defining all timestamps yourself by using the BitchX formats settings. This
+	will allow you to add timestamps to just about everything. But it can be
+	tidious work finding out all the different formats for messages and the 
+	likes. Therefor I've included here my own formats for timestamping (and
+	some more stuff):</p>
+	<pre>
+	/fset public %B[%n$0%B|%n$1%B>%n $3-
+	/fset send_public %P[%n$0%P|%n$2%P>%n $3-
+	/fset msg %B[%n$0%B|%G$1%B<%n $3-
+	/fset send_msg %P[%n$0%P|%n%R$1%P> %n$3-
+	/fset public_ar %B[%n$0%B|%Y$1%B>%n $3-
+	/fset action %B[%n$0%B|%W$1%n $4-
+	/fset action_ar %B[%n$0%B|%W$1%n $4-
+	/fset action_channel %B[%n$0%B|%W$1/$3%n $4-
+	/fset send_action %B[%n$0%B|%W$1%n $3-
+	/fset send_action_other %B[%n$0%B|%W$2%n->%W$1%n $3-
+
+	/fset channel_signoff %G[%n$0%G|%n$1%n%G|%n%CQUIT%n%G|%n$3%G>%n $4-
+	/fset join %G[%n$0%G|%n$1%n%G|%n%CJOIN%n%G|%n$3%G>%n
+	/fset leave %G[%n$0%G|%n$1%n%G|%n%CPART%n%G|%n$3%G>%n $4-
+	/fset nickname %G[%n$0%G|%n$1%n%G|%n%CNICK%n%G>%n $3
+	/fset nickname_other %G[%n$0%G|%n$1%n%G|%n%CNICK%n%G>%n $3
+	/fset nickname_user %G[%n$0%G|%n$1%n%G|%n%CNICK%n%G>%n $3
+	</pre>
+	<p>Above format settings will add timestamps to public messages, private
+	messages (by others and by yourself), channel joins, parts, quits, actions
+	(/me's by you and by others). It will change the display of private messages
+	too. While normally you would see something like:</p>
+	<pre>
+	[toDS-na(todsah@d44200.upc-d.chello.nl)] Hello there
+	[msg(toDS-na)] Hello to you to! 
+	</pre>
+	<p>you will now see the following (where red is what you said to toddie, and green is what toddie said to you):</p>
+	<pre>
+	<font color="purple">[</font>14:23<font color="purple">|</font><font color="red">toddie</font><font color="purple">&gt;</font> Hello there
+	<font color="blue">[</font>14:24<font color="blue">|</font><font color="green">toddie</font><font color="blue">&lt;</font> Hello to you to!
+	</pre>
+	
+<h3><a name="6.4.4">6.4.4 Colors</a></h3>
+<h2><a name="6.5">6.5 Misc settings</a></h2>
+
+
+
+<hr noshade size="1">
+<h1><a name="9">9. Document information</a></h1>
+<h2><a name="9.1">9.1 History</a></h2>
+<p>
+	<b>v0.2</b>
+	<ul>
+	<li>Changed font sizes for main text and code examples</li>
+	<li>Fixed a non ending code example which made everyhing below it a code example</li>
+	<li>Added notices that this document has been discontinued by the original author.</li>
+	</ul>
+</p>
+<h2><a name="9.2">9.2 To Do</a></h2>
+	<p>To Do's on this document are spread throughout this document in the form
+	of '<code>*** TODO DESCRIPTION</code>'. At these places informations needs
+	to be added, changed or whatever else is stated in the description. Global
+	ToDo's are stated here:</p>
+	<ul>
+		<li>BitchX and Screen.
+		<li>CTCP information.
+		<li>Bot mode.
+		<li>Scripting.
+		<li>Netiquette.
+		<li>DCC information.
+		<li>Bouncers.
+		<li>References (irc help, other clients, etc).
+		<li>Colorify bitchx output lines.
+	</ul>
+	<font color="#FF0000"><b>This document is not being actively maintained by the original author anymore.</b></font><br>
+	Therefor, the issues above will not be addressed by me (F.Boender). <b>BUT</b>, due to the open nature of this document
+	(see the 'contributing' and 'copyright' paragrafs below), you are more than welcom to submit changes to this document,
+	or copy it and modify it however you wish (to put it a different way: <i>You can finish it</i>. (Do read the copyright notice
+	before you do however)</p>
+	<p>The reason this document has been discontinued is very simple. BitchX doesn't cut it for me anymore, and I therefor 
+	do not feel the need to complete this document. Instead, I've switched do another, much better (IMHO, IMHO) irc client, namely
+	<a href="http://www.irssi.org">Irssi</a></p>
+	
+<h2><a name="9.3">9.3 Contributing</a></h2>
+	<p>If you feel like helping out finishing this document, making it the most
+	complete guide to BitchX, your help is greatly appreciated. Things which you
+	can help out with are i.e: removing spelling errors, finishing to do's, 
+	writing new sections, make suggestions, etc, etc, etc. All help, I repeat
+	<b>ALL HELP</b> is more than welcome.</p>
+	<p>When contributing, please mention on which version of this document you
+	made the changes. You may send any contributions to the email address in the
+	copyright section.</p>
+
+<h1><a name="10">10. Copyright</a></h1>
+	<p>copyright (c) 2000, ferry boender</p>
+	<p>this document may be freely distributed, in part or as a whole, on any medium,
+	without the prior authorization of the author, provided that this copyright
+	notice remains intact, and there will be no obstruction as to the further
+	distribution of this document. you may not ask a fee for the contents of this
+	document, though a fee to compensate for the distribution of this document is
+	permitted.</p>
+	<p>modifications to this document are permitted, provided that the modified
+	document is distributed under the same license as the original document and no
+	copyright notices are removed from this document. all contents written
+	by an author stays copyrighted by that author.</p>
+	<p>failure to comply to one or all of the terms of this license automatically 
+	revokes your rights	granted by this license</p>
+	<p>all brand and product names mentioned in this document are trademarks or
+	registered trademarks of their respective holders.</p>
+	<p>Author:<br><br>
+	Ferry Boender<br>
+	De Cotelaer 28<br>
+	3772 BP <br>
+	Barneveld,<br>
+	The Netherlands<br>
+	EMail: f (DOT) boender (AT) electricmonk (DOT) nl</p>
+
+</body>
+</html>
