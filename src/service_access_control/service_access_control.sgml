@@ -1,0 +1,165 @@
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook V4.1//EN">
+<article lang="en">
+
+<articleinfo>
+	<title>Service Access Control</title>
+	<subtitle>Per user restriction</subtitle>
+	<author>
+		<firstname>Ferry</firstname>
+		<surname>Boender</surname>
+	</author>
+</articleinfo>
+
+<sect1>
+	<title>About this document</title>
+	<para>On standard Unix systems it's common for a user account to have access to just about all the services which exist on the server. When a new user account is created, it will have a homedir, FTP access, SSH access, POP and mail capabilities, etc. More open services means more security risks. It is therefor very important to only give access to services which are required for a user. This document describes how this can be accomplished through the use of PAM.</para>
+	<para>PAM, which is short for Pluggable Authentication Modules, allows a system administrator to use modules in order to secure his system. Modules exist for all kinds of authentication methods, for instance: password-based, username-based, origin-based, etc. In theory it would be possible to write PAM modules for fingerprinting, voice and retinal-scan identification. Perhaps they already exist. (I didn't bother looking into it, I'm lazy and proud of it.)</para>
+	<para>This document describes only one nice 'trick' which can be accomplished using PAM. Much more interesting things can be done using PAM. If you'd like to know more about these, check out the Additional Readings section, which contains links to other PAM documents.</para>
+</sect1>
+
+<sect1>
+	<title>What we want</title>
+	<para>We (or at least, I) want to have one directory in my server's /etc/ dir, which contains a number of files (one for each service). Each of these files contain a list of usernames which are allowed access to the service. For example:
+	<screen>
+		<computeroutput>
+		
+	[todsah@sharky]/etc/service-access$ <userinput>ls</userinput>
+	ftp pop ssh su
+
+	[todsah@sharky]/etc/service-access$ <userinput>cat ftp</userinput>
+	root
+	todsah
+	annaangel
+	aromog
+		</computeroutput>
+	</screen>
+	<para>This means, the users root, todsah, etc are allowed access to the ftp server. They still need to enter their normal authentication like a password or whatever.</para>
+</sect1>
+
+<sect1>
+	<title>Which services are supported?</title>
+	<para>All services/programs that support PAM should in theory work with these service-access thingies. I'm sure it works with:</para>
+	<itemizedlist>
+		<listitem><para>Proftpd (see chapter 4.3, Specific services)</para></listitem>
+		<listitem><para>Sshd (OpenSSH)</para></listitem>
+		<listitem><para>Telnet</para></listitem>
+		<listitem><para>Console logins</para></listitem>
+		<listitem><para>Ipop3d</para></listitem>
+	</itemizedlist>
+	<para>Some services require some additional configuration. This will be discussed later.</para>
+</sect1>
+
+<sect1>
+	<title>How we're gonna do it</title>
+	<para>To accomplish this, we'll need to fiddle around with the PAM configuration. But first of all, lets create the service-access dir.</para>
+	<sect2>
+		<title>Service access files</title>
+		<para>Create a directory somewhere. It doesn't matter where, because we can all change where PAM will look for the files inside the PAM configuration. You can also name the dir anything you want. In this example, well create a dir in /etc/ named service-access.</para>
+
+		<para>After creating the directory, fill it with text files using your favorite text editor. The text files may be named anyway you want to, but it's best to use the same name as the service or the program which is providing the service. The text file should contain the names of the users which may use the service. When we look at the ftp service-access file, named ftp this is what's contained in it:</para>
+		<screen>
+			<computeroutput>
+			
+	root
+	todsah
+	annaangel
+	aromog
+			</computeroutput>
+		</screen>
+		<para>You may create such a file for each service.</para>
+	</sect2>
+	<sect2>
+		<title>Modifying PAM configuration</title>
+		<para>Now we tell PAM to check for a username in the service-access files, in addition to the default authorization checking. This can be done by changing the PAM configuration file for a service. The PAM configuration files are usually contained within the /etc/pam.d directory.
+		<para>Edit a pam configuration file and add the following line:
+		<screen>
+			<computeroutput>
+			
+	auth required pam_listfile.so item=user sense=allow file=/etc/service-access/ftp onerr=fail
+			</computeroutput>
+		</screen>
+		<para>(make sure you modify the <emphasis>file=</emphasis> option so it points to the correct file)</para>
+		<para>You can do this for all services which support PAM.</para>
+	</sect2>
+	<sect2>
+		<title>Specific services</title>
+		<para>Some services (daemons) require some configuration changes before PAM authentication will work properly.</para>
+
+		<sect3>
+			<title>ProFTPd</title>
+			<para>To enable PAM in ProFTPd, you'll have to add the following line to your configuration (which usually is <filename>/etc/proftpd.conf</filename>):</para>
+
+			<screen>
+				<computeroutput>
+			
+	AuthPAMAuthoritative on
+				</computeroutput>
+			</screen>
+		</sect3>
+	</sect2>
+</sect1>
+
+<sect1>
+	<title>Additional reading</title>
+		<para>The following world wide web links may provide interesting additional readings about PAM and other service access related reading material:</para>
+		<itemizedlist>
+			<listitem><para><ulink url="http://www.kernel.org/pub/linux/libs/pam/modules.html">PAM Modules/Applications available or in progress...</ulink></para></listitem>
+			<listitem><para><ulink url="http://www.kernel.org/pub/linux/libs/pam/Linux-PAM-html/pam.html">The Linux-PAM System Administrators' Guide</ulink></para></listitem>
+		</itemizedlist>
+</sect1>
+
+<sect1>
+	<title>Copyright / Author</title>
+	<para>Copyright (c) 2002-2004, Ferry Boender</para>
+	<para>This document may be freely distributed, in part or as a whole, on any medium, without the prior authorization of the author, provided that this Copyright notice remains intact, and there will be no obstruction as to the further distribution of this document. You may not ask a fee for the contents of this document, though a fee to compensate for the distribution of this document is permitted.</para>
+	<para>Modifications to this document are permitted, provided that the modified document is distributed under the same license as the original document and no copyright notices are removed from this document. All contents written by an author stays copyrighted by that author.</para>
+	<para>Failure to comply to one or all of the terms of this license automatically revokes your rights granted by this license</para>
+	<para>All brand and product names mentioned in this document are trademarks or registered trademarks of their respective holders.</para>
+	<para>Author:</para>
+	<para>
+		<address>
+			Ferry Boender
+			<street>De Cotelaer 28</street>
+			<postcode>3772 BP</postcode>
+			<city>Barneveld</city>
+			<country>The Netherlands</country>
+			<email>f (DOT) boender (AT) electricmonk (DOT) nl</email>
+		</address>
+	</para>
+
+	<sect2>
+		<title>Document changes</title>
+		<para>This document has undergone the following changes:</para>
+		<para>
+			<revhistory>
+				<revision>
+					<revnumber>0.4</revnumber>
+					<date>24 June 2003</date>
+					<authorinitials>FB</authorinitials>
+					<revremark>Rewrote document in Docbook SGML</revremark>
+				</revision>
+				<revision>
+					<revnumber>0.3</revnumber>
+					<date>20 June 2003</date>
+					<authorinitials>FB</authorinitials>
+					<revremark>Added document history. Added additional reading links</revremark>
+				</revision>
+				<revision>
+					<revnumber>0.2</revnumber>
+					<date>05 May 2003</date>
+					<authorinitials>FB</authorinitials>
+					<revremark>Added specific service information</revremark>
+				</revision>
+				<revision>
+					<revnumber>0.1</revnumber>
+					<date>10 May 2002</date>
+					<authorinitials>FB</authorinitials>
+					<revremark>Initial release</revremark>
+				</revision>
+			</revhistory>
+		</para>
+	</sect2>
+</sect1>
+
+</article>
+

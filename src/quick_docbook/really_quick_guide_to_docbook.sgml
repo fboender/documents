@@ -1,0 +1,230 @@
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook V4.1//EN">
+<article lang="en">
+
+<articleinfo>
+	<title>Really quick guide to DocBook</title>
+	<author>
+		<firstname>Ferry</firstname>
+		<surname>Boender</surname>
+	</author>
+</articleinfo>
+
+
+<sect1><title>Introduction</title>
+	<para>This document is about DocBook. DocBook is a standard for creating, mostly technical, documents. DocBook's great advantage lies in the fact that it allows you to convert one source format into multiple target formats. I.e. one SGML document can be converted into HTML, Postscript, PDF, RTF, etc. This document will briefly touch upon a number of subjects having to do with DocBook. How to install DocBook and conversion tools, how to write DocBook SGML and how to convert them into a useful readable document.</para>
+	<para>First off I'd like to say that I am by no means a DocBook expert. I am, probably just like you, a complete newbie. So why did I write this small guide than? Because I'm presumably one, perhaps two, steps ahead of the people who have never dealt with DocBook at all. It can be a bit of a pain in the back in order to get started with DocBook, and I know nobody likes to read through a 700 page book about the subject. So there, that's why I wrote this. But because I'm a newbie too, don't trust anything I say. If stuff doesn't work, check the books/manuals/dtd's/someone with a clue.</para>
+	<para>Second of all, this document describes only DocBook SGML, not DocBook XML. If you have absolutely no clue about what this means, you should really take the time to read the section about '<link linkend="whatisdocbook">What is DocBook?</link>' and '<link linkend="whatissgml">What is SGML?</link>'. This document also is, and will remain for some time, a work in progress. My hope is that other people will also contribute to this document. This might be in vain though.</para>
+</sect1>
+
+
+<sect1><title>About DocBook</title>
+	<sect2 id="whatisdocbook"><title>What is DocBook?</title>
+		<para>DocBook is a standard. It's a set of rules that explain what you can and can't do in a document. For instance, it will tell you (or rather some tool which will check up on you to see if you're sticking to the rules) that you can't put an computer program example in an address specification. Or you can't put text outside a paragraph. Those kinds of things.</para>
+		<para>Now this DocBook standard is defined as an SGML DTD. That's right, an SGML DTD.</para>
+	</sect2>
+	<sect2 id="whatissgml"><title>What is SGML?</title>
+		<para>If you know what XML is all about then, well, SGML is almost exactly the same. There actually also is a DocBook XML version. If you don't know diddlysquat about XML, read on. SGML is a means to define rules. SGML, an abbreviation of Standard Generalized Markup Language, allows these rules to define what can and can't be done in a markup language document (like, i.e. HTML). These rules are placed in a document which is called a DTD (Document Type Definition). Through the use of this DTD, tools can check if everything you wrote in the marked up document is valid according to the rules defined in that DTD. That is all that SGML and DocBook are.</para>
+		<para>So neither SGML nor the DocBook DTD can actually convert your source SGML document to anything else! All they do is define rules. Some tool somewhere does all the real work, converting your documents to what you want. So essential this isn't just a DocBook guide, but also a guide to DocBook converting tools.</para>
+	</sect2>
+	<sect2><title>Getting and installing DocBook</title>
+		<para>Getting and installing DocBook is actually very simple. You just download the DTD document, and you're done. But of course you also want some tools and such accompanying the DTD so you can actually do something useful with it. Information about various tools can be found in the '<link linkend="tools">Tools</link>' section.</para>
+	</sect2>
+</sect1>
+<sect1><title>DocBook SGML documents</title>
+	<para>SGML documents are a lot like HTML. (I'm gonna get shot, in a SGML/XML-expert-driveby-shooting now. You're not allowed to say this I believe). They contain tags (called elements in SGML and XML), which in turn contain attributes. Composing a SGML document is the same as a HTML document. You put some tags here, some tags there, some tags everywhere. The big difference with DocBook SGML and HTML is that HTML defines what the target document will actually look like (font size = 3), while the DocBook SGML just defines how the document is built up. So instead of saying: This piece of text, which is the title of the document, should look large, bold and slanted, the DocBook SGML just says: This is the document's title. They leave it up to the conversion tools to decide how the document will eventually look.</para>
+	<sect2><title>Some basics</title>
+		<para>Writing a DocBook document starts with marking the document as such:</para>
+		<para><programlisting>&lt;!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook V4.1//EN"&gt;</programlisting></para>
+		<para>Translation: This document is of the type 'article', and uses OASIS' DTD definition version v4.1. The '<literal>article</literal>' part may vary. You can change it to '<literal>book</literal>' in order to create a book and all kinds of other things. The exact difference between these, and its effect on the conversion tools is unknown to me.</para>
+		<para>Above line should be the very first thing you put in your (plain text) document. After that you specify the global layout of your document. This is done with a tag which has the same name as the DOCTYPE you used on the first line. In this case '<literal>article</literal>'. This is what the basic DocBook document looks like:</para>
+		<para><programlisting>&lt;!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook V4.1//EN"&gt;
+&lt;article lang="en"&gt;
+    &lt;!-- some stuff will go here --&gt;
+&lt;/article&gt;</programlisting></para>
+		<para>If you were making a book, the first line would read '<literal>book</literal>' instead of '<literal>article</literal>' and the start and end element which are now known as '<literal>&lt;article&gt;</literal>' would be '<literal>&lt;book&gt;</literal>'. The entire contents of your article/book/whatevah will be placed between these two elements. Now, you can't just dump some text in between them. Why not? Cause the rules of DocBook say you can't, that's why. What can you put between the elements than? Well, lots of things actually. (check the '<link linkend="additionalreadings">Additional reading</link>' section). For now I'll present you with this:</para>
+		<para><programlisting>&lt;sect1&gt;
+	&lt;para&gt;Never let school interfere with your education.&lt;/para&gt;
+&lt;/sect1&gt;</programlisting></para>
+		<para>Two new things there: '<literal>sect1</literal>' and '<literal>para</literal>'. Let's guess they stand for 'Section 1' and 'Paragraph'. A section is exactly which it says it is: It's a section of your article. There are also those things like : <literal>&lt;sect1&gt; &lt;sect2&gt;</literal> (which can be nested inside each other to give your document a hierarchy) <literal>&lt;chapter&gt;</literal>, etc.</para>
+	</sect2>
+	<sect2><title>A simple DocBook document</title>
+		<para>You should now have enough information to create a simple SGML document. Here it goes:</para>
+		<para><programlisting>&lt;!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook V4.1//EN"&gt;
+&lt;article lang="en"&gt;
+
+&lt;sect1&gt;
+    &lt;title&gt;Introduction&lt;/title&gt;
+    &lt;para&gt;Welcome to my very first introduction to DocBook!&lt;/para&gt;
+&lt;/sect1&gt;
+&lt;/article&gt;</programlisting></para>
+		<para>That's it! Now, read the section about '<link linkend="convertingdocbook">Converting DocBook</link>' so you can see some output documents. For those of you who are impatient UNIX users, issue the following command:</para>
+		<screen><computeroutput>[todsah@eek]~$ </computeroutput><userinput>db2html -u my_first_db.sgml</userinput></screen>
+	<sect2><title>Useful DocBook elements</title>
+		<para>DocBook elements are the key to it being of any use. So it sure be pleasant if you'd know some of them. Here are some of the most used ones. Most used by me that is. For more, check out the '<link linkend="additionalreadings">Additional readings</link>' section.</para>
+		<sect3><title>Layout elements</title>
+			<variablelist>
+				<varlistentry>
+					<term><literal><ulink url="http://www.docbook.org/tdg/en/html/sect1.html">&lt;sect1&gt;</ulink></literal></term>
+				<listitem><para>sect elements define the overall layout of you document. They will be automatically numbered (depending on the tool used to convert it, of course) in sequence. You can nest them, that is, a <literal>&lt;sect2&gt;&lt;/sect2&gt;</literal> can be nested within a <literal>&lt;sect1&gt;</literal> element. 
+				<varlistentry>
+					<term><literal><ulink url="http://www.docbook.org/tdg/en/html/para.html">&lt;para&gt;</ulink></literal></term>
+					<listitem><para>A paragraph. It can contain normal text.</para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal><ulink url="http://www.docbook.org/tdg/en/html/title.html">&lt;title&gt;</ulink></literal></term>
+					<listitem><para>Some elements are allowed to be titled. Most notably, the <literal>&lt;sect#&gt;</literal> elements and the <literal><ulink url="http://www.docbook.org/tdg/en/html/articleinfo.html">&lt;articleinfo&gt;</ulink></literal> element.</para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal><ulink url="http://www.docbook.org/tdg/en/html/articleinfo.html">&lt;articleinfo&gt;</ulink></literal></term>
+					<listitem><para>Guess what? It allows for article information to be described. It can contain a couple of elements, namely: <literal><ulink url="http://www.docbook.org/tdg/en/html/title.html">&lt;title&gt;</ulink></literal>, <literal><ulink url="http://www.docbook.org/tdg/en/html/author.html">&lt;author&gt;</ulink></literal> and some more.</para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal><ulink url="http://www.docbook.org/tdg/en/html/author.html">&lt;author&gt;</ulink></literal></term>
+					<listitem><para>An element to hold other elements which describe something about the author. <literal><ulink url="http://www.docbook.org/tdg/en/html/firstname.html">&lt;firstname&gt;</ulink></literal> and <literal><ulink url="http://www.docbook.org/tdg/en/html/surname.html">&lt;surname&gt;</ulink></literal> would look nice within this element.</para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal><ulink url="http://www.docbook.org/tdg/en/html/screen.html">&lt;screen&gt;</ulink></literal></term>
+					<listitem><para>The screen element should contain elements which describe a computer screen. These are, amongst others, <literal><ulink url="http://www.docbook.org/tdg/en/html/computeroutput.html">&lt;computeroutput&gt;</ulink></literal> and <literal><ulink url="http://www.docbook.org/tdg/en/html/userinput.html">&lt;userinput&gt;</ulink></literal></para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal><ulink url="http://www.docbook.org/tdg/en/html/computeroutput.html">&lt;computeroutput&gt;</ulink></literal></term>
+					<listitem><para>This element's contents (text) represents information which is shown on a computer screen as output by the computer.</para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal><ulink url="http://www.docbook.org/tdg/en/html/userinput.html">&lt;userinput&gt;</ulink></literal></term>
+					<listitem><para>This element's contents (text) represents information which is typed on the keyboard by the user.</para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal><ulink url="http://www.docbook.org/tdg/en/html/itemizedlist.html">&lt;itemizedlist&gt;</ulink></literal></term>
+					<listitem><para>Itemized lists are those nice lists which have bulletpoints in front of them. How they are represented once converted to an output document depends on the tool used, but usually it will be bulletpoints. The itemizedlist element should contain <literal><ulink url="http://www.docbook.org/tdg/en/html/listitem.html">&lt;listitem&gt;</ulink></literal> elements.</para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal><ulink url="http://www.docbook.org/tdg/en/html/listitem.html">&lt;listitem&gt;</ulink></literal></term>
+					<listitem><para>This element's contents, which should be <literal><ulink url="http://www.docbook.org/tdg/en/html/para.html">&lt;para&gt;</ulink></literal> (which in turn will contain some text), represents one item in an <literal>&lt;itemizedlist&gt;</literal>.</para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal><ulink url="http://www.docbook.org/tdg/en/html/variablelist.html">&lt;variablelist&gt;</ulink></literal></term>
+					<listitem><para>A variable list is like an itemized list, except it allows you to define a term and a description for this term. It's structure is somewhat more difficult than any other elements described in this document. The variablelist element should contain <literal>&lt;varlistentry&gt;</literal> elements.</para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal><ulink url="http://www.docbook.org/tdg/en/html/varlistentry.html">&lt;varlistentry&gt;</ulink></literal></term>
+					<listitem><para>A <literal><ulink url="http://www.docbook.org/tdg/en/html/variablelist.html">&lt;variablelist&gt;</ulink></literal> entry. This element should contain a <literal><ulink url="http://www.docbook.org/tdg/en/html/term.html">&lt;term&gt;</ulink></literal> element and a <literal><ulink url="http://www.docbook.org/tdg/en/html/listitem.html">&lt;listitem&gt;</ulink></literal> element per <literal><ulink url="http://www.docbook.org/tdg/en/html/varlistentry.html">&lt;varlistentry&gt;</ulink></literal> element.</para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal><ulink url="http://www.docbook.org/tdg/en/html/term.html">&lt;term&gt;</ulink></literal></term>
+					<listitem><para>Contains, in text, the term which will be described.</para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal><ulink url="http://www.docbook.org/tdg/en/html/programlisting.html">&lt;programlisting&gt;</ulink></literal></term>
+					<listitem><para>This should contain source code for programs and examples.</para></listitem>
+				</varlistentry>
+			</variablelist>
+		</sect3>
+	</sect2>
+</sect1>
+<sect1 id="convertingdocbook"><title>Converting DocBook</title>
+	<para>As I said in the introduction, the real power of DocBook is the ability to convert DocBook documents to any number of output formats using tools. Using these tools it's possible to convert a SGML source document to PDF, HTML, RTF, and more. </para>
+	<para>There are also other tools available which will convert documents to DocBook instead of the other way around. Tools for checking the syntax, tidying up the source, editors, etc. This chapter will only discuss some of the conversion tools. </para>
+	<sect2 id="tools"><title>Tools</title>
+		<para>Various conversion tools exist, some more used than others. Some of the most used are:</para>
+		<variablelist>
+			<varlistentry>
+				<term>Unix:</term>
+				<listitem>
+					<para><ulink url="http://openjade.sourceforge.net/">OpenJade</ulink></para>
+					<para>OpenJade is a tool for converting (publishing) DocBook documents to HTML, PDF, RTF and other formats. It is an implementation of the DSSSL standard, which is a fancy acronym for a set of rules which can be applied to DocBook documents in order to convert them. OpenJade is Free Software, and can be freely downloaded from the above page. Redhat users can install the <literal>openjade-</literal>* RPM packages. Debian users can install the <literal>docbook</literal>, <literal>docbook-dsssl</literal>, <literal>docbook-utils</literal> and <literal>openjade1.3</literal> packages (apt-get powah)</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Windows:</term>
+				<listitem>
+					<para>I haven't tried out DocBook on the Windows platform. You're on your own. If you know about how to do this, please email me so I can include the information here.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</sect2>
+	<sect2><title>Converting</title>
+		<para>On UNIX, converting is easy. Just switch to the directory containing your DocBook source, and issue the following command:</para>
+		<para><userinput>db2html my_first_db.sgml</userinput></para>
+		<para>You can also use db2pdf, db2ps or db2rtf to convert your DocBook to PDF, Postscript or Rich Text Format. The db2 commands are easy to use wrappers to OpenJade and are part of the JW tool-set.. They are available in the docbook-utils debian package.</para>
+		<para>I don't know anything about publishing DocBook on the Windows (or any other) platform. If you know something about this subject, please email it to me.</para>
+	</sect2>
+	<sect2><title>Configuring tools</title>
+		<para>The OpenJade tool can be configured by altering  the <filename>dbparams.dsl</filename> files, which can be found in the <filename>print/</filename> and <filename>html/</filename> directories in the <filename>stylesheet/dsssl/modular/</filename> directory. (This directory may vary from system to system. My Debian machine has them located in the <filename>/usr/share/sgml/docbook/stylesheet/dsssl/modular/</filename> directory) The <filename>html</filename> directory contains stylesheets for the conversion of DocBook SGML to HTML. The <filename>print</filename> directory contains stylesheets for the conversion to various printable formats like PDF and RTF.</para>
+		<para>For now, the only useful option I will discuss is one in the <filename>html/dbparams.dsl</filename> file. </para>
+		
+		<sect3><title>HTML: Setting a Cascading StyleSheet (CSS)</title>
+			<para>CSS are stylesheets which determine how the different HTML elements will eventually look when displayed in the web browser. Please note that they have almost absolutely nothing to do with DSSSL stylesheets. If you want the generated HTML to contain some kind of CSS file, you can specify one. This file will then be referenced by the produced HTML. The option you should be looking for is the %stylesheet% option. Initially, it looks like this:</para>
+			<screen><computeroutput>(define %stylesheet%
+;; REFENTRY stylesheet
+;; PURP Name of the stylesheet to use
+;; DESC
+;; The name of the stylesheet to place in the HTML LINK TAG, or '#f' to
+;; suppress the stylesheet LINK.
+;; /DESC
+;; AUTHOR N/A
+;; /REFENTRY
+#f)</computeroutput></screen>
+			<para>The '#f' indicates that no CSS stylesheet should be used. if you want to change it, you can specify a stylesheet like this:</para>
+			<screen><computeroutput>(define %stylesheet% "http://todsah.nihilist.nl/css/docbook_fb.css")</computeroutput></screen>
+			<para>This will generate the following additional HTML code in the output of openjade's DocBook to HTML conversion:</para>
+			<screen><computeroutput>&lt;META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"&gt;&lt;LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="http://todsah.nihilist.nl/css/docbook_fb.css"&gt;</computeroutput></screen>
+			<para>As you can see, the stylesheet is included in the HTML output. You can also see that the HTML output of openjade is quite ugly. Just ignore it.</para>
+		</sect3>
+	</sect2>
+</sect1>
+<sect1 id="additionalreadings"><title>Additional readings</title>
+	<para>This document just barely scratches the surface of DocBook, SGML, jade/openjade, DSSSL and all other things DocBook. For more information, you might like to consult these additional readings. I've tried to stick with online resources so you won't have to leave the comfort of your home in order to get DocBook literate. Two of the most important resources you should know about are these:</para>
+	<variablelist>
+		<varlistentry>
+			<term><ulink url="http://www.oasis-open.org/docbook/documentation/reference/html/docbook.html">DocBook: The Definitive Guide</ulink></term>
+			<listitem>
+				<para>ISBN: 156592-580-7</para>
+				<para>DocBook: The definitive guide is pretty close to being definitive. It contains just about everything you need or want to know about DocBook SGML/XML. Also includes instructions on various Windows/Mac/Unix tools for DocBook. The book can be bought, but for the freeloaders among us there is an free online version available. You can reach it by following the link above.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term><ulink url="http://www.dpawson.co.uk/docbook/">Docbook Frequently Asked Questions</ulink> </term>
+			<listitem>
+				<para>This web-page covers frequently asked questions about DocBook, and it is a good place to start if you're new to DocBook. It also shows that DocBook: The definitive guide isn't as definitive as they'd make you believe. This is because the writers of the book forgot an element reference guide. Luckily, DocBook FAQ page has one available <ulink url="http://www.dpawson.co.uk/docbook/reference.html#d12e58">here</ulink>.</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</sect1>
+
+<sect1><title>About this document</title>
+	<sect2><title>Contributing</title>
+		<para>This document is incomplete. For instance, it only talks about UNIX tools for converting DocBook. If you'd like to contribute something to this document, like i.e. extra elements, other tools, extra information, spelling corrections, etc, you may send them to me (consult the <link linkend="author">author</link> section) and I will include them in this document.</para>
+	</sect2>
+	<sect2><title>Copyright</title>
+		<para>Copyright (c) 2002-2004, Ferry Boender</para>
+		<para>This document may be freely distributed, in part or as a whole, on any medium, without the prior authorization of the author, provided that this Copyright notice remains intact, and there will be no obstruction as to the further distribution of this document. You may not ask a fee for the contents of this document, though a fee to compensate for the distribution of this document is permitted.</para>
+		<para>Modifications to this document are permitted, provided that the modified document is distributed under the same license as the original document and no copyright notices are removed from this document. All contents written by an author stays copyrighted by that author.</para>
+		<para>Failure to comply to one or all of the terms of this license automatically revokes your rights granted by this license</para>
+		<para>All brand and product names mentioned in this document are trademarks or registered trademarks of their respective holders.</para>
+	</sect2>
+	<sect2 id="author"><title>Author</title>
+		<address>
+			Ferry Boender
+			<email>f (DOT) boender (AT) electricmonk (DOT) nl</email>
+		</address>
+	</sect2>
+	<sect2><title>History</title>
+		<para>This document has undergone the following changes:</para>
+		<para>
+			<revhistory>
+				<revision>
+					<revnumber>0.1</revnumber>
+					<date>July 27, 2003</date>
+					<authorinitials>FB</authorinitials>
+					<revremark>Initial release.</revremark>
+				</revision>
+			</revhistory>
+		</para>
+</sect1>
+</article>

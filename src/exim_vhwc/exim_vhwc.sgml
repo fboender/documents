@@ -1,0 +1,244 @@
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook V4.1//EN">
+<article lang="en">
+
+<articleinfo>
+	<title>Exim Virtual Host Wildcard Delivery</title>
+	<author>
+		<firstname>Ferry</firstname>
+		<surname>Boender</surname>
+	</author>
+</articleinfo>
+
+<sect1>
+	<title>About this document</title>
+	<para>I spent a lot of time figuring out how I could have all mail which didn't have a proper/existing recipient get sent to a particular user. I also wanted to be able to specify a different recipient for each virtual domain.</para>
+	<para>In this document I will explain how I made it work. To be honest, I was quite surprised when it actually worked, so it might very well be, that you won't get it to work. But to keep things on a happy note, at least one other person got it to work with the help of my configuration. (right, maffie?)</para>
+	<para><emphasis>Disclaimer:</emphasis>This document is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY nor the guaranty that this will work and not total screw up your configuration (backups people!)</para>
+</sect1>
+
+<sect1>
+	<title>What we want</title>
+	<para> We want all mail which arrives on your system, and which can't be delivered because the specified user does not exist, to be delivered to some user. For each virtual domain we want to be able to specify a different recipient user. But Exim should still honor the default alias file (which contains aliases, independent of virtual hosts) I'll give an example to elaborate:</para>
+	<para>
+		<itemizedlist>
+			<title>REAL users on the system</title>
+			<listitem><para>john</para></listitem>
+			<listitem><para>peter</para></listitem>
+			<listitem><para>todsah</para></listitem>
+		</itemizedlist>
+		<itemizedlist>
+			<title>Aliases</title>
+			<listitem><para>pete -> peter</para></listitem>
+			<listitem><para>spamhere -> todsah</para></listitem>
+		</itemizedlist>
+		<itemizedlist>
+			<title>Virtual domains for which we recieve mail</title>
+			<listitem><para>some.hostname.com</para></listitem>
+			<listitem><para>myhost.dhs.org</para></listitem>
+		</itemizedlist>
+	</para>
+	<para>Now, imagine the following:</para>
+	<literallayout>
+		Somebody mails to <emphasis>john@some.hostname.com</emphasis>, the mail is delivered to user <emphasis>john</emphasis>
+		Somebody mails to <emphasis>spamhere@myhost.dhs.org</emphasis>, the mail is delivered to user <emphasis>todsah</emphasis>
+	</literallayout>
+	<para>The following will happen (after we've set up the wildcard handlers):<para>
+	<literallayout>
+		Somebody mails to <emphasis>doesntexist@some.hostname.com</emphasis>, the mail is delivered to user <emphasis>john</emphasis>
+		Somebody mails to <emphasis>knockknock@myhost.dhs.org</emphasis>, the mail is delivered to user <emphasis>todsah</emphasis>
+	</literallayout>
+</sect1>
+
+<sect1>
+	<title>How we're gonna do it</title>
+	<para> Now that you understand exactly what this document will (hopefully) teach you, I'll finally explain how to accomplish this. Some knowledge about the Exim configuration file will come in handy, but it's do-able without.</para>
+	<sect2>
+		<title>About Exim configuration</title>
+		<para> Exim configuration can be split up in a couple of parts:</para>
+		<variablelist>
+			<varlistentry><term>Main configuration</term><listitem><para> Configuration options which apply to the daemon and all received mail.</para></listitem></varlistentry>
+			<varlistentry><term>Transport configuration</term><listitem><para> These configuration options are hard to explain. Let's just say they tell Exim how mail should be stored on the system or what should be done with the contents of the mail</para></listitem></varlistentry>
+			<varlistentry><term>Directors configuration</term><listitem><para> These options define how Exim finds out for which user received mail is.</para></listitem></varlistentry>
+			<varlistentry><term>Some other configuration stuff</term><listitem><para> These other configuration options are not important right now.</para></listitem></varlistentry>
+		</variablelist>
+		<para>We'll only need to hack the 'Directors configuration' part.</para>
+	</sect2>
+	<sect2>
+		<title>The Directors configuration section</title>
+		<para> This section already contains some default directors which Exim uses to find out for which user received mail is. They are:</para>
+		<variablelist>
+			<varlistentry><term>Real_local</term><listitem><para>I have no idea what this directive does.</para></listitem></varlistentry>
+			<varlistentry><term>system_aliases</term><listitem><para>The default alias file (/etc/aliases)</para></listitem></varlistentry>
+			<varlistentry><term>procmail_pipe</term><listitem><para>If users have a .procmailrc file in their homedir, this program will be called by Exim. I don't exactly know what procmail does.</para></listitem></varlistentry>
+			<varlistentry><term>userforward</term><listitem><para>The .forward file in users' homedirs in which they can specify a different email address/user to which all their mail should be forwarded.</para></listitem></varlistentry>
+			<varlistentry><term>local_user</term><listitem><para>Normal local users.</para></listitem></varlistentry>
+		</variablelist>
+		<para>These directors are parsed from top to bottom (so their order in the configuration file matters) and directive which applies to the mail message will take care of it. So mail to i.e my_alias@myhost.dhs.org will not reach the local_user directive. So if a real user exists on the system named my_alias, but the /etc/aliases file specifies my_alias as mail for user todsah, all the mail will go to todsah, and not the user my_alias. BUT! since Exim found out that the mail should be send to user todsah, that mail will be parsed through the configuration again. So if user todsah has i.e. a .forward file in it's homedir, Exim will notice this the second time the mail is checked against the various configuration directives.</para>
+	</sect2>
+	<sect2>
+		<title>Our own director</title>
+		<para>Okay. To get wildcard aliases to work, we need to add a director of our own which will do almost the same as the system_aliases director, but it should match all recipients (even non-existing ones) at the specified domain names. To get this to work, we'll add the new director at the end of the Directors section. This is because it will only send the mail to the wildcard if all the other directors fail.</para>
+		<para>Insert the following director after the localuser director in the /etc/exim.config file, at the end of the directors section, just above 'end'.</para>
+			<programlisting>
+	system_aliases_wc:
+	driver = aliasfile
+	file_transport = address_file
+	pipe_transport = address_pipe
+	file = /etc/aliases.wildcards   <co id="owndir.l5">
+	include_domain = true           <co id="owndir.l6">
+	search_type = lsearch*@         <co id="owndir.l7">
+			</programlisting>
+			<para> I'll explain the director: If you look at the normal system_alias director, you will notice that the system_alias_wc director only differs from it in the last 3 lines. Here's what they mean:</para>
+			<calloutlist>
+				<callout arearefs="owndir.l5"><para>This tells Exim in which file the wildcard aliases are</para></callout>
+				<callout arearefs="owndir.l6"><para>Tells Exim that the alias file includes domain names.</para></callout>
+				<callout arearefs="owndir.l7"><para>Tells Exim that it should match _all_ recipient (user) names for the domain specified in the aliases_wc file.</para></callout>
+			</calloutlist>
+			<para>Okay, were done. It's that easy (if you know what it is. If you have to figure it out yourself, it sucks - believe me)</para>
+			<para>Save the new configuration and restart Exim.</para>
+	</sect2>
+	<sect2>
+		<title>The wildcard alias file</title>
+		<para> For Exim to know which user will receive undeliverable mail, we need to set up the wildcard alias file as described in section 4.3 (file = /etc/aliases.wildcards). It's quite simple, here's how mine looks like:</para>
+		<programlisting>
+	*@arise.nl: todsah@arise.dhs.org
+	*@arise.dhs.org: todsah@arise.dhs.org
+	*@tribe.eu.org: tribbel@tribe.eu.org
+	*@funghus.dhs.org: todsah@arise.dhs.org
+	*@tropenlust.dhs.org: tropenlust@arise.dhs.org
+		</programlisting>
+		<para>I think you'll be able to figure out the syntax yourself. Just create the /etc/aliases.wildcards file and save it.</para>
+	</sect2>
+	<sect2>
+		<title>Director order</title>
+		<para>The order of the directors in your exim configuration file are of great importance, if you want this whole thing to work. Here's the order of my directors:</para>
+		<programlisting>
+	real_local:
+	system_aliases:
+	procmail:
+	userforward:
+	localuser:
+	system_aliases_wc:
+		</programlisting>
+		<para>If the order of your directors is different, you should probably change them to the above order.</para>
+	</sect2>
+</sect1>
+
+<sect1>
+	<title>Testing the configuration</title>
+	<para>After following the steps in the 4.x sections, you can now restart Exim (and perhaps also run the newaliases file, but I don't believe that's necesarry) and it _should_ work. If you want to test it, you can use the following command:</para>
+	<screen>
+		<userinput>
+
+	exim -d2 -bt
+		</userinput>
+	</screen>
+	<para>preferably as root. This will put exim in the address testing mode, at debugging level 2. If you need more debugging information, just increase the number (-d2) Debugging level 2 will show you exactelly how mail is passed through all the different directors. You will be presented with a prompt like so:</para>
+	<screen>
+		<computeroutput>
+
+	Exim version 3.12 debug level 2 uid=0 gid=0
+	probably Berkeley DB version 1.8x (native mode)
+	Caller is an admin user
+	Caller is a trusted user
+	>
+		</computeroutput>
+	</screen>
+	<para>You may now enter random email addresses, to see how exim will handle them. Some examples (using different debugging levels , or else the output is going to be too much):</para>
+	<screen>
+		<userinput>
+
+	> todsah@arise.dhs.org
+		</userinput>
+		<computeroutput>
+
+	system_aliases director: lsearch key=todsah
+	file="/etc/aliases"
+	system_aliases director failed for todsah:
+	userforward director: file = .forward
+	set uid=0 gid=0 euid=1000 egid=1000
+	successful stat of /home/todsah/.
+	/home/todsah/.forward not found
+	restored uid=0 gid=0 euid=8 egid=8
+	queued for local_delivery transport: local_part=todsah domain=arise.dhs.org
+	localuser director succeeded for todsah
+	todsah@arise.dhs.org
+	deliver to todsah in domain arise.dhs.org
+	director = localuser, transport = local_delivery
+	>
+		</computeroutput>
+	</screen>
+	<para>Here you can see that there isn't an alias for user todsah. After that Exim apparently knows that the user is an existing user on the system, so it checks the user's .forward file and deliveres the mail.</para>
+	<para>Now, let's test our new directive:</para>
+	<screen>
+		<userinput>
+
+	> nonexistinguser@arise.nl
+		</userinput>
+		<computeroutput>
+
+	system_aliases director: lsearch key=nonexistinguser
+	file="/etc/aliases"
+	system_aliases director failed for nonexistinguser:
+	procmail director failed for nonexistinguser: no such user
+	userforward director failed for nonexistinguser (not a user)
+	localuser director failed for nonexistinguser: no such user
+	system_aliases_wc director: lsearch* key=nonexistinguser@arise.nl
+	file="/etc/aliases.wildcards"
+	system_aliases_wc director generated todsah@arise.dhs.org
+		</computeroutput>
+	</screen>
+	<para>In this output I've cut away some non-important things. The important thing is, that, if every director fails, the system_aliases_wc director takes over. After that the recipient found by the system_aliases_wc director will be passed through the directors again, so that Exim will know if the user todsah has a .forward file, etc.</para>
+	<para>You can fiddle around a bit with the Exim address testing mode to make sure everything works ok, and then leave it by typing <keycombo><keycap>CTRL</keycap><keycap>d</keycap></keycombo> or <keycombo><keycap>CTRL</keycap><keycap>c</keycap></keycombo>.</para>
+</sect1>
+
+<sect1>
+	<title>Copyright / Author</title>
+	<para>Copyright (c) 2002-2004, Ferry Boender</para>
+	<para>This document may be freely distributed, in part or as a whole, on any medium, without the prior authorization of the author, provided that this Copyright notice remains intact, and there will be no obstruction as to the further distribution of this document. You may not ask a fee for the contents of this document, though a fee to compensate for the distribution of this document is permitted.</para>
+	<para>Modifications to this document are permitted, provided that the modified document is distributed under the same license as the original document and no copyright notices are removed from this document. All contents written by an author stays copyrighted by that author.</para>
+	<para>Failure to comply to one or all of the terms of this license automatically revokes your rights granted by this license</para>
+	<para>All brand and product names mentioned in this document are trademarks or registered trademarks of their respective holders.</para>
+
+<para>Author:</para>
+	<para>
+		<address>
+			Ferry Boender
+			<street>De Cotelaer 28</street>
+			<postcode>3772 BP</postcode>
+			<city>Barneveld</city>
+			<country>The Netherlands</country>
+			<email>f (DOT) boender (AT) electricmonk (DOT) nl</email>
+		</address>
+	</para>
+
+	<sect2>
+		<title>Document changes</title>
+		<para>This document has undergone the following changes:</para>
+		<para>
+			<revhistory>
+				<revision>
+					<revnumber>0.3</revnumber>
+					<date>09 October 2003</date>
+					<authorinitials>FB</authorinitials>
+					<revremark>Typo fixes</revremark>
+				</revision>
+				<revision>
+					<revnumber>0.2</revnumber>
+					<date>24 jun 2003</date>
+					<authorinitials>FB</authorinitials>
+					<revremark>Rewrote document in docbook</revremark>
+				</revision>
+				<revision>
+					<revnumber>0.1</revnumber>
+					<date>2000</date>
+					<authorinitials>FB</authorinitials>
+					<revremark>Initial release</revremark>
+				</revision>
+			</revhistory>
+		</para>
+	</sect2>
+</sect1>
+
+</article>
+
