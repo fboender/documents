@@ -1,0 +1,42 @@
+<VirtualHost *:80>
+	######
+	# VHost definition
+	######
+        ServerAdmin webmaster@dvd.dev.local
+        ServerName dvd.dev.local
+
+	######
+	# VHost directory settings
+	######
+        DocumentRoot /var/www/dvd.dev.local/htdocs/
+
+	######
+	# Enable Python
+	######
+	<Location />
+		PythonPath "sys.path+['/var/www/dvd.dev.local/htdocs']"
+		SetHandler python-program
+		PythonHandler cherrypy._cpmodpy::handler
+		PythonOption cherrypy.setup dvd::start_modpython
+		PythonDebug On
+	</Location>
+	<Location /images/>
+		SetHandler None
+	</Location>
+
+	######
+	# Logging level
+	######
+        LogLevel warn
+
+	######
+	# Log files
+	######
+        ErrorLog /var/www/dvd.dev.local/logs/error.log
+        CustomLog /var/www/dvd.dev.local/logs/access.log combined
+
+	######
+	# Misc settings
+	######
+	serversignature off
+</VirtualHost>
