@@ -2,7 +2,7 @@ Exim Virtual Domains with wildcards
 ===================================
 
 Ferry Boender
-<ferry DOT boender AT gmail.com>
+<ferry DOT boender AT electricmonk . nl>
 version 0.1, November 7, 2008
 
 Introduction
@@ -53,9 +53,9 @@ dc_use_split_config='true'
 
 === Adding a router ===
 
-Next, we must tell Exim4 how it should handle mail for these domains. The default setup is not enough, so what we need to do is add a router to the Exim4 configuration. All the email Exim receives (and for which it is configured to handle email in the setup above), goes through all the routers until Exim has found where it can actually deliver the mail. This could be a local user, or a remote mail address, or whatever.
+Next, we must tell Exim4 how it should handle mail for these domains. The default setup is not enough, so what we need to do is add a router to the Exim4 configuration. All the email Exim4 receives (and for which it is configured to handle email in the setup above), goes through all the routers until Exim has found where it can actually deliver the mail. This could be a local user, or a remote mail address, or whatever.
 
-So we add a router to the Exim configuration which will do what we want. The router must be referenced by Exim before the System aliases are tried, and after the +real_local+ router is checked. The real_local router allows direct delivery to local users without other processing getting in the way so errors can always be properly delivered) 
+So we add a router to the Exim4 configuration which will do what we want. The router must be referenced by Exim4 before the System aliases are tried, and after the +real_local+ router is checked. The real_local router allows direct delivery to local users without other processing getting in the way so errors can always be properly delivered) 
 
 So we create a new router file: +/etc/exim4/conf.d/router/350_exim4-config_vdom_aliases+ with the following contents:
 
@@ -76,11 +76,9 @@ This sets up a special custom Exim4 router which will look at any incoming mail 
 
 === Automatically detect local domains ===
 
-// FIXME: Check if below is true and if it can be done otherwise (edit MAIN_LOCAL_DOMAINS)
-
 Normally you'd have to manually specify all the domain-names for which Exim4 should accept and handle email. If you'd like Exim4 to automatically detect which domain-names it should handle email for by looking in the directory +/etc/exim4/virtual/+ for domain-names, follow the steps in this section. If you still want to manually configure the local domains, you can skip this step.
 
-WARNING: The instructions in this section modify configuration files which are managed by Debian. Debian does a very poor job of making sure it does not overwrite any configurations you may have edited, so it is possible that whenever Exim4 gets upgrades by Debian, the changes you made in this section are overriden. If you wish to be on the safe side, always make sure you also add any local domainnames to the +/etc/exim4/update-exim4.conf.conf+ file like you would normally do.
+WARNING: The instructions in this section modify configuration files which are managed by Debian. Debian does a very poor job of making sure it does not overwrite any configurations you may have edited, so it is possible that whenever Exim4 gets upgrades by Debian, the changes you made in this section are overridden. If you wish to be on the safe side, always make sure you also add any local domain names to the +/etc/exim4/update-exim4.conf.conf+ file like you would normally do.
 
 To make Exim4 automatically accept mail for domains found in the +/etc/exim4/virtual/+ directory, find the file +/etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs+ and edit it. Locate the line that says:
 
@@ -138,10 +136,10 @@ HOSTNAME::
 Other things we can configure in these files are:
 
 ---------------------------------------------------------------------
-# Make any delivery for the recipient fail. Exim will send a notification back to the sender.
+# Make any delivery for the recipient fail. Exim4 will send a notification back to the sender.
 spam: :fail: This address has been blocked due to spam (this doesn't mean your email is considered spam!). Please refer to http://www.peterson.com for another e-mail address.
 
-# Include a list of other recipients. Exim will send the message to all the users in the included file
+# Include a list of other recipients. Exim4 will send the message to all the users in the included file
 devlist :include:/etc/exim4/lists/devlist
 
 # Discard all messages send to this recipient:
@@ -150,7 +148,7 @@ noreply :blackhole:
 
 === Apply configuration and restarting ===
 
-Finally, we need to apply the new configuration and restart Exim:
+Finally, we need to apply the new configuration and restart Exim4:
 
 ---------------------------------------------------------------------
 # update-exim4.conf
@@ -160,7 +158,7 @@ Finally, we need to apply the new configuration and restart Exim:
 Testing
 -------
 
-An important step in our setup is testing whether mail is delivered correctly. We can do this easily by running Exim4 in address testing mode to see where a message for a recipient will be delivered by Exim. To start Exim in testing mode, run the following command:
+An important step in our setup is testing whether mail is delivered correctly. We can do this easily by running Exim4 in address testing mode to see where a message for a recipient will be delivered by Exim4. To start Exim4 in testing mode, run the following command:
 
 ---------------------------------------------------------------------
 # exim4 -bt
@@ -169,7 +167,7 @@ An important step in our setup is testing whether mail is delivered correctly. W
 
 You will be put at a prompt where you can enter an recipient email address. Exim4 will then show you where it will be delivered.
 
-The default testing mode doesn't give too much usefull output, so we can add the +-d+ switch to get more debugging output. Exim4 will now also show us which directives and routers it's going through, and where the recpient email address matches a particular router and the resulting action.
+The default testing mode doesn't give too much useful output, so we can add the +-d+ switch to get more debugging output. Exim4 will now also show us which directives and routers it's going through, and where the recipient email address matches a particular router and the resulting action.
 
 ---------------------------------------------------------------------
 # exim4 -bt -d
