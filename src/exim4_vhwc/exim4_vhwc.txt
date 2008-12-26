@@ -233,7 +233,7 @@ routing pete@localhost
 
 In the output above, we that Exim4 runs our vdom router, and searches for a file matching the domainname of the recpient in the +/etc/exim4/virtual/+ directory. It finds it, and then searches for the local part (+john+) in that file. As we can see, Exim4 finds where mail for that user at that domain should go (+pete@localhost+), so Exim4 continues the delivery using that user.
 
-Copright
+Copyright
 --------
 
 Copyright (c) 2008, Ferry Boender
