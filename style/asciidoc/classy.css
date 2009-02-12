@@ -45,7 +45,7 @@ h4 {
 p, dl {
 	margin-left: 20px;
 	text-align: justify;
-	line-height: 1.2em;
+	line-height: 1.3em;
 }
 
 dl dt {
@@ -57,8 +57,11 @@ dl dd p {
 
 pre {
 	margin-left: 40px;
-	border-left: 1px solid #D0D0D0;
 	padding-left: 5px;
+}
+pre, tt {
+	font-family: "Courier New", courier, monospace;
+	color: #202020;
 }
 
 ul {
@@ -84,6 +87,16 @@ div.toclevel4 {
 div.admonitionblock div.title {
 	font-weight: bold;
 	margin-right: 20px;
+}
+div.tableblock {
+	margin-left: 30px;
+}
+div.imageblock {
+	margin-left: 30px;
+}
+div.image-title {
+	font-style: italic;
+	font-size: small;
 }
 
 /* vim: set ft=css ts=4 sw=4 noexpandtab: */
