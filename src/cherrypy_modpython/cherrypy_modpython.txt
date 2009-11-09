@@ -4,7 +4,7 @@
 CherryPy on Apache2 with mod_python
 ====================================
 Ferry Boender
-1.4, October 29, 2007
+1.5, November 9, 2009
 
 Introduction
 ------------
@@ -174,6 +174,11 @@ Getting your application to work
 Okay, so now it's time to get your application to work with mod_python. All
 that's needed is to put the CherryPy framework from blocking to non-blocking
 mode, and you're done.
+
+NOTE: Philip Stark mentions that since CherryPy 3.1, you do not have to put
+CherryPy in non-blocking mode any longer. The "blocking=false" option has been
+deprecated and will generate an error in your log file. Keep on reading,
+however, cause there are still a lot of things to take care of.
 
 At least, that's the theory. In practice, there's a whole lot more that needs
 to be done. There are a bunch of pitfalls that might prevent your application
@@ -441,7 +446,7 @@ About this document
 
 === Document License ===
 
-Copyright (c) 2002-2004, Ferry Boender
+Copyright (c) 2002-2009, Ferry Boender
 
 This document may be freely distributed, in part or as a whole, on any medium,
 without the prior authorization of the author, provided that this Copyright
@@ -477,3 +482,4 @@ during the cherrypy-exploration and writing of this document:
 
 * Michiel van Baak
 * Fumanchu
+* Philip Stark
