@@ -1,0 +1,751 @@
+Building a line calculator
+==========================
+
+TODO:
+
+	- Functions
+	- Error handling
+	- Constants
+
+Introduction
+------------
+
+In this article, we'll be building a line-based calculator in Python. The end result will look like this:
+
+-----------------------------------------------------------------------------
+> 2 * (5+1) / 3 * (pi ^ 2)
+= 39.4784176044
+-----------------------------------------------------------------------------
+
+We could of course simply use Python's 'eval()' built-in, but that's rather insecure not to mention boring. So instead we will write a parser and evaluator which can calculate arithmetic expressions.
+
+Some theory
+-----------
+
+First we'll cover some theory we need when implementing our calculator. Most of this should be pretty straight-forward, and you probably already know it.
+
+=== Operands and operators ===
+
+Let's look at the following arithmetic expression:
+
+-----------------------------------------------------------------------------
+2 * (5+1) / 3 * (pi ^ 2)
+-----------------------------------------------------------------------------
+
+It contains 'operands' and 'operators'. Numbers and constants (such as 'pi') are operands. The addition, multiplication and division symbols are 'operators', because the operate on operands.
+
+=== Precedence ===
+
+The various operators have different precedence. For instance, multiplication has a higher precedence than addition. This means that in the expression `2 \+ 5 \* 10`, we should first calculate `5 \* 10` (which is 50), and then `2 \+ 50`, so we end up with `52` instead of `70`. Here a table of all the operators, listed by precedence:
+
+[grid="all"]
+`--------`---------------------------------
+^, sqrt   Exponent, Squareroot             
+*, /      Multiply, Divide                 
++. -      Add, Substract                   
+-------------------------------------------
+
+In our calculator, we will not implement 'sqrt' as an operator, but as a function, so it's precedence it not important as the operands it operates on are given an parameters to the function. We will however be implementing a modulo operator +mod+. Since it is normally a function, we will give the modulo operator the highest precedence, as it should always be evaluated first.
+
+We can use parenthesis to force a particular precedence of evaluation. So `2 \+ 5 \* 10 = 52`, but `(2 \+ 5) \* 10 = 70`. 
+
+=== Associativity ===
+
+Operators also have an 'associativity'. Operators can be 'left-associative', 'right-associative' or 'non-associative'. Associativity is used to determine how an expression with operators that are equal in precedence is handled. Most operators are left-associative (\+, *, /, etc). Exponents ( \^ ) are right-associative. That means that `2 \^ 2 \^ 3` should be evaluated from the right-side, not the left. So it becomes, in effect: `2 \^ (2 \^ 3) = 256`, instead of `(2 \^ 2) ^ 3 = 64`.
+
+Infix and Postfix notations
+---------------------------
+
+=== Postfix notation ===
+
+As we've seen, there are rather a lot of things to take care of when evaluating expressions for our line calculator. Parenthesis, precedence, associativity. Wouldn't it be great if we could get rid of all those and just evaluate from left to right? Well, good news everyone! We can.
+
+-----------------------------------------------------------------------------
+2 * (5+1) / 3 * (pi ^ 2)
+-----------------------------------------------------------------------------
+
+The expression above is written in, what is called 'infix' notation. The operators are written in between the operands. There is also another notation, called 'postfix' or 'Reverse Polish Notation', which does away with operator precedence, associativity and which doesn't need parenthesis. Here's how it works.
+
+Instead of writing our operators 'in between' our operands, we write them 'after the operands'. So `1 \+ 2` becomes `1 2 +`. Postfix notation works like this:
+
+* Start evaluating from left to right.
+* When we encounter an operator, we take the two operands directly before it, and apply the operation to them.
+* Replace the result of that operation with the operands and the operator in the expression.
+
+Let's look at a more elaborate example:
+
+-----------------------------------------------------------------------------
+2 * 5 + 1
+-----------------------------------------------------------------------------
+
+This infix expression can be writing in postfix notation like so:
+
+-----------------------------------------------------------------------------
+2 5 * 1 +
+-----------------------------------------------------------------------------
+
+From left to right, we first multiply 2 with 5, and then add 1 to that. If we add parenthesis, like so:
+
+-----------------------------------------------------------------------------
+2 * ( 5 + 1 )
+-----------------------------------------------------------------------------
+
+the postfix expression becomes:
+
+-----------------------------------------------------------------------------
+2 5 1 + *
+-----------------------------------------------------------------------------
+
+Applying the postfix rules, we start evaluating from left to right until we see an operator +++. We apply that addition operation to the two operators preceding it: 5 and 1. We replace the operator and operands with that result, giving us:
+
+-----------------------------------------------------------------------------
+2 6 *
+-----------------------------------------------------------------------------
+
+We continue evaluating from left to right, and encounter the +*+ operator. We apply it to the two preceding operands, and get 12.
+
+Another example:
+
+-----------------------------------------------------------------------------
+2 * (5+1) / 3 * (pi ^ 2)
+-----------------------------------------------------------------------------
+
+The postfix expression for this is:
+
+-----------------------------------------------------------------------------
+2 5 1 + * 3 / pi 2 ^ *
+-----------------------------------------------------------------------------
+
+Or, when we add some parenthesis purely for clarification:
+
+-----------------------------------------------------------------------------
+( ( ( ( ( 2  (5 1 +)  * 3 )  / pi )  2 )  ^ )  * )
+-----------------------------------------------------------------------------
+
+Let's see the steps when we evaluate the expression:
+
+-----------------------------------------------------------------------------
+2 5 1 + * 3 / pi 2 ^ *
+
+2     6 * 3 / pi 2 ^ *
+
+       12 3 / pi 2 ^ *
+
+            4 pi 2 ^ *
+
+         4 9.8696044 *
+
+             39.478418
+-----------------------------------------------------------------------------
+
+Postfix, or Reverse Polish Notation is a stack-operated expression notation. We can simply parse from left to right like a stack, without having to worry about what comes further along the expression. This makes it extremely convenient for our line calculator, as stack-based operations are easy to implement. 
+
+So the first thing we should do is write a function which will convert infix expressions to Reverse Polish Notation.
+
+=== Tokenizing ===
+
+Before we start working on the actual body of our infix to postfix converter, we have to break our input infix string into smaller pieces. This is called tokenization, and each piece of the string is called a token. The string `2 \* (5 \+ 1)` would result in the tokens: `2`, `*`, `(`, `5`, `\+`,`1` and `)`. A program which converts strings into tokens is usually called a 'lexer'.
+
+We'll be writing our line calculator in Python, and it just so happens there is a lexer available in the Python standard library which suits our needs quite nicely. It's called +shlex+, and it is usually used to tokenize shell wildcard patterns. It works rather simple.
+
+// 1_lexer.py
+-----------------------------------------------------------------------------
+import shlex
+
+s = '2 * (5 + 2.5)'
+
+lex = shlex.shlex(s)
+for token in lex:
+	print token
+-----------------------------------------------------------------------------
+
+This outputs:
+
+-----------------------------------------------------------------------------
+2
+*
+(
+5
++
+2
+.
+5
+)
+-----------------------------------------------------------------------------
+
+You'll notice that shlex tokenizes +2.5+ into three different tokens: +2+, +.+ and +5+. This is not what we want, and we can change this behaviour by changing the +lex.wordchars+ property. +lex.wordchars+ is a string containing all the characters that define what shlex sees as a single 'word', or token. So we add the period to it like so:
+
+// 2_lexer.py
+-----------------------------------------------------------------------------
+lex = shlex.shlex(s)
+lex.wordchars += '.'
+for token in lex:
+-----------------------------------------------------------------------------
+
+The output now shows us what we want:
+
+-----------------------------------------------------------------------------
+2
+*
+(
+5
++
+2.5
+)
+-----------------------------------------------------------------------------
+
+Okay, so that's it for our lexer. That was easy. Now we can continue with the actual infix to postfix conversion.
+
+=== Shunting Yard algorithm ===
+
+In order to convert from infix to postfix notation, we employ the Shunting Yard algorithm. The Shunting Yard algorithm converts infix to postfix by utilizing two stacks: an output and operator stack. As we've seen in the postfix example above, all we have to do in order to convert from infix to postfix is shift around operators. Shunting Yard allows us to do this easily.
+
+==== Basic operators ====
+
+A simplified version of the Shunting Yard algorithm that doesn't concern itself with associativity and parenthesis works like this:
+
+-----------------------------------------------------------------------------
+While there are tokens:
+	Read a token
+	If the token is an operand:
+		push it to the output stack.
+	If the token is an operator:
+		While there is an operator on the operator stack:
+			If the token's precedence is lower or equal to the operator on the operator stack:
+				Pop operator from the operator stack and append to output stack
+		Append token to the operator stack
+After no more tokens:
+	While there are tokens on the operator stack:
+		Pop token from operator stack and append onto output stack.
+-----------------------------------------------------------------------------
+
+Let's look at a simple example. Take the following expression:
+
+-----------------------------------------------------------------------------
+2 + 5 * 10
+-----------------------------------------------------------------------------
+
+We start reading tokens. The +2+ token goes on the output queue. Next we encounter the `\+` token. Since there is nothing on the operator stack, we append the `\+` token to the output stack. We append `5` to the output stack. Now we encounter the `\*` token. There are operators on the operator stack, so we start popping operators from that stack onto the output stack. But since `\*` is not equal or lower in precedence then the `\+` token at the top of the operator stack, we can stop immediately. We append `\*` to the operator stack. Next, we append `10` to the output stack. Now we don't have any tokens left, so we simply pop all the tokens from the operator stack onto the output stack (or reverse the operator stack and append the whole of the stack to the output, same thing basically).
+
+Here is that sequence visualized:
+
+-----------------------------------------------------------------------------
+Token             Output                                   Operator stack
+-----             ------                                   --------------
+2                 [2]                                      []              
++                 [2]                                      [+]           
+5                 [2, 5]                                   [+]           
+*                 [2, 5]                                   [+, *]      
+10                [2, 5, 10]                               [+, *]      
+
+NOTOKEN           [2, 5, 10, *]                            [+]
+NOTOKEN           [2, 5, 10, *, +]                         []
+
+OUTPUT = 2 5 10 * +
+-----------------------------------------------------------------------------
+
+Let's look at another example. This time, the multiplication happens first instead of further along the expression.
+
+-----------------------------------------------------------------------------
+8 * 2 + 3 
+-----------------------------------------------------------------------------
+
+We start reading tokens. `8` gets append to the output. Since there is nothing on the operator stack, we append `\*` to the operator stack. `2` gets append to the output. We encounter `\+`, so we look at the operator stack again. We pop operators from the operator stack to the output stack as long as our token is lower or equal in precedence than the operator at the top of the operator stack. `\*` is higher in precedence, so we pop it to the output stack. That's all there is on the operator stack, so we're done. Append `\+` to the operator stack. Append `3` to the output stack. That's it for our tokens, so we pop all the operators left on the operator stack to the output stack.
+
+Again, visually:
+
+-----------------------------------------------------------------------------
+Token             Output                                   Operator stack
+-----             ------                                   --------------
+8                 [8]                                      []                                      
+*                 [8]                                      [*]                                   
+2                 [8, 2]                                   [*]                                   
++                 [8, 2, *]                                [+]                                   
+3                 [8, 2, *, 3]                             [+]                                   
+
+NOTOKEN           [8, 2, *, 3, +]                          []
+-----------------------------------------------------------------------------
+
+Our postfix output, as you can see from the output stack, is:
+
+-----------------------------------------------------------------------------
+8 2 * 3 +
+-----------------------------------------------------------------------------
+
+Okay! So let's write the algorithm. We start by encoding the operator precedence in a dictionary so we know each operator's precedence. Next we define the output and operator stacks, and start reading and handling tokens. Finally we pop everything left on the operator stack to the output stack and we print the result.
+
+// 3_inf2postf.py
+-----------------------------------------------------------------------------
+import shlex
+
+s = '2 + 5 * 10'
+
+operator_prec = {
+	'+'   : 1,
+	'-'   : 1,
+	'*'   : 2,
+	'/'   : 2,
+	'^'   : 3,
+	'%'   : 3,
+}
+
+lex = shlex.shlex(s)
+lex.wordchars += '.'
+stack_out = []
+stack_op = []
+	
+# Read tokens from input string
+for token in lex:
+	# If the token is an operator...
+	if token in operator_prec:
+		# Pop operators from the operator stack as long as our token has a
+		# lower or equal precedence to the operator at the top of the stack.
+		while stack_op and operator_prec[token] <= operator_prec[stack_op[-1]]:
+			stack_out.append(stack_op.pop())
+		# Add the token to the operator stack
+		stack_op.append(token)
+	# If token isn't an operator, we assume it's a operand...
+	else:
+		stack_out.append(float(token))
+
+# Done with the tokens in the input string. Now pop all the operators left
+# on the operator stack to the output stack. This is the same as reversing
+# the operator stack and appending it to the output, so we do that.
+stack_op.reverse()
+stack_out += stack_op
+
+print stack_out
+-----------------------------------------------------------------------------
+
+We've now got a basic infix to postfix converter. There's still some stuff missing, such as parenthesis and operator associativity. We'll add them now.
+
+==== Parenthesis ====
+
+Given our current program, adding logic for parenthesis is rather easy. Since parenthesis indicate that anything inside them should be evaluated before continuing with the rest of the expression, we can simply keep a reference to any opening parenthesis we encounter and then, when we encounter a closing parenthesis, we simply pop everything from the stack on the output queue. We discard the two parenthesis while doing so, as we don't need them anymore.
+
+Here's an example:
+
+-----------------------------------------------------------------------------
+2 * (3 + 5) + 1
+-----------------------------------------------------------------------------
+
+And the visualization of the stacks
+
+-----------------------------------------------------------------------------
+Token             Output                                   Operator stack
+-----             ------                                   --------------
+2                 [2]                                      []
+*                 [2]                                      [*]
+(                 [2]                                      [*, (]
+3                 [2, 3]                                   [*, (]
++                 [2, 3]                                   [*, (, +]
+5                 [2, 3, 5]                                [*, (, +]
+)                 [2, 3, 5, +]                             [*]
++                 [2, 3, 5, +, *]                          [+]
+1                 [2, 3, 5, +, *, 1]                       [+]
+NOTOKEN           [2, 3, 5, +, *, 1, +] 
+-----------------------------------------------------------------------------
+
+We start reading tokens. We add the `2`, `\*`, `(`, `3`, `\+` and `5` to the appropriate stacks like before. Now we encounter the `)`, and we pop everything from the operator stack to the output stack until we encounter the opening parenthesis again. We discard both of the parenthesis. Now we encounter a `\+`. Since `\+`'s precedence is lower than that of `\*`, we pop `\*` from the operator stack to the output. `\+` gets appended to the operator stack. We add `1` to the output, and are now through our tokens. So we pop everything left on the operator stack to the output stack, and we're done.
+
+Let's encode this in our algorithm. First, we modify our operator precedence table so that '(' and ')' always have the lowest precedence. This way, when we encounter an operator inside parenthesis, we can be sure that we'll never pop the left parenthesis off of the operator stack. Left parenthesis should only be popped off when we encounter a right parenthesis.
+
+-----------------------------------------------------------------------------
+operator_prec = {
+	'('   : 0,
+	')'   : 0,
+	'+'   : 1,
+	'-'   : 1,
+	'*'   : 2,
+	'/'   : 2,
+	'^'   : 3,
+	'%'   : 3,
+}
+-----------------------------------------------------------------------------
+
+Now we change our main routine so it handles parenthesis. This is just another two +if+ clauses in the main token handling routines.
+
+-----------------------------------------------------------------------------
+# Read tokens from input string
+for token in lex:
+	# Parenthesis
+	if token == '(':
+		stack_op.append(token)
+	elif token == ')':
+		# Pop operands from the operator stack to the output until we find a
+		# matching '('
+		while stack_op and stack_op[-1] != '(':
+			stack_out.append(stack_op.pop())
+		if not stack_op:
+			raise CalcError('Unmatched parenthesis')
+		# Pop the '(' from the stack and discard it
+		stack_op.pop()
+	# If the token is an operator...
+	elif token in operator_prec:
+		# Pop operators from the operator stack as long as our token has a
+		# lower or equal precedence to the operator at the top of the stack.
+		while stack_op and operator_prec[token] <= operator_prec[stack_op[-1]]:
+			stack_out.append(stack_op.pop())
+		# Add the token to the operator stack
+		stack_op.append(token)
+	# If token isn't an operator, we assume it's a operand...
+	else:
+		stack_out.append(float(token))
+-----------------------------------------------------------------------------
+
+We change our `s` to: `s = \'2 \* (3 \+ 5) \+ 1\'`, and run the new program:
+
+-----------------------------------------------------------------------------
+$ python ./4_inf2postf.py 
+[2.0, 3.0, 5.0, '+', '*', 1.0, '+']
+-----------------------------------------------------------------------------
+
+Exactly what we expected.
+
+==== Associativity ====
+
+Now all that's left to add to our infix to postfix routine is to add associativity. Let's first define which operators are left-associative, and which are right-associative. We do not have to deal with non-associativity, since our calculator will not be using any operators that are non-associative.
+
+Since we're not dealing with non-associativity, it is enough to know if an operator is right-associative. Anything not right-associative is left-associative. The only right-associative operator we will be dealing with is the `\^` operator. We will encode the associativity information in a list called `operator_rassoc`:
+
+-----------------------------------------------------------------------------
+operator_rassoc = ['^']
+operator_prec = {
+	'+'   : 1,
+	'-'   : 1,
+	'*'   : 2,
+	'/'   : 2,
+	'^'   : 3,
+	'%'   : 3,
+}
+-----------------------------------------------------------------------------
+
+Now we must extend our algorithm. If we encounter an operator which is right-associative (in our case, just the exponent operator), we should keep popping operators from the operator stack onto the output stack until we run into an operator that is less in precedence than our current operator. We can see why in the following infix expression:
+
+-----------------------------------------------------------------------------
+2 ^ 3 + 2 ^ 3 ^ 4
+-----------------------------------------------------------------------------
+
+It translates to the equivalent postfix expression:
+
+-----------------------------------------------------------------------------
+2 3 ^ 2 3 4 ^ ^ +
+-----------------------------------------------------------------------------
+
+Visualizing the stacks for this conversion gives us:
+
+-----------------------------------------------------------------------------
+Token             Output                                   Operator stack
+-----             ------                                   --------------
+2                 2
+^                 2                                       ^
+3                 2 3                                     ^
++                 2 3 ^                                   +
+2                 2 3 ^ 2                                 +
+^                 2 3 ^ 2                                 + ^
+3                 2 3 ^ 2 3                               + ^
+^                 2 3 ^ 2 3                               + ^ ^
+4                 2 3 ^ 2 3 4                             + ^ ^
+NOTOKEN           2 3 ^ 2 3 4 ^ ^ +
+-----------------------------------------------------------------------------
+
+The reason we only pop operators off the stack that are less in precedence when we encounter a right-associative operator (in contrast to popping operators of off the stack that are less 'or' equal in precedence for left-associative operators) is because we need to shift the operator to the right of the operands. This won't happen if we pop both lesser and equal operators from the operator stack, as the ^ operator is always equal in precedence as itself.
+
+To handle associativity in our algorithm, we must extend the basic Shunting yard algorithm with the following:
+
+-----------------------------------------------------------------------------
+	If the token is an operator:
+		While there is an operator on the operator stack:
+			If the top operator on the stack is left-associative and has as lower or equal precedence as the current token:
+				Pop the token from the operator stack to the output stack.
+			Else If the top operator on the stack is left-associative and has a lower precedence as the current token:
+				Pop the token from the operator stack on to the output stack.
+			Else:
+				Stop reading from the operator stack.
+		Append token to the operator stack
+-----------------------------------------------------------------------------
+
+So, the extended Shunting Yard algorithm now looks like this, including dealing with parenthesis and right-associativity of operators:
+
+-----------------------------------------------------------------------------
+While there are tokens:
+	Read a token
+	If the token is a opening parenthesis:
+		Push it to the operator stack
+	If the token is a closing parenthesis:
+		While there are operators on the operator stack:
+			If the top operator on the stack is not a parenthesis:
+				Pop the operator from the operator stack onto the output stack.
+			Else:
+				Stop reading from the operator stack.
+	If the token is an operand:
+		push it to the output stack.
+	If the token is an operator:
+		While there is an operator on the operator stack:
+			If the top operator on the stack is left-associative and has as lower or equal precedence as the current token:
+				Pop the token from the operator stack to the output stack.
+			Else If the top operator on the stack is right-associative and has a lower precedence as the current token:
+				Pop the token from the operator stack on to the output stack.
+			Else:
+				Stop reading from the operator stack.
+		Append token to the operator stack
+After no more tokens:
+	While there are tokens on the operator stack:
+		Pop token from operator stack and append onto output queue.
+-----------------------------------------------------------------------------
+
+The next step is to extend our code with associativity-handling code. We replace our handing for operators with the following:
+
+// 5_inf2postf.py
+-----------------------------------------------------------------------------
+	# If the token is an operator...
+	elif token in operator_prec:
+		# Pop operators from the operator stack as long as our token has a
+		# lower or equal precedence to the operator at the top of the stack
+		# (left-associative operators) or as long as our token has a lower
+		# precedence than the operator on the top of the stack
+		# (right-associative).
+		while \
+			stack_op and \
+			( \
+				(token not in operator_rassoc and operator_prec[token] <= operator_prec[stack_op[-1]]) or \
+				(token in operator_rassoc and operator_prec[token] < operator_prec[stack_op[-1]]) \
+			):
+			stack_out.append(stack_op.pop())
+		# Add the token to the operator stack
+		stack_op.append(token)
+-----------------------------------------------------------------------------
+
+When we now run our code with `s = \'2 \^ 3 \+ 2 \^ 3 \^ 4'`, we get:
+
+-----------------------------------------------------------------------------
+$ python 5_inf2postf.py 
+[2.0, 3.0, '^', 2.0, 3.0, 4.0, '^', '^', '+']
+-----------------------------------------------------------------------------
+
+This output matches the output of our example above, as expected. We now have an fully functional Infix to Postfix translator!
+
+=== Postfix evaluator ===
+
+Now that we can convert our infix to postfix, the next step is to write an evaluator for postfix expressions. The reason why we first convert to postfix becomes evident here. Since postfix is stack-oriented, writing an evaluator for it is rather easy. Earlier in this document, I described the basic algorithm for evaluating the postfix notation:
+
+* Start evaluating from left to right.
+* When we encounter an operator, we take the two operands directly before it, and apply the operation to them.
+* Replace the result of that operation with the operands and the operator in the expression.
+
+When we take an example input `2 \* 3 \+ 2 / 3` and run it through our infix to postfix converter, we are left with the following postfix stack:
+
+-----------------------------------------------------------------------------
+stack = [2.0, 3.0, '*', 2.0, 3.0, '/', '+']
+-----------------------------------------------------------------------------
+
+Now for our postfix evaluator:
+
+-----------------------------------------------------------------------------
+# Postfix evaluator
+op_fn = {
+	'*'  : (2, lambda x, y: x*y),
+	'/'  : (2, lambda x, y: x/y),
+	'+'  : (2, lambda x, y: x+y),
+	'-'  : (2, lambda x, y: x-y),
+	'mod': (2, lambda x, y: x%y),
+	'%'  : (2, lambda x, y: x%y),
+	'^'  : (2, lambda x, y: x**y),
+}
+
+stack_out = []
+for token in stack:
+	if token in op_fn:
+		args_nr, func = op_fn[token]
+		args = []
+		for i in range(-args_nr, 0):
+			args.append(stack_out.pop(i))
+		stack_out.append(func(*args))
+	else:
+		stack_out.append(token)
+
+print stack_out
+-----------------------------------------------------------------------------
+
+First we define a dictionary which maps operators to functions. For this we need to know how many operands each operator takes, and what operation we should perform on the operators. In our case, we only need to handle operators which take two parameters. We use lambda's, which are simply inline functions, to perform the operations.
+
+Next we walk through the input stack. When we encounter an operand, we remove it from the input stack and append it to the output stack. When we encounter an operator, we retrieve as many operands from the end of the output stack (which are always the last operands to appear before the operator) as the operator requires, and apply the function mapped in the dictionary. We append the result to the output stack so that our last seen operand is the result of the operation.
+
+When the loop is done, and no errors have occurred (such as not enough operands for a specific operator), we are left with the final result as the only element of the output stack. This is rather easy, and can be viewed in the "Final Program" section below.
+
+Finishing up
+------------
+
+Our line calculator is almost done, but there are still some problems with out program.
+
+First off all, negative numbers are not interpreted as negative numbers but as the minus operator with a normal operand. We can't just add the `-` to our tokenizer's `wordchars` property, or it will fail on normal operators. So we must add some logic to determine whether a we're dealing with a negative number, or an operator. We can do this by peeking at the next token in the queue whenever we encounter an operator. If the next token is a minus operator, and the current token is also an operator, we can assume that the user meant the minus operator plus the next operand to be a negative number. You can see how this is done in the full example below.
+
+So the top of the main loop of our infix to postfix converter now becomes:
+
+-----------------------------------------------------------------------------
+    token = True
+    while token:
+      prev_token = token
+      token = lex.get_token()
+
+      if token == '-' and (prev_token == True or prev_token in self.operator_prec):
+        # We're dealing with a negative number
+        token += lex.get_token()
+-----------------------------------------------------------------------------
+
+Another thing we haven't yet done is proper error handling. I won't go into the details, because they're rather boring, but you will find proper error handling added to the full example below. Search for any place where the CalcError is raised.
+
+Full Example
+------------
+
+This is a full example of the line calculator we built above, including negative number handling, error handling, and nicely wrapped in an object. It also includes some more operators.
+
+-----------------------------------------------------------------------------
+import shlex
+import math
+
+class CalcError(Exception):
+  pass
+
+class Calc(object):
+
+  operator_rassoc = ['^']
+  operator_prec = {
+    '('   : 0,
+    ')'   : 0,
+    '<<'  : 1,
+    '>>'  : 1,
+    '+'   : 2,
+    '-'   : 2,
+    '*'   : 3,
+    '/'   : 3,
+    '^'   : 4,
+    '%'   : 4,
+    'mod' : 4,
+    'log' : 4,
+  }
+  constants = {
+    'pi' : math.pi,
+    'e'  : math.e,
+  }
+  functions = [
+    'sqrt', 'floor', 'ceil',
+  ]
+  op_fn = {
+    '*'    : (2, lambda x, y: x*y),
+    '/'    : (2, lambda x, y: x/y),
+    '+'    : (2, lambda x, y: x+y),
+    '-'    : (2, lambda x, y: x-y),
+    'mod'  : (2, lambda x, y: x%y),
+    'log'  : (1, lambda x: math.log10(x)),
+    '%'    : (2, lambda x, y: x%y),
+    '^'    : (2, lambda x, y: x**y),
+    '<<'   : (2, lambda x, y: int(x)<<int(y)),
+    '>>'   : (2, lambda x, y: int(x)>>int(y)),
+    'sqrt' : (1, math.sqrt),
+    'floor': (1, math.floor),
+    'ceil' : (1, math.ceil),
+  }
+
+  def __init__(self):
+    pass
+
+  def eval(self, expression):
+    expression = expression.strip()
+    return(self.rpn_eval(self.infix_to_rpn(expression)))
+
+  def infix_to_rpn(self, s):
+    lex = shlex.shlex(s)
+    lex.wordchars += '.<>'
+    stack_out = []
+    stack_op = []
+    
+    token = True
+    while token:
+      prev_token = token
+      token = lex.get_token()
+
+      if token == '-' and (prev_token == True or prev_token in self.operator_prec):
+        # We're dealing with a negative number
+        token += lex.get_token()
+
+      if token == '*':
+        # Special case for '**' which is the power operator.
+        peek_token = lex.get_token()
+        if peek_token == '*':
+          token = '^'
+        else:
+          lex.push_token(peek_token)
+
+      if token:
+        if token in self.constants:
+          stack_out.append(self.constants[token])
+        elif token in self.functions:
+          stack_op.append(token)
+        elif token == ',':
+          while stack_op and stack_op[-1] != '(':
+            stack_out.append(stack_op.pop())
+        elif token == '(':
+          stack_op.append(token)
+        elif token == ')':
+          while stack_op and stack_op[-1] != '(':
+            stack_out.append(stack_op.pop())
+          if not stack_op:
+            raise CalcError('Unmatched parenthesis.')
+          stack_op.pop()
+        elif token in self.operator_prec:
+          # Operator
+          while \
+            stack_op and ( \
+              stack_op[-1] not in self.operator_prec or \
+              ( \
+                (token not in self.operator_rassoc and self.operator_prec[token] <= self.operator_prec[stack_op[-1]]) or \
+                (token in self.operator_rassoc and self.operator_prec[token] < self.operator_prec[stack_op[-1]]) \
+              )
+            ):
+            stack_out.append(stack_op.pop())
+          stack_op.append(token)
+        else:
+          # Operand
+          try:
+            stack_out.append(float(token))
+          except ValueError, e:
+            raise CalcError('Illegal operand \'%s\'.' % (token))
+
+    if '(' in stack_op or ')' in stack_op:
+      raise CalcError('Unmatched parenthesis.')
+
+    stack_op.reverse()
+    stack_out += stack_op
+
+    return(stack_out)
+      
+  def rpn_eval(self, stack):
+    try:
+      stack_out = []
+      for token in stack:
+        if token in self.op_fn:
+          args_nr, func = self.op_fn[token]
+          args = []
+          try:
+            for i in range(-args_nr, 0):
+              args.append(stack_out.pop(i))
+          except IndexError, e:
+            raise CalcError('Insufficient operands for "%s" operator.' % (token))
+          stack_out.append(func(*args))
+        else:
+          stack_out.append(token)
+        prev_token = token
+
+      if stack_out:
+        return(stack_out[0])
+      else:
+        return('I cant make sense of it at all.')
+    except OverflowError, err:
+      return('Overflow.')
+
+c = Calc()
+print c.eval('1 + 1')
+print c.eval('-2 + -2')
+print c.eval('e * pi')
+-----------------------------------------------------------------------------
