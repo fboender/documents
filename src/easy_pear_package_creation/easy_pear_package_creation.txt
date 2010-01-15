@@ -1,0 +1,223 @@
+Easy PEAR Package creation
+==========================
+
+Ferry Boender
+1.0, Apr 12, 2009
+:Author Initials: FB
+
+Here's a fairly simple way of creating PEAR package so you can distribute your application or library as a PEAR package.
+
+Premise
+-------
+
+Let's assume you've written an application or library called 'MyApp'. The following is a possible directory structure layout:
+
+	myapp/
+	  |- MyApp.php
+	  \- MyAap/
+		   \- MyApp/MyLib.php
+
+Install the PackageFileManager
+------------------------------
+
+Since writing a package file by hand is way too much work, we first install the PEAR_PackageFileManager utility. This PEAR package includes a commandline utility which will guide you through the steps needed to create a proper package.xml file for your application or library.
+
+	# pear install pear install PEAR_PackageFileManager_Cli-0.3.0
+	Ignoring installed package pear/pear
+	No releases available for package "pear.php.net/install"
+	Cannot initialize 'channel://pear.php.net/install', invalid or missing package file
+	WARNING: channel "pear.php.net" has updated its protocols, use "channel-update pear.php.net" to update
+	Did not download optional dependencies: pear/PHP_CompatInfo, use --alldeps to download automatically
+	pear/PEAR_PackageFileManager can optionally use package "pear/PHP_CompatInfo" (version >= 1.4.0)
+	downloading PEAR_PackageFileManager_Cli-0.3.0.tgz ...
+	Starting to download PEAR_PackageFileManager_Cli-0.3.0.tgz (8,051 bytes)
+	.....done: 8,051 bytes
+	downloading PEAR_PackageFileManager-1.6.3.tgz ...
+	Starting to download PEAR_PackageFileManager-1.6.3.tgz (82,393 bytes)
+	...done: 82,393 bytes
+	Package "channel://pear.php.net/install" is not valid
+	install ok: channel://pear.php.net/PEAR_PackageFileManager-1.6.3
+	install ok: channel://pear.php.net/PEAR_PackageFileManager_Cli-0.3.0
+
+If your PEAR is outdated, you will see something like:
+
+	pear/PEAR_PackageFileManager requires PEAR Installer (version >= 1.8.0alpha1), installed version is 1.7.1
+
+In that case, you can upgrade your PEAR like so:
+
+	# pear channel-update pear.php.net
+	Updating channel "pear.php.net"
+	Update of Channel "pear.php.net" succeeded
+	# pear upgrade PEAR
+	...
+	upgrade ok: channel://pear.php.net/PEAR-1.8.1
+
+You may also run into problems with alpha/beta state packages required for installation of the PackageFileManager CLI package. For instance, I got the following error: Failed to download pear/XML_Serializer within preferred state "stable", latest release is version 0.19.2, stability "beta", use "channel://pear.php.net/XML_Serializer-0.19.2" to install
+
+In that case, you must manually install the beta packages:
+
+	# pear install channel://pear.php.net/XML_Serializer-0.19.2
+	downloading XML_Serializer-0.19.2.tgz ...
+	Starting to download XML_Serializer-0.19.2.tgz (39,703 bytes)
+	..........done: 39,703 bytes
+	downloading XML_Parser-1.3.2.tgz ...
+	Starting to download XML_Parser-1.3.2.tgz (16,260 bytes)
+	...done: 16,260 bytes
+	install ok: channel://pear.php.net/XML_Parser-1.3.2
+	install ok: channel://pear.php.net/XML_Serializer-0.19.2
+
+Generate a package.xml file
+----------------------------
+
+You can now use the PackageFileManager command-line utility to bootstrap a package.xml file for your PEAR package.
+
+Change to the directory that is the root of your package:
+
+-----------------------------------------------------------
+$ cd myapp/
+
+myapp$ ls
+MyApp  MyApp.php
+
+myapp$ pfm
+
+PEAR Package File Manager Command Line Tool
+
+Please enter the location of your package [.]*: .
+
+Creating a new package file ...
+
+Enter the base install directory*: .
+
+Enter the name of the package [myapp]*: MyApp
+
+Channel or URI based package? [c] (c,u)*: u
+
+Enter the package URI*: http://www.example.com/download/PEAR/
+
+Enter a 1 line summary*: My first PEAR example application.
+
+Enter a description* (2 blank lines to finish):
+MyApp is my first PEAR example application.
+It rocks.
+
+Enter the release version*: 0.1.0
+
+Enter the API version [0.1.0]*: 
+
+Choose a release stability [alpha] (alpha,beta,stable)*:  
+
+Choose an API stability [alpha] (alpha,beta,stable)*: 
+
+Enter any release notes* (2 blank lines to finish):
+Initial release
+
+Enter the minimum PHP version [5]*: 
+
+Enter the minimum PEAR Installer version [1.4.0]*: 
+
+Please choose a license from one of the following options
+
+	1) Apache
+	2) BSD Style
+	3) LGPL
+	4) MIT
+	5) PHP
+
+Please choose an option: 4
+
+How many maintainers?*: 1
+
+What type of maintainer is #1? [lead] (lead,developer,contributor,helper)*:     
+
+Enter maintainer #1's name*: Ferry Boender
+
+Enter maintainer #1's username*: fboender
+
+Enter maintainer #1's email [fboender@php.net]*: ferry.boender@example.com
+
+PEAR Package File Manager Command Line Tool
+
+	1. Package name                 [MyApp]
+	2. Channel/URI                  [URI: http://www.example.com/download/PEAR/]
+	3. Summary                      [My first PEAR example application.]
+	4. Description                  [MyApp is my first PEAR example applic...]
+	5. Maintainers
+	6. Version                      [Release: 0.1.0 API: 0.1.0]
+	7. Stability                    [Release: alpha API: alpha]
+	8. License                      [MIT]
+	9. Notes                        [Initial release]
+   10. Dependencies
+   11. Tasks
+   12. Regenerate contents
+   13. Echo package file to stdout
+   14. Save & Quit
+   15. Quit without saving          (ctrl-c)
+
+Please choose an option from the menu: 14
+
+Analyzing MyApp/MyLib.php
+Analyzing MyApp.php
+-----------------------------------------------------------
+
+This generates a package.xml for you, containing details for the PEAR package creation.
+
+Create a PEAR package
+---------------------
+
+PEAR can use this package.xml file to create a PEAR package for you:
+
+	myapp$ pear package package.xml 
+	Analyzing myapp/MyApp.php
+	Analyzing myapp/MyApp/MyLib.php
+	Package MyApp-0.1.0.tgz done
+
+Testing and (un)installing your package
+---------------------------------------
+
+Test the installation of the package:
+
+	myapp$ pear install ./MyApp-0.1.0.tgz
+	pear install ./MyApp-0.1.0.tgz
+	install ok: channel://__uri/MyApp-0.1.0
+
+It appears to work. Make sure to check the PEAR directory to see if it placed the files in the right spot:
+
+	myapp$ ls /usr/share/php/
+	Archive  MyApp      OS    PEAR.php  Structures  adodb  doc   pearcmd.php  php-shell-cmd.php
+	Console  MyApp.php  PEAR  PHP       System.php  data   docs  peclcmd.php
+
+The MyApp.php file, and the MyApp directory have been added to the PEAR library directory. If their PHP include_path is set correctly, users of your package should now be able to include it using:
+
+	include('MyApp.php');
+
+You can uninstall the package using the pear uninstall command:
+
+	$ pear uninstall channel://__uri/MyApp-0.1.0
+	uninstall ok: channel://__uri/MyApp-0.1.0
+
+Distribute your package
+-----------------------
+
+You can now put your PEAR package online, and point users to it by mentioning they can install it using PEAR with the command:
+
+	$ pear install http://www.example.com/download/PEAR/MyApp-0.1.0.tgz
+
+Updating your package
+---------------------
+
+When you release a new version of your package, it's fairly easy to update the package.xml file manually. Edit the package.xml file, and 
+
+FIXME
+
+Copyright / License
+-------------------
+
+Copyright (c) 2009, Ferry Boender
+
+This document may be freely distributed, in part or as a whole, on any medium, without the prior authorization of the author, provided that this Copyright notice remains intact, and there will be no obstruction as to the further distribution of this document. You may not ask a fee for the contents of this document, though a fee to compensate for the distribution of this document is permitted.
+
+Modifications to this document are permitted, provided that the modified document is distributed under the same license as the original document and no copyright notices are removed from this document. All contents written by an author stays copyrighted by that author.
+
+Failure to comply to one or all of the terms of this license automatically revokes your rights granted by this license
+
