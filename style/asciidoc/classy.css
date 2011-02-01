@@ -60,8 +60,11 @@ pre {
 	padding-left: 5px;
 }
 pre, tt {
-	font-family: "Courier New", courier, monospace;
-	color: #202020;
+	font-family: monospace;
+	color: #353535;
+}
+pre {
+	margin-bottom: 20px;
 }
 
 ul {
