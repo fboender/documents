@@ -1,7 +1,7 @@
 BoxBackup setup (Debian/Ubuntu)
 ===============================
 Ferry Boender
-1.0, Feb 1, 2011
+1.1, Feb 20, 2011
 :Author Initials: FB
 
 Introduction
@@ -611,6 +611,62 @@ Afterwards simply restart +bbackupd+:
 
     client:/root# /etc/init.d/bbackupd restart
     
+=== Example client configuration ===
+
+Here's a full example of a client configuration. This configuration has been stripped of comments for brevity. Please consult your own configuration for the meaning of each directive.
+
+    StoreHostname = server.example.com
+    AccountNumber = 0x00000001
+    KeysFile = /etc/boxbackup//bbackupd/00000001-FileEncKeys.raw
+    
+    CertificateFile = /etc/boxbackup//bbackupd/00000001-cert.pem
+    PrivateKeyFile = /etc/boxbackup//bbackupd/00000001-key.pem
+    TrustedCAsFile = /etc/boxbackup//bbackupd/serverCA.pem
+    
+    DataDirectory = /var/run
+    
+    NotifyScript = /etc/boxbackup//bbackupd/NotifySysadmin.sh
+    
+    UpdateStoreInterval = 3600
+    MinimumFileAge = 21600
+    MaxUploadWait = 86400
+    
+    KeepAliveTime = 120
+    
+    FileTrackingSizeThreshold = 65535
+    DiffingUploadSizeThreshold = 8192
+    MaximumDiffingTime = 120
+    
+    CommandSocket = /var/run/bbackupd.sock
+    
+    Server
+    {
+        PidFile = /var/run/bbackupd.pid
+    }
+    
+    BackupLocations
+    {
+        var-lib-svn-
+        {
+            Path = /var/lib/svn/
+        }
+        etc-
+        {
+            Path = /etc/
+        }
+        var-www-
+        {
+            Path = /var/www/
+            ExcludeFilesRegex = .*\.(mp3|MP3|avi|log|bak)$
+            ExcludeFilesRegex = .*\.log\.1$
+            ExcludeFilesRegex = .*\.log\..*\.gz$
+        }
+        home-
+        {
+            Path = /home/
+        }
+    }
+
 Troubleshooting
 ---------------
 
