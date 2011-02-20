@@ -299,7 +299,7 @@ The next step is to create and sign the server certificate. For this we need to 
     subject=/CN=Backup system server root
     Getting Private key
 
-This generates a +co+ directory at our current location. This directory contains a bunch of certificates, including the root certificate. We need this root certificate to sign the server and client certificates.
+This generates a +ca+ directory at our current location. This directory contains a bunch of certificates, including the root certificate. We need this root certificate to sign the server and client certificates.
 
 IMPORTANT: We need to keep this +ca+ directory around as it is required to sign client certificates! Store it in a *secure* location!
 
@@ -332,7 +332,7 @@ Okay, let's sign the server certificate using our root certificate:
 
 We do as the output says and copy the signed server certificates to the configuration directory:
 
-    server:/root# cp ca/servers/server.electricmonk.nl-cert.pem /etc/boxbackup/bbstored
+    server:/root# cp ca/servers/server.example.com-cert.pem /etc/boxbackup/bbstored
     server:/root# cp ca/roots/clientCA.pem /etc/boxbackup/bbstored
     server:/root# chown -R bbstored:bbstored /etc/boxbackup/ 
     server:/root# chmod 700 /etc/boxbackup/
@@ -406,14 +406,14 @@ Debian will configure some things for us, but that's just confusing (and didn't 
 
 Now we generate the configuration ourselves. We supply the +lazy+ mode parameter which will continuously scan our system for changes. This sounds resource intensive, but it actually spreads the load better over time. We also supply the account ID (which we generated earlier on), the server name (FQDN), a run directory where BoxBackup can store temporary information and a path we want backed up. (We add more later on). We will be backing up +/var/lib/svn+.
 
-    client:/root# bbackupd-config /etc/boxbackup/ lazy 00000001 server.electricmonk.nl /var/run /var/lib/svn/
+    client:/root# bbackupd-config /etc/boxbackup/ lazy 00000001 server.example.com /var/run /var/lib/svn/
     
     Setup bbackupd config utility.
     
     Configuration:
        Writing configuration file: /etc/boxbackup//bbackupd.conf
        Account: 00000001
-       Server hostname: server.electricmonk.nl
+       Server hostname: server.example.com
        Directories to back up:
           /var/lib/svn/
     
