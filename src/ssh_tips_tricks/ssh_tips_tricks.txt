@@ -1,0 +1,47 @@
+SSH Tips and Tricks
+===================
+
+Ferry Boender
+1.0, Apr 15, 2011
+:Author Initials: FB
+
+Input / Output
+--------------
+
+foo
+
+Configuration
+-------------
+
+=== Client configuration ===
+
+--------------------------------------------------------------------------------
+	Host *
+			ForwardAgent yes
+			ForwardX11 yes
+			ServerAliveInterval 5
+			ServerAliveCountMax 720
+
+	Host beheer
+			Hostname beheer.office.zx.nl
+			User fboender
+
+	Host zoltar
+			Hostname zoltar.electricmonk.nl
+
+	Host scooter
+			Hostname scooter.electricmonk.nl
+
+	Host eek
+			ProxyCommand ssh scooter.electricmonk.nl nc eek 22
+--------------------------------------------------------------------------------
+
+=== Server configuration ===
+
+--------------------------------------------------------------------------------
+	#AuthorizedKeysFile     %h/.ssh/authorized_keys
+	AuthorizedKeysFile      /etc/ssh/authorized_keys/%u
+--------------------------------------------------------------------------------
+
+NOTE: if the AllowUsers setting is completely missing from the sshd config file, all users are allowed (see man sshd_config). You may prefer to leave it that way -- your choice. I prefer to make the usernames explicit because I'm paranoid ;-)
+
