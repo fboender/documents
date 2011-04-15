@@ -1,0 +1,237 @@
+<html>
+	<head>
+		<title>Encodings in Python</title>
+	</head>
+	<body>
+
+<h1>Encodings in Python</h1>
+
+<h2>Introduction</h2>
+<p>There's a whole slew of information regarding all kinds of encoding issues out there on the big bad Internet. Some deal with how unicode works, some with what UTF-8 is and how it relates to other encodings and some with how to transform from one encoding to another. All that theory is nice, but I've found a rather worrying lack of practical, understandable and contextual information on dealing with encodings in Python, leading me to think I'd never be able to properly deal with encodings in Python.</p>
+
+<p>So I took the plunge, and tried to find some stuff out. Here's what I came up with. All of this might be terribly wrong though. Encodings are a complicated subject if you ask me, so feel free to correct me if I'm wrong.</p>
+
+<p><strong>NOTICE</strong>: This article uses special HTML entities in various places to show output. Depending on your browser, the encodings it supports and the font you are using and its capabilities of showing UTF-8 characters (see, complicated!), you may or may not be able to properly see these characters. In these cases a description of the character is given between parenthesis right after the character.</p>
+
+<h2>Basics</h2>
+
+<p>When we're talking about text, we're really talking about two things:</p>
+
+<ul>
+<li>Byte representation of text.</li>
+<li>Encoded representation of text.</li>
+</ul>
+
+<p>Byte representation of text doesn't give a crap about what language or encoding something is. A byte is a byte: 8 bits, 256 different values. </p>
+
+<p>The text's encoding doesn't exist. That is, a text is encoded in what we <em>say</em> it is encoded in. If I take a piece of UTF-8 text, and say "this is encoded as latin-1", that's just fine. There is nothing inherently UTF-8y about the text. The encoding merely lets us know what little symbol we should show when we encounter a certain byte (or range of bytes, for that matter). But pretending that a piece of UTF-8 text is encoded in latin-1 can of course cause problems when the text contains bytes which latin-1 doesn't have. This is what causes encoding/decoding errors in Python.</p>
+
+<p>A piece of text consisting of the byte with decimal value 163 does not exist in ASCII (as it is heigher than 128), represents '&pound;' (Pound sterling) in latin-1, '&#290;' (Capital G Cedilla) in Cyrillic (ISO-8859-5) and also doesn't exist in UTF-8. As you can see, it all depends on how you interpret it, and encodings are names for ways to interpret.</p>
+
+<p>There are an almost infinite number of encodings out there. If you wanted to, you could make your own. Some of the ones I'll be using as an example in this little adventure are: </p>
+
+<ul>
+<li><p><code>ASCII</code></p>
+
+<p>A 7-bit encoding (the 1st bit is unused) that doesn't know jack about swishy characters with accents and stuff.</p></li>
+<li><p><code>Latin-1</code>, <code>ISO 8859-1</code>, <code>Windows-1252</code></p>
+
+<p>An 8-bit encoding that knows about accents and stuff. Backwards compatible with ASCII in that its last 7 bits (byte-values lower than 128) map to the same characters as ASCII does. Higher characters map to all kinds of stuff like characters with accents on them, pound signs, etc.</p></li>
+<li><p><code>UTF-8</code></p>
+
+<p>A variable-length encoding. It can consist of 1 byte or more, up to 4 bytes. Also backwards compatible with ASCII in the same way that latin-1 is. Go <a href="http://code.alexreisner.com/articles/character-encoding.html">here</a> if you want to read more about how UTF-8 works.</a>.</p></li>
+</ul>
+
+<h2>When to deal with encodings</h2>
+
+<p>In any given software system, we have to deal with a lot of different potential encodings. Here are some general ones we have to worry about:</p>
+
+<ul>
+<li>The default system encoding of the Operating System.</li>
+<li>The encoding of any input into the program.</li>
+<li>The default encoding of our programming language.</li>
+<li>The encodings our software libraries can work with.</li>
+<li>The supported encoding of the tools we use to work with data in our program (debuggers, etc).</li>
+<li>The encoding of the destination when we output data to it.</li>
+</ul>
+
+<p>As we can see, there are a <em>lot</em> of things that can go wrong. All this sounds rather despairing doesn't it? The truth of the matter is that most of the time, encodings don't matter at all. In reality, we only need to take encoding into account when:</p>
+
+<ul>
+<li>We want to operate on the actual <em>meanings</em> of the text, instead of just transporting bytes around.</li>
+<li>We output text to a system which needs to operate on the actual <em>meanings</em> of the text (or which cares about the encoding its input comes in).</li>
+</ul>
+
+<p>Suppose we're reading a file and counting the number of bytes in that file. Does the encoding matter? No, we care about bytes, not characters. If, however, we want to count the frequency of <em>characters</em>, we'll need to deal with encodings, since an 'e' without an accent is not the same as an '&eacute;' ('e' <em>with</em> an accent). When we're outputting text, it depends on the system we're outputting to whether we need to deal with encodings. If we're inserting data into a database, and that database expects UTF-8, we'll need to make sure we also output UTF-8. If we're printing to the console, and the system default encoding is ASCII, we'll need to make sure we're outputting ASCII.</p>
+
+<p>As a software developer, you'll mostly have to deal with the encodings of input and output of your program. This presents us with two major problems:</p>
+
+<ul>
+<li>We need to know the encoding of our input.</li>
+<li>We need to know the encoding we need to output.</li>
+</ul>
+
+<p>Sometimes, however, we simply don't <em>know</em> the encodings. When we read input from a text file that contains bytes with values higher than 127, we might simply not know what encoding it is. It could be in the system's default encoding, but it does not have to be. These can be tricky problems. For instance, my system default encoding is ASCII at the moment. Yet running the command <code>apt-cache dumpavail</code> produces output with bytes with a value higher than 128. Which encoding is it in? It's probably UTF-8, but we don't know for sure because apt-cache doesn't tell us. As far as the system is concerned, It's in ASCII encoding! Except that ASCII doesn't support bytes with larger then 128 values, so in reality it is output with invalid characters.</p>
+
+<p>Usually these problems are solved by making industry standards. For instance, some things always have to be in a certain encoding. Other things may let us know up-front what encoding something is in. An HTML document, for instance, should mention its encoding on the first line of the file (which should always be in just ASCII characters so everything can read it).</p>
+
+<h2>How to deal with encodings</h2>
+
+<p><strong>WARNING</strong>: You may encounter what is sometimes called a 'heisenbug'. A heisenbug is a bug which normally does not appear when your program is running, but only appears when you try to look at the data. In the case of encodings, suppose you try to print a string, purely for debugging reasons, which has the UTF-8 encoding. The console you're printing on may not be able to deal with UTF-8, and as such Python tries to encode the UTF-8 string to ASCII and fails. This bug would not occur had you not tried to print the data to the console. </p>
+
+<p>Onto the meat of the article! How do we deal with encodings?</p>
+
+<p>First, some basics. Normal strings in Python don't care about encoding:</p>
+
+<pre><code>&gt;&gt;&gt; s = 'Andr\xE9' # \xE9 == hex for 233 == latin-1 for e-acute.
+&gt;&gt;&gt; type(s)
+&lt;type 'str'&gt;
+&gt;&gt;&gt; print s
+Andr&#65533;
+</code></pre>
+
+<p>Note that I'm outputting this to an ASCII terminal, yet python does not complain about the unsupported character in 's'. It simply show some garbled text 'Andr&#65533;' ('i' with trema, reversed questionmark and a 1/2 character).</p>
+
+<p>Python also has support for unicode strings. These unicode strings can contain just about any character in the entire world. </p>
+
+<pre><code>&gt;&gt;&gt; s = u'Andr\xE9'
+&gt;&gt;&gt; type(s)
+&lt;type 'unicode'&gt;
+</code></pre>
+
+<p>In this case, we define a unicode string 'Andr&eacute;' ('e' acute) by specifying the '&eacute;' as hexidecimal value <code>E9</code>. Since unicode strings can contain just about everything, they are ideal as intermediate storage for strings. It is therefor always a good idea to <em>decode</em> any input you receive from its encoding to unicode, and to <em>encode</em> it to the proper encoding when you output it again.</p>
+
+Now let's see what happens when we print the unicode string we just created:
+
+<pre><code>&gt;&gt;&gt; print s
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+UnicodeEncodeError: 'ascii' codec can't encode character u'\xe9' in position 4: ordinal not in range(128)
+</code></pre>
+
+<p>As you can see in the previous examples, when we use normal python strings, we don't get an error. But when we use the Unicode string, we get an encoding error. Like I said: normal strings in Python don't care about encoding, but unicode strings do. So when we try to print it, Python will notice our terminal is in ASCII, and tries to convert the string from Unicode to ASCII. This, naturally, fails as ASCII doesn't know about character \xE9. We'll learn how to deal with that in a moment. First, let's look at how to handle input.</p>
+
+<p>So what do we do when reading in an ASCII string when it contains invalid characters? We've got three options:</p>
+
+<ul>
+<li>Ignore the entire encoding (if we can).</li>
+<li>Ignore any invalid characters.</li>
+<li>Replace any invalid characters with a placeholder character. </li>
+</ul>
+
+<p>Ignoring invalid characters simply removes them from the text as the text is decoded from the source encoding to the target encoding. Replacement will replace the unknown character with a placeholder character. When encoding to unicode, it will be replaced with the character with hexidecimal value XFFFD. This is a two-byte character which will be rendered (if your font supports it) as a square or diamond with a questionmark in it. </p>
+
+<p>So, let's decode our input (containing invalid characters) from ascii to unicode:</p>
+
+<pre><code>&gt;&gt;&gt; s = 'Andr\xE9'               # ASCII with invalid char \xE9.
+&gt;&gt;&gt; s.decode('ascii', 'ignore')
+u'Andr'
+</code></pre>
+
+<p>The '&eacute;' is dropped from the output string as it does not exist in ASCII. We can also replace characters:</p>
+
+<pre><code>&gt;&gt;&gt; s.decode('ascii', 'replace')
+u'Andr\ufffd'
+</code></pre>
+
+<p>This works great. The '&eacute;' is replaced with <code>\uFFFFD</code>: the UTF-8 symbol &#65533; (Black diamond with a questionmark) representing an unsupported character. The <code>decode()</code> method on normal strings decodes <em>from</em> the encoding you specify to a unicode string. But look at what happens when we do the same thing, but print the variable?:</p>
+
+<pre><code>&gt;&gt;&gt; print s.decode('ascii', 'replace')
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+UnicodeEncodeError: 'ascii' codec can't encode character u'\ufffd' in position 4: ordinal not in range(128)
+</code></pre>
+
+<p>How is this possible? Did we do something wrong? No, everything is alright. This is the heisenbug. What happened here is that the 'replace' option will replace any unknown characters in the ASCII string to the \xFFFD unicode character. When we try to print the resulting unicode string to the terminal, Python will try to convert the string to our default system encoding (ASCII) and print it. This will fail, because \xFFFD isn't a character in ascii either. If we want to print it (for debugging purposes or something) we have to encode it back to ASCII before we can:</p>
+
+<pre><code>&gt;&gt;&gt; print s.decode('ascii', 'replace').encode('ascii', 'replace')
+Andr?
+</code></pre>
+
+<p>The Python manual mentions: "When a Unicode string is printed, written to a file, or converted with str(), conversion takes place using this default [ASCII] encoding". Since Python converts without using any of the replacement options, UnicodeEncodeErrors can occur. We have to encode it ourselves if our data contains invalid characters. The <code>encode()</code> method of a unicode string encodes the string <em>from</em> unicode <em>to</em> the encoding you specify. If we were to output the string to a HTML file that is in the UTF-8 encoding, we would do this instead:</p>
+
+<pre><code>s = 'Andr\xE9'
+
+line = s.decode('ascii', 'replace')
+f_out = file('foo.html', 'w')
+f_out.write('''&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;!DOCTYPE html
+   PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;body&gt;
+    %s
+&lt;/body&gt;
+&lt;/html&gt;''' % (line.encode('utf-8')))
+
+f_out.close()
+</code></pre>
+
+<p>This will output a HTML document with the string 'Andr&#65533;' (where the last character is a diamond with a questionmark in it, depending on how your browser displays the UTF-8 replacement character). We first decode the line from ASCII to Unicode and when we output it, we encode it from Unicode to UTF-8. Rmemeber: UTF-8 isn't the same as Unicode! There's also UTF-16, UTF-32, etc.</p>
+
+<p>If we know that the string 's' is actually in the latin-1 encoding, we can replace the line:</p>
+
+<pre><code>line = s.decode('ascii', 'replace')
+</code></pre>
+
+<p>with:</p>
+
+<pre><code>line = s.decode('latin-1', 'replace')
+</code></pre>
+
+<p>and the output in UTF-8 will become 'Andr&eacute;'.</p>
+
+<p>Another problem that can occur is when you try to run the <tt>decode()</tt> method on strings which are already unicode:</p>
+
+<pre><code>&gt;&gt;&gt; s = 'Andr\xE9'
+&gt;&gt;&gt; u = s.decode('ascii', 'replace')
+&gt;&gt;&gt; u
+u'Andr\ufffd'
+&gt;&gt;&gt; u.decode('ascii', 'replace')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+UnicodeEncodeError: 'ascii' codec can't encode character u'\ufffd' in position 4: ordinal not in range(128)
+&gt;&gt;&gt; u.decode('utf-8', 'replace')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/lib/python2.5/encodings/utf_8.py", line 16, in decode
+    return codecs.utf_8_decode(input, errors, True)
+UnicodeEncodeError: 'ascii' codec can't encode character u'\ufffd' in position 4: ordinal not in range(128)
+</code></pre>
+
+<p>As you can see, calling the <tt>decode()</tt> method on a Unicode string always seems to fail. I have no idea why the Unicode strings in Python have this method, but it's probably either because they inherit from the String type, or this is the 'internal' method Python uses when it needs to display or convert a Unicode string. If I remember correctly, the <tt>decode()</tt> will be removed from Unicode strings in the future.
+
+<h2>Conclusion</h2>
+
+<p>It turns out that dealing with encodings in Python is tricky since we have to deal with a large number of potential problem areas. Once you're familier with the ins and outs though, dealing with encodings becomes rather easy. In general:</p>
+
+<ul>
+<li>If input is just 'passing through' your program, just treat it as binary instead of text. Don't decode or encode at all. But be careful about the target output (including the terminal when debugging with print or something) as it may require a specific encoding.</li>
+</ul>
+
+<p>For input:</p>
+
+<ul>
+<li>First decode input from the encoding it is in to Unicode.</li>
+<li>If you know the input encoding: <code>s = input.decode(input_encoding)</code>.</li>
+<li>If you do not know the input encoding, take the safe route and decode from ASCII with the 'replace' option: <code>s = input.decode('ascii', 'replace')</code></li>
+<li>If the input might contain invalid characters for the encoding it is in, use the <code>replace</code> option. (always a good idea)</li>
+</ul>
+
+<p>For output:</p>
+
+<ul>
+<li>If you know the output encoding: <code>s.encode(output_encoding)</code>.</li>
+<li>If you do not know the output encoding, and there is an agreement about the default encoding, use that. Otherwise, take the safe route and use ASCII.</li>
+<li>If the target encoding might not support all the characters that are in the internal representation, use the 'replace' option.</li>
+</ul>
+
+<p>I hope I got all this right, and that it makes dealing with encodings in Python a little clearer.</p>
+
+<h2>Further reading</h2>
+
+Further reading:
+
+<a href="http://docs.python.org/tutorial/introduction.html#unicode-strings">An Informal Introduction to Python: Unicode-strings</a><br />
+</body>
+</html>
