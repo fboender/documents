@@ -5,10 +5,65 @@ Ferry Boender
 1.0, Apr 15, 2011
 :Author Initials: FB
 
+Authentication
+--------------
+
+=== Passwordless key ===
+
+	ssh -i <passwordless key>
+
+	(sftp)
+
+=== SSH Agent ===
+
+	<script>
+
 Input / Output
 --------------
 
-foo
+Like every other Unix tool, SSH can use input and output redirection. When running a command directory on a remote machine using SSH, it will redirect any input given to it locally to the remote command. Any output from the remote command is redirected back to your local machine. This allows for some very useful time-savers.
+
+For instance, we can run the command +du+ (diskusage) on the remote machine, and locally pipe it into +xdu+ to get a graphical representation on our local X11 desktop of the remote disk usage:
+
+	$ ssh HOST du /var/www/ | xdu
+
+Or suppose we want to transfer a remote directory's contents to the local machine without using scp (for whatever reason). We can remotely create a tar archive of the directory, and instruct +tar+ to write it to the standard output (using the minus as the filename) instead of a file. SSH will transfer the remote standard output of tar to our local machine, where we can untar it in the same manner:
+
+	$ ssh HOST tar -cf - Documents/notes | tar -xf -
+	$ ls Documents/notes/
+	dev.c.txt                            sysadmin.networking.txt
+	dev.git.txt                          sysadmin.openssl.txt
+	dev.mysql.txt                        sysadmin.solaris.txt
+
+Perhaps we need to create a local copy of a MySQL database on a remote machine. Unfortunatelly, MySQL access is not remotely allowed and the harddisk on the remote machine is full, so we can't create a dump there, transport it to our local machine and read it in. No worry, SSH to the rescue:
+
+	$ ssh HOST mysqldump -u USER -pPASSWORD -h localhost DATABASENAME > dump.sql
+
+Or we can just import it directly:
+
+	$ ssh HOST mysqldump -u USER -pPASSWORD -h localhost DATABASENAME | mysql -u USER -pPASSWORD -h localhost DATABASENAME
+
+Likewise we can locally pipe data into ssh and use it at the remote host. Again, we use the minus-sign to indicate reading from standard in:
+
+	$ echo "hello world" | ssh HOST "cat - >foo.txt"
+
+This will put "hello world" in a file called +foo.txt+ on the remote host.
+
+Tunnels and proxies
+-------------------
+
+=== SOCKS5 proxy ===
+
+We can use SSH as a SOCKS5 proxy. An SOCKS5 proxy works much like a normal tunnel, but works with multiple clients at the same time, and is not restricted to forwarding of a single port. We can start a SOCKS5 using the +-D+ option:
+
+Socks5 is pretty neat, as it allows you to proxy stuff without the server having to know anything about the way the client works. For instance, if we give the following command:
+
+	$ ssh -D 8080 REMOTE_HOST
+
+Now we can configure local clients (such as Firefox, Pidgin Instant Messanger, Chrome, etc) to use the proxy. All network traffic (with the exception of DNS, possibly!) will go through the SOCKS5 proxy. For instance:
+
+	$ chromium-browser --proxy-server="socks5://127.0.0.1:8080"
+
 
 Configuration
 -------------
@@ -44,4 +99,10 @@ Configuration
 --------------------------------------------------------------------------------
 
 NOTE: if the AllowUsers setting is completely missing from the sshd config file, all users are allowed (see man sshd_config). You may prefer to leave it that way -- your choice. I prefer to make the usernames explicit because I'm paranoid ;-)
+
+SFTP
+----
+
+http://www.electricmonk.nl/log/2007/08/08/sftp-identity-file-and-batch-mode/
+
 
