@@ -1,6 +1,5 @@
 SSH Tips and Tricks
 ===================
-
 Ferry Boender
 1.0, Apr 15, 2011
 :Author Initials: FB
@@ -10,47 +9,220 @@ Authentication
 
 === Passwordless key ===
 
-	ssh -i <passwordless key>
+One very useful feature of SSH are passwordless keys. They are especially useful when you're writing scripts that need to run commands on a remote hosts. Since those will run unattended, you don't want them to prompt for a password.
 
-	(sftp)
+WARNING: Be careful when using passwordless keys! If the security of the client machine is compromised, the remote server will be *just as compromised*! Check the Authorization section of this article for tips on how to limit the damage of a compromised client machine!
+
+You can generate passwordless keys using the +ssh-keygen+ tool. Simply press +enter+ when asked for the password:
+
+    $ ssh-keygen 
+    Generating public/private rsa key pair.
+    Enter file in which to save the key (/home/user/.ssh/id_rsa): /home/user/passwordless_rsa
+    Enter passphrase (empty for no passphrase): 
+    Enter same passphrase again: 
+    Your identification has been saved in /home/user/passwordless_rsa.
+    Your public key has been saved in /home/user/passwordless_rsa.pub.
+    The key fingerprint is:
+    70:50:84:e3:ea:de:62:43:4e:cf:76:a4:86:8e:c7:29 user@eek
+
+We can add the passwordless public key to a remote machine's list of authorized keys using the +ssh-copy-id+ tool:
+
+    $ ssh-copy-id -i /home/user/passwordless_rsa.pub user@remote_host
+    Now try logging into the machine, with "ssh 'user@remote_host'", and check in:
+    
+      .ssh/authorized_keys
+    
+    to make sure we haven't added extra keys that you weren't expecting.
+
+We specify which public key to transport using the +-i /home/user/passwordless_rsa.pub+ option.
+
+Now we can ssh to the +remote_host+ without using a password. If the private key has been placed in the current user's +.ssh+ directory, ssh will automatically detect it when trying to connect. If you want to be sure it finds the private key to connect with, you can once again specify the +i path_to_private_key+ option:
+
+    $ ssh -i /home/user/passwordless_rsa user@remote_host
+    user@remote_host$ 
+
+When using passwordless keys, you may provide the +-q+ and +-o "BatchMode=yes"+ options to SSH in order to make it quiet. Otherwise, errors related to SSH might be interpreted as errors from remote commands.
 
 === SSH Agent ===
 
-	<script>
+The SSH Agent is a tool which can keep your private keys in memory. When connecting to a remote machine, any SSH session (including +scp+ and +sftp+) will try to contact a running agent on the machine to see if the required private key is already loaded. If it is, it will be used to connect the remote machine. This way you only have to enter your password for a private key once, instead of each time you want to connect.
+
+You can test if an SSH Agent is already running with the following command:
+
+    $ ssh-add -l
+    Could not open a connection to your authentication agent.
+
+As you can see, no agent is currently running. We can start one with the following command:
+
+    $ eval `ssh-agent`
+    Agent pid 6265
+
+The above command runs the +ssh-agent+ program, which will output some other commands, which are then run by the current shell. This is the actual output of the +ssh-agent+ program:
+
+    SSH_AUTH_SOCK=/tmp/ssh-tXJFfB6269/agent.6269; export SSH_AUTH_SOCK;
+    SSH_AGENT_PID=6270; export SSH_AGENT_PID;
+    echo Agent pid 6270;
+
+As you can see, the +ssh-agent+ is started. It then creates a socket in the +/tmp+ directory and sets that location as an environment variable so that SSH clients (+ssh+, +scp+, +sftp+) know where to contact the agent. 
+
+We can add keys to the agent using the +ssh-add+ tool:
+
+    $ ssh-add user\@host.rsa 
+    Enter passphrase for user@host.rsa: 
+    Identity added: user@host.rsa (user@host.rsa)
+
+We can now connect to any remote machine that has the public key counterpart in its +authorized_keys+ file without having to enter our password again.
+
+The +ssh_agent+ program generates a random name for the socket. One frequent problem with starting the SSH agent like we did just now is that only the current shell knows about the socket location. If we open another terminal, it won't know about the running SSH agent, since the environment variable isn't set in the new terminal. We can work around this by specifying our own path to a socket with the +-a+ option.
+
+Combining this knowledge, we can add a few lines to our +.profile+ (or +.bashrc+) startup script to start an agent if none is running yet. We also check for a forwarded agent and don't do anything if a forwarded agent is found (more on forwarding agents later on).
+
+------------------------------------------------------------------------------
+# Do not start an SSH agent if the user has a forwarded agent.
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    # Check if a local SSH agent is already running. If not, start one.
+    export SSH_AUTH_SOCK="$HOME/.ssh/sshagent.socket"
+    if [ ! -S "$SSH_AUTH_SOCK" ]; then
+        eval `ssh-agent -a "$SSH_AUTH_SOCK"`
+    fi
+fi
+------------------------------------------------------------------------------
+
+With this script in your +.profile+, you will only have to start one agent ever for a given user as long as that machine doesn't reboot (or the agent is killed in some other way). If you log out, the agent is not killed, and will be re-used the next time you log in.
+
+=== Agent forwarding ===
+
+Perhaps the most useful feature of SSH is Agent Forwarding. We can tell +ssh+ it should do Agent Forwarding by supplying the +-A+ commandline option when we ssh to remote machine. For this to work, you have to have an SSH agent running locally, or agent forwarding had to be enabled when you SSHed into your current session. (Use +ssh-add -l+ to see if an agent is avaiable).
+
+    $ ssh -A user@remote_host
+
+When enabling Agent Forwarding with the +-A+ switch, ssh will automatically create a socket at the remote host and set some environment variables (+SSH_AUTH_SOCK+, most notably) when you connect to a remote machine. If an ssh session needs to perform authentication, it will first try to reach the SSH agent through the socket. All requests will be sent back to the original SSH agent. This works for as many nested sessions as you'd like.
+
+Using Agent forwarding, you can start a single agent on, say, your desktop machine. Every authentication request made by any SSH session will be sent back to the agent running on your desktop machine, without the need to start additional SSH agents on remote machines and loading keys there. As you can imagine, this is a much better method of keeping private keys secure opposed to storing them on every machine you need to SSH from.
+
+You can enable SSH agent forwarding for all the hosts you SSH to automatically (without the need to specify the +-A+ switch) by putting the following in your +~/.ssh/config+:
+
+------------------------------------------------------------------------------
+Host *
+        ForwardAgent yes
+------------------------------------------------------------------------------
+
+Authorization
+-------------
+
+=== Restricting commands ===
+
+You can restrict which command can be run by someone logging in with a public/private key in the +authorized_keys+ file. For instance, to restrict a certain public/private key to running the +df -h+ command (to view avaiable diskspace), you add a line to the +authorized_keys+ file like this (Public key shortened for brevity):
+
+    command="/bin/df -h" ssh-dss AAAAC8ghi9ldw== user@host
+
+Now when we SSH to that machine (and we have that key loaded):
+
+    $ ssh user@host
+    Filesystem            Size  Used Avail Use% Mounted on
+    /dev/mapper/dev-root   39G  2.2G   35G   6% /
+    Connection to host closed.
+
+Its not possible for a single key to run multiple commands via any normal SSH configuration mechanism. However, SSH will set an environment variable +$SSH_ORIGINAL_COMMAND+ with the command the user tried to run. We can take advantage of that by writing a shellscript. For example, we can create a script called +commands.sh+ on the remote host:
+
+------------------------------------------------------------------------------
+#!/bin/sh
+
+case $SSH_ORIGINAL_COMMAND in
+	"diskspace")
+		df -h
+		;;
+	"dirlist")
+		ls -1
+		;;
+	"apache_restart")
+		/etc/init.d/apache restart
+		;;
+	*)
+		echo "Unknown command"
+esac
+------------------------------------------------------------------------------
+
+Then we restrict the user to running that shellscript:
+
+    command="/bin/sh /home/user/commands.sh" ssh-dss AAAAC8ghi9ldw== user@host
+
+The user can now run multiple commands by piping them into the ssh command:
+
+    $ ssh -q user@host diskspace
+    Filesystem            Size  Used Avail Use% Mounted on
+    /dev/mapper/dev-root   39G  2.2G   35G   6% /
+    
+    $ ssh -q dev dirlist
+    commands.sh
+    dump.sql
+
+=== Restricting addition of keys ===
+
+By default, SSH puts the +authorized_keys+ files in the user's home directory. This allows users to add other keys themselves; a situation you might want to avoid. You can change the location where the key files are kept in the +/etc/ssh/sshd_config+ file, using the +AuthorizedKeysFile+ option:
+
+--------------------------------------------------------------------------------
+#AuthorizedKeysFile     %h/.ssh/authorized_keys
+AuthorizedKeysFile      /etc/ssh/authorized_keys/%u
+--------------------------------------------------------------------------------
+
+The +%u+ will expand to the username. The location of the +authorized_keys+ file for a user named "john" will become +/etc/ssh/authorized_keys/john+. +%h+ expands to the users homedirectory.
+
+Make sure users can't write to the files in question. 
+
+=== Restricting which users can SSH ===
+
+You can restrict which users are allowed to use SSH with the +AllowUsers+ option in +/etc/ssh/sshd_config+:
+
+--------------------------------------------------------------------------------
+AllowUsers john pete
+--------------------------------------------------------------------------------
+
+NOTE: if the AllowUsers setting is completely missing from the sshd config file, all users are allowed (see man sshd_config). You may prefer to leave it that way -- your choice. I prefer to make the usernames explicit because I'm paranoid ;-)
 
 Input / Output
 --------------
 
-Like every other Unix tool, SSH can use input and output redirection. When running a command directory on a remote machine using SSH, it will redirect any input given to it locally to the remote command. Any output from the remote command is redirected back to your local machine. This allows for some very useful time-savers.
+Like every other Unix tool, SSH can use input and output redirection. When running a command on a remote machine using SSH, it will redirect any input given to it locally to the remote command. Any output from the remote command is redirected back to your local machine. This allows for some very useful time-savers.
 
 For instance, we can run the command +du+ (diskusage) on the remote machine, and locally pipe it into +xdu+ to get a graphical representation on our local X11 desktop of the remote disk usage:
 
-	$ ssh HOST du /var/www/ | xdu
+    $ ssh HOST du /var/www/ | xdu
 
 Or suppose we want to transfer a remote directory's contents to the local machine without using scp (for whatever reason). We can remotely create a tar archive of the directory, and instruct +tar+ to write it to the standard output (using the minus as the filename) instead of a file. SSH will transfer the remote standard output of tar to our local machine, where we can untar it in the same manner:
 
-	$ ssh HOST tar -cf - Documents/notes | tar -xf -
-	$ ls Documents/notes/
-	dev.c.txt                            sysadmin.networking.txt
-	dev.git.txt                          sysadmin.openssl.txt
-	dev.mysql.txt                        sysadmin.solaris.txt
+    $ ssh HOST tar -cf - Documents/notes | tar -xf -
+    $ ls Documents/notes/
+    dev.c.txt                            sysadmin.networking.txt
+    dev.git.txt                          sysadmin.openssl.txt
+    dev.mysql.txt                        sysadmin.solaris.txt
 
 Perhaps we need to create a local copy of a MySQL database on a remote machine. Unfortunatelly, MySQL access is not remotely allowed and the harddisk on the remote machine is full, so we can't create a dump there, transport it to our local machine and read it in. No worry, SSH to the rescue:
 
-	$ ssh HOST mysqldump -u USER -pPASSWORD -h localhost DATABASENAME > dump.sql
+    $ ssh HOST mysqldump -u USER -pPASSWORD -h localhost DATABASENAME > dump.sql
 
 Or we can just import it directly:
 
-	$ ssh HOST mysqldump -u USER -pPASSWORD -h localhost DATABASENAME | mysql -u USER -pPASSWORD -h localhost DATABASENAME
+    $ ssh HOST mysqldump -u USER -pPASSWORD -h localhost DATABASENAME | mysql -u USER -pPASSWORD -h localhost DATABASENAME
 
 Likewise we can locally pipe data into ssh and use it at the remote host. Again, we use the minus-sign to indicate reading from standard in:
 
-	$ echo "hello world" | ssh HOST "cat - >foo.txt"
+    $ echo "hello world" | ssh HOST "cat >foo.txt"
 
 This will put "hello world" in a file called +foo.txt+ on the remote host.
 
 Tunnels and proxies
 -------------------
+
+=== Local port tunnel ===
+
+Sometimes you may need to use a certain service on a network, but the network has been firewalled against external connections on ports other than the SSH port. SSH allows us to create a 'tunnel' into the remote network. Suppose we are on a network 192.168.1.x and we want to connect to port 80 on a machine with 192.168.56.3. But the 192.168.56.x network is firewalled, and we can only access it through a bastion host at 192.168.56.1. Here's what we do:
+
+    $ ssh -L 80:192.168.56.3:80 user@192.168.56.1
+
+SSH will now create a tunnel to 192.168.56.3 port 80 through 192.168.56.1. The +-L+ option takes three arguments, separated with colons: +local_port:remote_ip:remote_port+. The +local_port+ is where SSH will listen for incoming connections on the machine where you issued this command. +remote_ip:remote_port+ is the machine/port to which you wish to create the tunnel. It is important to remember that this is as you'd view it from the server you're ssh-ing too (192.168.56.1 in this case), not as you'd view it from your local machine. 
+
+You can additionally specify the +-N+ switch to prevent SSH from actually logging in to 192.168.56.1.
 
 === SOCKS5 proxy ===
 
@@ -58,51 +230,67 @@ We can use SSH as a SOCKS5 proxy. An SOCKS5 proxy works much like a normal tunne
 
 Socks5 is pretty neat, as it allows you to proxy stuff without the server having to know anything about the way the client works. For instance, if we give the following command:
 
-	$ ssh -D 8080 REMOTE_HOST
+    $ ssh -D 8080 REMOTE_HOST
 
 Now we can configure local clients (such as Firefox, Pidgin Instant Messanger, Chrome, etc) to use the proxy. All network traffic (with the exception of DNS, possibly!) will go through the SOCKS5 proxy. For instance:
 
-	$ chromium-browser --proxy-server="socks5://127.0.0.1:8080"
+    $ chromium-browser --proxy-server="socks5://127.0.0.1:8080"
 
+=== ProxyCommand ===
+
+Many networks require you to SSH to a bastion (firewall/gateway) server before you're able to SSH to any machine on the network. This becomes tedious quickly, as you have to SSH twice each time. The +ProxyCommand+ is a setting in your ssh configuration file which can do this for you automatically.
+
+Assume we want to SSH to a host \'web1.example.com'. Before we can SSH to this host we first have to SSH to \'example.com'. We can SSH directly to \'web1.example.com' by putting the following in our +~.ssh/config+ file:
+
+--------------------------------------------------------------------------------
+Host web1
+        ProxyCommand ssh example.com nc web1.example.com 22
+--------------------------------------------------------------------------------
+
+If we SSH to +web1+ now, we are automatically sent to web1.example.com. It's even possible to use +scp+ and other SSH tricks directly, thus saving us the trouble of having to transfer files to example.com first, then to our local machine (or vice versa).
+
+ProxyCommand can also be used with other things. To SSH through a HTTP proxy at 192.0.2.0 port 8080:
+
+--------------------------------------------------------------------------------
+ProxyCommand /usr/bin/nc -X connect -x 192.0.2.0:8080 %h %p
+--------------------------------------------------------------------------------
 
 Configuration
 -------------
 
 === Client configuration ===
 
---------------------------------------------------------------------------------
-	Host *
-			ForwardAgent yes
-			ForwardX11 yes
-			ServerAliveInterval 5
-			ServerAliveCountMax 720
+The SSH client configuration lives in the file +/home/USER/.ssh/config+. It has many useful directives. The basic way it works is we specify a host identifier, and add configuration settings to that host. 
 
-	Host beheer
-			Hostname beheer.office.zx.nl
-			User fboender
-
-	Host zoltar
-			Hostname zoltar.electricmonk.nl
-
-	Host scooter
-			Hostname scooter.electricmonk.nl
-
-	Host eek
-			ProxyCommand ssh scooter.electricmonk.nl nc eek 22
---------------------------------------------------------------------------------
-
-=== Server configuration ===
+For instance, if your local username is +john+, but on the backup machine +backup.example.com+ it's always +backup+, you can tell SSH to automatically use that username to log in:
 
 --------------------------------------------------------------------------------
-	#AuthorizedKeysFile     %h/.ssh/authorized_keys
-	AuthorizedKeysFile      /etc/ssh/authorized_keys/%u
+Host backup.example.com
+        User backup
 --------------------------------------------------------------------------------
 
-NOTE: if the AllowUsers setting is completely missing from the sshd config file, all users are allowed (see man sshd_config). You may prefer to leave it that way -- your choice. I prefer to make the usernames explicit because I'm paranoid ;-)
+You can create aliases (much like the +/etc/hosts+ file) to save some typing:
+
+--------------------------------------------------------------------------------
+Host backup
+        Hostname backup.example.com
+        User backup
+--------------------------------------------------------------------------------
+
+If you want to apply a certain configuration option to *every* host, use the asterisk wildcard:
+
+--------------------------------------------------------------------------------
+Host *
+        ForwardAgent yes
+        ServerAliveInterval 5
+        ServerAliveCountMax 720
+--------------------------------------------------------------------------------
 
 SFTP
 ----
 
 http://www.electricmonk.nl/log/2007/08/08/sftp-identity-file-and-batch-mode/
 
+
+Sources: http://oreilly.com/catalog/sshtdg/chapter/ch08.html#74105
 
