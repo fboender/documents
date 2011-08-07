@@ -127,7 +127,7 @@ sWeights = sorted(weights.items(), lambda x, y:cmp(x[1], y[1]))
 wTotal = sum(weights.values())
 --------------------------------------------------------------------------------
 
-You'll see a little bit of Python magic right here, so let me explain. The +sorted+ function is a Python built-in which returns a sorted duplicate of the first argument you pass it. We pass it +weights.items()+ which looks like + +++( ('A', 2), ('B', 4'), ('C', 3), (D, 1) )+++ +. As the second parameter we pass an anonymous (nameless) function (a 'lambda') that takes two parameters: +x+ and +y+. The anonymous function compares the second value in both arguments and returns whether +x+ is smaller than, equal to or larger than +y+. The +sorted+ function uses that function to determine how to sort the first parameter.
+You'll see a little bit of Python magic right here, so let me explain. The +sorted+ function is a Python built-in which returns a sorted duplicate of the first argument you pass it. We pass it +weights.items()+ which looks like +( (\'A\', 2), (\'B\', 4), (\'C\', 3), (\'D\', 1) )+. As the second parameter we pass an anonymous (nameless) function (a 'lambda') that takes two parameters: +x+ and +y+. The anonymous function compares the second value in both arguments and returns whether +x+ is smaller than, equal to or larger than +y+. The +sorted+ function uses that function to determine how to sort the first parameter.
 
 +sWeights+ now looks like this:
 
