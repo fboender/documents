@@ -243,8 +243,4 @@ All brand and product names mentioned in this document are trademarks or registe
 Author:
 
  Ferry Boender
- Lloyd Webberhof 56
- 3543 EH
- UTRECHT
- The Netherlands
- <f (DOT) boender (AT) electricmonk (DOT) nl>
+ <ferry (DOT) boender (AT) electricmonk (DOT) nl>

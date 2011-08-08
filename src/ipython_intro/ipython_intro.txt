@@ -425,9 +425,5 @@ registered trademarks of their respective holders.
 Author:
 
  Ferry Boender
- Lloyd Webberhof 56
- 3543 EH
- UTRECHT
- The Netherlands
- <f (DOT) boender (AT) electricmonk (DOT) nl>
+ <ferry (DOT) boender (AT) electricmonk (DOT) nl>
 
