@@ -1,0 +1,65 @@
+<html>
+	<head>
+		<style>
+			html {
+				font-family: sans-serif;
+				width: 70%;
+			}
+			p {
+				text-align: justify;
+			}
+			pre{
+				margin-left: 10px;
+				background-color: #D0D0D0;
+				border: 1px solid #A0A0A0;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Trickle</h1>
+		<h2>A lightweight userspace bandwidth shaper.</h2>
+		<address>May 30th, 2007 by Ferry Boender</address>
+
+		<p>Sometimes, you&#8217;ll want to download something but you don&#8217;t want it to completely saturate your Internet connection. Perhaps you&#8217;re already downloading something more important, or you simply don&#8217;t want to get in the way of other people that are sharing the same Internet connection. Some programs, such as gFTP, wget and bittorrent, offer built-in up/download rate limiting. Other programs, such as apt-get and associates, don&#8217;t. Enter <a href="http://monkey.org/~marius/pages/?page=trickle">Trickle</a>.</p>
+
+		<p>Trickle is a user space bandwidth shaper. It allows you to limit the bandwidth consumption of a program without requiring all kinds of kernel patches, firewall configurations or root access to the machine on which you wish to use it. Trickle can run in collaborative and stand alone mode. In collaborative mode, trickle can limit the bandwidth used by a bunch of programs at the same time. In stand alone mode, trickle simply limits the program you specify.</p>
+		<h3>Stand alone mode</h3>
+		<p>Trickle is easiest to use in stand-alone mode. Simply run trickle with a download and/or upload limit and a program you want to limit. For example:</p>
+		<pre>
+[todsah@jib]~$ <strong>trickle -d 20 -u 20 wget http://www.electricmonk.nl/bigfile</strong>
+<strong>trickle: Could not reach trickled, working independently: No such file or directory</strong>
+&#8211;12:19:18&#8211;  http://www.electricmonk.nl/bigfile
+		   => `bigfile&#8217;
+Resolving www.electricmonk.nl&#8230; 194.187.77.6
+Connecting to www.electricmonk.nl|194.187.77.6|:80&#8230; connected.
+HTTP request sent, awaiting response&#8230; 200 OK
+Length: 51,200,000 (49M) [text/plain]
+
+ 0% [                                     ] 180,224       <b>21.83K/s</b>    ETA 38:03
+		</pre>
+		<p>In the example above we use wget for demonstrative purposes, even though it has built-in bandwidth shaping. As you can see, the download rate is 21.83K/s. Of course, this is not exactly 20 K/s, but the download rate will vary between 19 and 21 K/s giving an average of 20 K/s. You can use the <b>-w</b> and <b>-t</b> command-line options to fine-tune this behaviour. The longer trickle  runs, the closer it will get to 20 K/s. For more information, check out the <a href="http://monkey.org/~marius/trickle/trickle.1.txt">manual page</a>.</p>
+		<h3>Daemon mode</h3>
+		<p>In daemon mode, trickle can limit a group of programs to a fixed limit of bandwidth. To start the daemon, run the trickled command:</p>
+		<pre>
+[todsah@jib]~$ trickled -d 20 -u 20
+		</pre>
+		<p>This will start the trickle daemon that will limit the total bandwidth available to all programs run via trickle to 20 K/s both up and down. So if you run a single program via trickle, it can consume 20 K/s. Two programs can each consume 10 K/s, etc. As an example, we start three wget sessions:</p>
+		<pre>
+[todsah@jib]~/temp$ trickle wget http://www.electricmonk.nl/bigfile
+ 1% [                                     ] 933,888        6.66K/s  ETA 1:47:17
+[todsah@jib]~/download$ trickle wget http://www.electricmonk.nl/bigfile
+ 1% [                                     ] 720,896        6.65K/s  ETA 1:56:59
+[todsah@jib]~$ trickle wget http://www.electricmonk.nl/bigfile
+ 2% [                                     ] 1,228,800      6.64K/s  ETA 1:45:00
+		</pre>
+		<p>The download rate is limited to about 6.6 K/s per session, making a total of 19.8 K/s. As is usually the case with bandwidth shapers, it may take a couple of seconds before all sessions are correctly limited. This is because of the algorithm used by shapers to determine how much they should delay the sending and receiving of traffic.</p>
+		<h3>Availability</h3>
+		<p>Trickle has been available in Debian at least since v3.1 (&#8217;Sarge&#8217;) and in Ubuntu since Warty. <code>apt-get install trickle</code> should do the trick.</p>
+
+		<h3>Notes</h3>
+		<ul>
+		<li>Trickle doesn&#8217;t work with setuid programs. The reason for this is that setuid programs ignore the LD_PRELOAD functionality for security reasons. Trickle requires this functionality to do its shaping. (It also doesn&#8217;t work with statically linked programs for the same reason.)</li>
+		<li>Trickle only works with programs that use the socket(2) interface for transmitting and receiving data. Also, it only works with TCP connections, not with UDP connections.</li>
+		</ul>
+	</body>
+</html>
