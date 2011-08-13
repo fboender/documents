@@ -1,0 +1,14 @@
+if (logged_in()) {
+    if ($action == "logout") {
+        act_logout();
+    } else {
+        # Show a form with a logout button
+        display_logout();
+    }
+} else {
+    if ($username != NULL && $password != NULL) {
+        act_login();
+    } else { 
+        display_login();
+    }
+}
