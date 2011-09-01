@@ -1,0 +1,590 @@
+Edgeworld Strategy guide
+========================
+Ferry Boender
+v0.4
+
+Preface
+-------
+
+This is a small strategy guide for Edgeworld, most useful to newer players, but with some tips for the rest too.
+
+Got a tip? Correction? Addition to an appendix? Email me at ferry DOT boender AT gmail DOT com, and I'll add them to the guide!
+
+Generic
+-------
+
+=== Finding players ===
+
+There are a bunch of ways to find players. 
+
+*The Scout & Attack Bases* screen (the little globe in the middle of your command panel). The Players PvP tab lists all players in your current sector. The Feuds PvP tab lists players you've attacked or that have attacked you. Factions PvE are computer players.
+
+*Global, alliance and group chats* are another way to find players. You can click on players names to message and scout them or invite them to a group (more on that later). It is not possible to send resources to players via this menu. For that, see the Alliance method of finding players.
+
+*The Alliance screen* allows you to list players in your alliance and the leaders of other alliances. In the My Alliance tab, you can click on a users name to send them messages, scout them and send them resources. This tab also lists which enemies last attacked people in your alliance, giving you an easy way to retaliate against player for the glory of your alliance.
+
+*GPS* allows you to find a player by playername. They can be bought using platinum, or won in Zoot's Loot. They can be used only ONCE per GPS.
+
+=== Zoot's Loot ===
+
+Once a day (??is this true? I think I may have gotten it twice a day, once in the afternoon, one just after midnight, then one in the afternoon again), you will get chance to play Zoot's Loot. Zoot offers random prizes that can include anything in the shop (??true??). Chances of getting lesser prices are higher naturally. One trick is to *refresh the webpage before playing* until enough squares contain nice prizes. This way you enhance your chances of winning something good. *Don't forget to click "Claim"* to claim your prize, or else you will lose it
+
+You will not get your prize immediately. The item you've won gets added to the store. You first have to find the item in the store and click the Use button before it takes effect. 
+
+Offense
+-------
+
+Offense starts with scouting an enemy base. (See Finding Players for more information). Once you are scouting a base, and it is not under protection and you have warps available, you can attack by clicking the green Attack button.
+
+The goals of attacking are:
+
+* *Gaining XP*,
+* *Looting resources* and/or,
+* *Retaliating against players*.
+
+=== Analysing the base ===
+
+Before you decide to attack, analyse the base and try to find any weak spots. Check the Defense chapter for spotting weak-spots in a base. Make sure you have a plan of action and know what kind of troops you want to send. In case you're not sure whether you've got enough troops for your plans, check before attacking. If you find that you don't have those four rhinos needed to carry out your plan, you must retreat and lose one or more warps.
+
+Depending on your goals, watch out for either weak spots in an enemy's base and / or exposed and lightly-protected resources. Weak spots can be scattered or lone defenses that may open up holes to the base's core or defenses of the same type in the same spot. Select troops and warp-in points accordingly.
+
+=== Selecting troops ===
+
+You must then select troops to send by clicking on their icons. You can remove troops from the selection by clicking the small red minus icon on the troop icon. Which troops to select depends on the availability of your troops, the enemy base and where you want to attack it. Before FIXME: Expand
+
+The following troops are available:
+
+*Marines*::
+	Marines are dirt-cheap and fast to build, and have decent health/damage. It may seem like they don't do much damage, and they're the lowest level troops, yet in large numbers they're very useful. Use to quickly take out defenses.
+*Rhinos*::
+	Rhinos are cheap to build and have large amounts of health (at lower levels). Although they do very little damage, they are extremely useful to distract enemy defenses while other troups take them out. Two or three rhinos can often distract defenses long enough for pyro's or specters to do a lot of damage. Warp in rhinos far away from where you want them to distract, and prepare the second warp-in with high-damage dealing close-range troups. Once the rhinos are distracting all the guns you want them to distract, warp in additional troops close to defenses to take out the defenses. Be careful when using this strategy with X-1's though, because the splash damage from attacks they perform on rhinos can easily whipe out your forces. Use snipers in that case.
+*Raiders*::
+	Raiders have medium health, and don't do a lot of damage. Their strength lies in the fact that when they hit any kind of mining facility, you will receive twice the resources from that mine. One hit by the raiders is enough, other troups can destroy the building for double resources. It's all about correct timing and warp-in placement with these troups, but they can significantly increase the spoils of war. Note that raiders will always go for turrets first, even if they're not being attacked by one. This makes it difficult to time their warp-in precisely so that they can hit mines first.
+*Pyros*::
+	Pyros have below-average health, but the deal alot of damage. Use to quickly take out defenses while rhinos or titans distract them. Warp in close to defenses once they're distracted. Easily wiped out by X-1 Cannons.
+*Specters*::
+	Arguably the most useful kind of troops, Specters can take out targets from a large distance. They operate outside of the range of X-1 cannons and Tesla's, allowing them to take out those units without loses. Most useful as a tactical unit dropped in to take care of X-1's and Tesla's, they make a good addition to a mixed group of units. Check the Appendix to see how to utilize these extremely useful units (is that too many U's? I never can tell) to farm Fractions.
+
+
+
+FIXME: raiders double resource taking if they shoot mines/storage.
+
+=== Warping in ===
+
+After having selected your troops, you must pick the spot to warp in. This is done by moving the cursor around the battlefield and clicking it in a strategic point that is allowed. If you are not allowed to warp in at a particular spot, the cursor will be red; otherwise green.
+
+A warp gate has a limit on how much troops you can warp in per attack. This limit is determined by the level of your warp gate, and the space used up by a unit. A Marine, for instances, uses up one space, while a Titan uses 4. That means if your warp gate has 20 spaces, you can only send four titant and four marines. It is therefor important to *level up your warpgate for more powerful attacks*.
+
+You can *warp in way beyond the borders of a base*. This allows certain fast troops such as rhinos to sprint ahead and take the brunt of the attack before your other troops come into range of the enemy's defenses or to give you time to prepare for the next warp-in. Once defenses are locked on to a target, they will continue to fire until the target is dead, making rhinos and titans good cannon fodder to distract enemy defenses while you warp in more units with high damage to kill the defenses off.
+
+It is often best to *warp in as closely to defensive structures as possible*, giving troops with short range but heavy firepower (such as pyros) a quick way to dispatch enemy defenses. If they have to run across the entire battlefield before reaching their intended targets they can easily be wiped out by turrets and X-1 canon's splash damage. Hover with the mouse cursor over enemy defensive buildings to see their range and pick a good spot.
+
+Of vital importance is that it is *not necessary to warp in all troops at the same time* during an attack. You can warp troops in as many times as you want, as long as the warp space hasn't been used up. That means you can warp Rhinos in close to defenses in order to distract them while you warp in other troops in different locations to take out resources or strategic targets. Make sure you have a coherent battle plan in mind so you don't have to think about what to do as your first wave of troops gets slaughtered.
+
+Sometimes, however, an enemy base (both real players and Factions controlled by the computer) has exposed mines and supply depots that can be attacked with long-range troops (Specters). In that case you may *want to warp in out-of-range of the defense* and let your long-range troops take out the buildings.
+
+If all your warps are charged, *you get three warps*. There is *no way currently to increase this number*, nor is there a way to build additional warp gates (even though Factions can be seen to have more than one). Attacking a Faction always costs one warp per attack. Attacking a real player takes one warp if they are offline, and two if they are currently online. That means the first attack you try on an enemy must succeed if they are online, since you cannot attack immediately again.
+
+*If you are inactive during an attack for about 5 minutes*, you will automatically retreat.
+
+=== Battle ===
+
+Once your troops are warped in, they will *move towards the building closest to them and start attacking it*. If troops come under attack by defenses, that *defensive building will become their next target, but not before they destroy their current target*. It is therefor important to warp in in the right spot, lest your troops start shooting a useless building with lots of health, while they're being shot at from all sides.
+
+Enemy defenses work in much the same way. They *target the first offensive unit to enter their range*, and continue firing at it until it is dead. As mentioned earlier, this can be used to distract defenses using, for instance, rhinos.
+
+=== Tactical retreat ===
+
+There is no shame in a tactical retreat if things do not go according to plan, or if your goals have been met. Sometimes troops do not move and attack the way you intended too, and it might be better to cut your loses by retreating than to continue a pointless attack. Always carefully weigh the potential gains against the losses and if necessary, hit that retreat button.
+
+Many valuable resources can be gotten by carefully analysing a base's layout and attack badly defended supply depots and resource mines. Get in quick with long-range troops (Specters, for instance), take out the supply depots/mines, and retreat. Go in hard with high-damage, short-range troops such as pyros, take out some defensive buildings, plunder the mines and retreat. These are some of the methods of high return-on-investment attacks. It is not always about flattening the enemies base. Check Appendix I for a list of easy to exploit vulnerabilities in computer-controlled factions.
+
+=== Double attack ===
+
+Sometimes an enemy's base is well enough protected that you cannot get through their defenses and plunder resources in one go. After an initial attack it is possible to Scout again directly and lay down a second attack. This can be used to first destroy defenses in strategic places and then sending in a second wave to loot resources or destroy the rest of the base. Varying your troops between assaults may be a good idea.
+
+=== Aftermath ===
+
+After attacking an enemy, they remain open to attack for a small while (??30 seconds or something??). After that, if sufficient damage has been done to their base, they will receive protection and cannot be attacked again in that timeframe. (??Need more info on this. How long does protection last? Always 30 min or until repairs are done? Damage to base required for protection???).
+
+Both players will receive a battle report on how they did. See \'Getting Attacked' for the strategic value of this battle report.
+
+Defense
+-------
+
+=== Defensive buildings ===
+
+Having good defensive buildings is key to staying on top of the game. Bad defenses make you an attractive target, and you will lose resources precious to getting ahead in the game. Worse, the enemy gains them over your back.
+
+Here's a list of the various defensive buildings and their usefulness:
+
+* *Turrets* have *long range* and *decent firepower*. Use them to cover large areas of your base. Due to their long range, they are very useful to draw in troops (see the chapter How Attacking Works for details). Their weak spot is that they can only target one enemy at a time, making it easy for enemies to send Rhinos or Titans to distract your turrets. *Keep at same level as Command Center*.
+
+* *X-1 Canons* have *shorter ranges*, and have *fairly low firepower*. Their strength lies in the fact that they *do splash damage*, dealing damage to not just the enemy they are targeting, but also those in the direct vicinity of that target. This makes them very effective against \'swarming' troops such as Marines and Piros. *Keep at same level as command center*.
+
+* *Concussion turrets* have *long range*, and *reasonable firepower*. When they fire at a target, there is a change (??correct??) that they *slow that target down for a while*. This allows other defensive capabilities to pick them off. A reasonable defense against enemies who try to use Rhinos or Titans to distract your defenses, but not for long. *Keep at about two to three levels below your Command Center*, unless you can spare the time and resources.
+
+* *Tesla Towers* have *short range*, but *high firepower*. Upgrading them allows them to *attack multiple targets* at once, making them very good short-range defenses. Use turrets to lure enemies in from long range and Tesla Towers to wipe them out. No advice on the level to keep them at, you decide.
+
+Generic tips:
+
+Check Section 6.2 (Appendix II) for a list of all the building upgrades.
+
+Make sure you *build all the defensive buildings you are allowed to build*. How many that are depends on the level of your Command Center, so if you feel you don't have enough defensive buildings, it's time to upgrade your Command Center.
+
+An important aspect is to *level up your defenses*. Leveling up your defensive buildings is cheap and fast, especially in the beginning. There are also various missions to be completed by upgrading defenses, providing that precious XP for leveling up. 
+
+In general you'll want to keep your *Gun Turrets and X-1 canons at the same level as your Command Center*, until they are at least level 4. At lower levels (1 to 3), upgrading Tesla Towers and Concussion Turrets is less useful, since the benefits are minimal. Keep them somewhere between one and two levels lower than your Command Central, unless you can spare the resources and time to upgrade them.
+
+
+=== Base layout ===
+
+The layout of your base is as important as having high-level defensive buildings. There is no one obviously correct way to lay out your base, but here are some tips:
+
+* *Protect resource mines and supply towers*. Other buildings are less important, as you do not lose resources when they are destroyed. Insufficiently protected resource mines and supply towers make you an attractive target to enemies.
+
+.Resource-protected base with varied defenses
+[caption="Figure 1: "]
+image::ew_strat_protres.png[]
+
+* *Overlap defenses*. Each defensive building has a radius. Hover your mouse over a building to see the green circle. The more overlap these circles have, the more concentrated firepower is available in the overlap. 
+
+.Overlap in defenses
+[caption="Figure 2: "]
+image::ew_strat_overlap.png[]
+
+* *Vary defenses*. Try to vary your defenses. Four Tesla tower in a single cluster without any turrets are very vulnerable to Specter offenses with their long range. Instead, vary your defenses. This way a turret can attack long-rage targets such as Specters, while an X-1 Canon can wipe out large groups of Marines or Pyros that get too close.
+
+=== Getting attacked ===
+
+About once a day you will get attacked by the AI. This is a random attack by a Faction, controlled by the computer. They are usually harmless and under-powered, and you get to delay the attack a bit so you can move some stuff around in your base in case you weren't prepared. The *AI always tries to attack the weakest spot* of your base.
+
+FIXME: Delay attack and collect resources before attack, so you don't lose them. (by Venom)
+
+When you are under attack from another player, you will be notified of the attack (if you are online at the moment). You cannot watch the actual battle as it progresses, but after the attack is over you will get a battle report in your mail. The battle report lists how you did in your defensive. You can hover over the blue information icons with your mouse to see which of your buildings were destroyed, what kind of troops the enemy sent and how much of them you destroyed. *Use this information to your advantage* by deducing weak spots in your base. If the enemy sent many Specters, and you lost a lot of resource mines or supply depots, it probably means you have a long-rage weak spot in your base. Try to find it and cover it with turrets. Much can be learned from the battle reports, so do not just ignore them.
+
+=== Attack Aftermath ===
+
+After having been attacked, any damaged buildings are repaired automatically. You will not lose any buildings permanently, nor will they go down levels. The only thing you can lose in an attack are resources. During repair, upgrades and mining continues like normal.
+
+//eveling
+//--------
+//
+//PASS
+//
+//Alliances
+//---------
+//
+//PASS
+//
+Resources
+---------
+
+=== Getting resources ===
+
+There are three ways to get resources:
+
+* *Mine* them using mining facilities.
+* *Destroy enemy (PvP or PvE) resource facilities and supply depots* (only PvP).
+* *Trade* and gift/receive resources from other members in your alliance.
+
+==== Mining ====
+
+*Mining* for resources is straight-forward. Build mines and upgrade them. You can get far with two mines of each type, as long as you upgrade them. There are four types of resources:
+
+* *Crystals (Blue)*. Used for upgrades of all building types except Crystal Mines themselves.
+* *Gas (Purple)*. Used for upgrades of all building types except Gas Mines themselves.
+* *Energy (Yellow)*. Used for upgrades of Concussion turrets, Tesla Coils, Warp Gates, Research Faciliies and for doing Research
+* *Uranium (Green)*. Used for doing upgrades of X-1 Canons and for research and training troops.
+
+A mine has both an *hourly rate* and a *storage capacity*. The hourly rate is how much the mine produces per hour. The capacity determines how much resources the mine can hold before the resources must be collected manually. This means that the higher level your mines are, the less attention you have to pay to them. A mine with capacity of 18000 and an hourly rate of 3000 can go 6 hours without you having to collect the resources.
+
+Upgrading a mine will increase both, but storage capacity will grow much faster. Upgrading mines stays relatively cheap both resource and time-wise. Mining continues during upgrades. Building new mines seems like an attractive option, as it is very cheap and fast. The additional space they take up must be protected by defensive capabilities, however. One big advantage of upgrading mines instead of building new ones is additional storage capacity provided. Capacity increases more than production, giving you plenty of storage without having to build additional storage facilities. As always, there is no obvious best way to go, so do what works best for you.
+
+Tips:
+
+* *Protecting mines and storage facilities is key* to a good defense. Other buildings are not important.
+* *Before leveling up, collect the resources from your mines*. After leveling up, all your mines will be filled to storage capacity. If your mines are already full before leveling up, you will *not get any free resources* from the levelling.
+* *Level up your mines* so that they can go longer without having to collect the resources. Don't waste those hours you're not playing with low-level mines that stop producing when they're full.
+
+==== PvP / PvE farming ====
+
+*Destroying* enemy bases can be an advantageous method of getting resources, provided you can minimize the loses of your troops. Many PvP players, even some at high levels, have badly defended bases where resources are up for the grabbing. But be aware that those with low-level defenses may have put more time in building up their offenses and may retaliate.
+
+Some of the PvE (Player-vs-Environment, otherwise known as the AI, NPCs and Factions) bases have some kind of vulnerability that makes parts of their base easy targets for grabbing resources quickly. *Farming PvE bases can make the difference between being low on resources and always having enough*. For example, the lvl 19 Helio Legion base has a weak-spot in the North-West (upper-left) corner. The two reactors can be attacked with Specters, which can stay out of reach of the Tesla Coils. 
+
+The returns can be significant, and the risk of loosing troops is zero, if the warp-in is performed correctly. Try to find weaknesses in high-level Faction bases for larger returns. You can *farm resources very quickly in this way*. See Appendix 1 for a list of weak spots in Faction bases. Note that *you do not get resources by destroying Supply Depots of AI players*, unlike those of real players.
+
+*Trading* resources in your alliance is a great way to get rid of excess resource of one kind while gaining resources you are low on. Ask in the alliance chat for a trade. Make sure to be clear on what you need versus what you can spare, so deals can be made quickly without confusion. *Begging for resources without trading back equally is considered bad mentality*. Some players continually beg for resources while giving or trading little back. They level up over the backs of their fellow players in an Alliance, and may get kicked out!
+
+=== Storing resources ===
+
+Some tips:
+
+* Upgrading supply depots will massively improve their capacities.
+* Again, upgrade your mines so they take longer to fill up. Don't waste those hours your not playing.
+* Other players in your alliance may be willing to hold resources in storage for you. Offer them something in return to make it worth their while.
+
+Leveling up
+-----------
+
+Leveling up is perhaps the main goal of the game. FIXME
+
+Appendix
+--------
+
+=== Vulnerabilities in Faction bases ===
+
+This is a list of zero-risk or minimal risk vulnerabilities in faction bases *if you retreat in time*. Use them to your advantage to loot resources or complete missions (destroying the Command Centers). 
+
+This appendix uses wind-directions to point out base weaknesses. The wind-directions and corresponding places in the enemy base can be seen in Figure III.
+
+.Wind-direction locations in bases
+[caption="Figure 3: "]
+image::ew_strat_pos.png[]
+
+Notes:
+
+* The specters mentioned in (most of) these attacks can be *level 1 specters*. Send as many as you want for the zero-risk attacks, but you may want to start with one to see if you got the correct warp-in spot. In some cases, you have a very narrow spot where you can attack without getting hit. In this case it is *best not too send too many specters*, as they take up a larger area. The attack will take longer, but you will have zero loses with fewer specters.
+
+* *Zero-loss* means the attack can be accomplished without losing any troops, provided you got the tactics down.
+
+The following vulnerabilities have been found and tested. If you have additional vulnerabilities, please let me know. See the Help and Contact sections on how to contact me.
+
+Lvl 19, Helio Legion, *Zero-loss*::
+	Weak spot in the North. The two reactors, barracks, two tesla's and staging area can be destroyed with Specters (lvl1) with zero loses. Warp in from the far-north, a little to the left. Retreat once the afore-mentioned buildings are destroyed. Gains: *1023 XP, 4800 Uranium*.
+
+// Lvl 19, Erazi Syndicate::
+// 	Weak spot in the South-West. With minimal losses, all the solar plants can easily be destroyed. Drop 2 rhinos in the far-South/South-West , giving you enough time to prepare the second warp-in. Once the rhinos are under attack by all defenses, warp in Specters close to the turrets/teslas. Loses will probably be the two rhinoes plus about one other offensive troop. Zero-loss success has been had with 1 titan (lvl1) and the rest Specters (lvl2) a little lower. Gians: * XP, Energy*.
+
+Lvl 25, Erazi Syndicate, *Minimal-loss / Zero-loss*::
+	Weak spot in the South-West. With minimal losses, all the solar plants can easily be destroyed. Drop 3 rhinos in the far-South/South-West , giving you enough time to prepare the second warp-in. Once the rhinos are under attack by all defenses, warp in 4 snipers, 3 hornets and 5 marines or similar close to the turrets/teslas. Loses will probably be the two rhinoes plus about one other offensive troop. Zero-loss success has been had with 1 titan (lvl1) and the rest Specters (lvl2) a little lower. If you manage to warp in a Raider at the right time and the right place, you can significantly increase your gains to about 75,000 - 85,000 energy. Gians: *1,611 to 1,856 XP, 45,600 to 85,000 Energy*.
+
+Lvl 31, Erazi Syndicate, *Minimal-loss*::
+	Weak spot in the East corner. The Command Center is vulnerable. FIXME. This can be used to complete the "Erazi Spaceport" mission for 50,000 Energy and 6,000 XP (once).
+//Lvl 37, Erazi Syndicate::
+//	Weak spot in the South-West. With minimal losses, all the solar plants can be destroyed. On the South-West side there are two gun turrets and 2 tesla coils, if they can be taken out in an initial attack with titans/ rhinos / pyors etc, then the second wave of specters (lvl1) can snipe away 9 energy dishes with ease, each of them providing 30k energy. Alternatively, If you want to minimize losses you can use two attack waves and merely tactical retreat after your destroy said towers and than second in specters the 2nd time around. Gains: *3114 XP, 270,000 Energy*
+
+Lvl 50, Maar Confederacy, *Zero-loss*::
+	Weak spot in the North-West side. It is possible to destroy 5 of the 6 X-1 Canons with zero losses using Specters (lvl1), but your warp-in must be exactly right. Otherwise, loses will be minimal (2, maybe 3). Warp in just left and a little under where the north turret's range and the Concussion turret's range overlap.  Gains: *XP: 3,840*
+
+Lvl 50, Helio Legion *Zero-loss / Minimal-loss*::
+	Weak spot in the North corner. The exposed reactor can be taken out with Specters (lvl1) without them getting hit. An alternative strategy is to first send in 2 rhino's (lvl4). Once they've attracted the attention of the defense, quickly drop in a raider from the North corner as close to the reactor as possible. One hit to the Reactor from the Raider is enough. After that, drop in the Specters from a distance to take out the reactor for double the uranium. You will probably lose the rhinos and the raider, but at 60,000 Uranium, those are acceptable losses. Gains: *30,000 - 60,000 Uranium*.
+
+//Lvl 50, Erazi Syndicate::
+//	Weak spot in the South-West. To the left-bottom of the staging area is a single turret vulnerable to sniper fire. With minimal losses, you can destroy the turret quickly and then snipe out two tesla coils and the staging area. Gains: *??? XP*
+
+Lvl 100, Erazi Syndicate, *Zero-loss*::
+	Weak spot in the West corner. The three Teslas in the West corner facing North-West can be taken out by Specters (lvl1) without losses. Warp in on the left two rocks of the rock formation in the far North-West. Gains: *3,762 XP*.
+
+Lvl 150, Helio Legion, *Zero-loss*::
+	Weak spot in the North corner. The barracks are weakly protected, and can be destroyed with Specters (lvl1). Gains: *1,300 XP*
+
+Lvl 250, Anything::
+	No, just.. no. Oh god no :'(
+
+// lvl 25 helio, 1 hornet, rest marines. Untested
+// lvl 25 helio, Command Center (mission?).
+// lvl 25 helio, North, lots of buildings
+
+=== Leveling up ===
+
+
+* Level 31 to 32: 667,000 XP
+
+
+=== Building upgrades ===
+
+Notes:
+
+* All levels require a Command Center of that level, except for the Command Center itself. So if you want to upgrade anything to level 5, you need a level 5 Command Center.
+//[options="header,compact"]
+//|==========================================================================================================
+//|Lvl    5+|Costs                                          6+|Stats
+//|         |*Time* |*Crystals* |*Gass* |*Energy* |*Uranium*  |*Health*  |*Dmg*  |*Range* |*ROF* |*Targets* |*Splash*
+//|1        |       |           |       |         |           |          |       |        |      |          |       
+//|2        |       |           |       |         |           |          |       |        |      |          |       
+//|3        |       |           |       |         |           |          |       |        |      |          |       
+//|4        |       |           |       |         |           |          |       |        |      |          |       
+//|5        |       |           |       |         |           |          |       |        |      |          |       
+//|6        |       |           |       |         |           |          |       |        |      |          |       
+//|7        |       |           |       |         |           |          |       |        |      |          |       
+//|8        |       |           |       |         |           |          |       |        |      |          |       
+//|==========================================================================================================
+//
+
+==== Command Center ====
+
+[options="header,compact"]
+|==========================================================================================================
+|Lvl    5+|Costs                                    |Stats
+|         |*Time* |*Crystals* |*Gass*     |*Energy*  |*Uranium*  |*Health*  
+|1        |       |           |           |          |           |          
+|2        |1m     |200        |200        |0         |0          |          
+|3        |5m     |1,000      |1,000      |0         |0          |          
+|4        |30m    |6,000      |6,000      |0         |0          |          
+|5        |2h     |24,000     |24,000     |0         |0          |          
+|6        |15h    |200,000    |200,000    |0         |0          |1800   
+|7        |3d     |1,000,000  |1,000,000  |0         |0          |2100      
+|8        |4d     |15,000,000 |15,000,000 |15,000,000|15,000,000 |          
+|==========================================================================================================
+
+==== Staging Area ====
+
+[options="header,compact"]
+|==========================================================================================================
+|Lvl    5+|Costs                                  2+|Stats
+|         |*Time* |*Crystals* |*Gass* |*Energy* |*Uranium*  |*Health*  |*Capacity*  
+|1        |       |           |       |         |           |          |       
+|2        |       |           |       |         |           |500       |80     
+|3        |2m     |200        |200    |0        |0          |550       |120    
+|4        |10m    |750        |750    |0        |0          |600       |160    
+|5        |30m    |5,000      |5,000  |0        |0          |650       |200    
+|6        |       |           |       |         |           |          |       
+|7        |       |           |       |         |           |          |       
+|8        |       |           |       |         |           |          |       
+|==========================================================================================================
+
+==== Barracks ====
+
+[options="header,compact"]
+|==========================================================================================================
+|Lvl    5+|Costs                                    |Stats
+|         |*Time* |*Crystals* |*Gass* |*Energy* |*Uranium*  |*Health*  
+|1        |       |           |       |         |           |500       
+|2        |1m     |75         |75     |0        |0          |550       
+|3        |2m     |125        |125    |0        |0          |600       
+|4        |       |           |       |         |0          |650       
+|5        |30m    |4,500      |4,500  |0        |0          |700       
+|6        |       |           |       |         |           |          
+|7        |       |           |       |         |           |          
+|8        |       |           |       |         |           |          
+|==========================================================================================================
+
+==== Warp Gate ====
+
+[options="header,compact"]
+|==========================================================================================================
+|Lvl    5+|Costs                                            2+|Stats      
+|         |*Time*   |*Crystals* |*Gass*     |*Energy*   |*Uranium*  |*Health*  |*Capacity*          
+|1        |         |           |           |           |0          |          |      
+|2        |2m30s    |1,000      |1,000      |2.000      |0          |          |      
+|3        |25m      |10,000     |10,000     |20,000     |0          |          |      
+|4        |2h5m     |50,000     |50,000     |100,000    |0          |130       |25    
+|5        |20h50m   |500,000    |500,000    |1,000,000  |0          |140       |30        
+|6        |         |           |           |           |0          |          |          
+|7        |13d8h20m |8,000,000  |8,000,00   |16,000,000 |0          |          |          
+|8        |17d8h40m |17,500,000 |17,500,000 |35,000,000 |0          |          | 
+|==========================================================================================================
+
+==== Factory ====
+
+[options="header,compact"]
+|==========================================================================================================
+|Lvl    5+|Costs                                    |Stats
+|         |*Time* |*Crystals* |*Gass* |*Energy* |*Uranium*  |*Health*  
+|1        |       |           |       |         |           |500       
+|2        |7m30s  |100        |100    |0        |0          |550       
+|3        |30m    |500        |500    |0        |0          |600       
+|4        |       |           |       |         |           |650       
+|5        |       |           |       |         |           |700       
+|6        |       |           |       |         |           |          
+|7        |       |           |       |         |           |          
+|8        |       |           |       |         |           |          
+|==========================================================================================================
+
+==== Tech Lab ====
+
+[options="header,compact"]
+|==========================================================================================================
+|Lvl    5+|Costs                                    |Stats
+|         |*Time* |*Crystals* |*Gass*  |*Energy* |*Uranium*  |*Health*  
+|1        |       |           |        |         |           |          
+|2        |       |           |        |         |           |          
+|3        |       |           |        |         |           |          
+|4        |       |           |        |         |           |          
+|5        |       |           |        |         |           |180       
+|6        |20h50m |250,000    |250,000 |500,000  |0          |200       
+|7        |       |           |        |         |           |          
+|8        |       |           |        |         |           |          
+|==========================================================================================================
+
+==== Tesla Tower ====
+
+[options="header,compact"]
+|==========================================================================================================
+|Lvl    5+|Costs                                           3+|Stats
+|         |*Time* |*Crystals* |*Gass*  |*Energy* |*Uranium*  |*Health* |*Damage*  |*Targets*  
+|1        |       |           |        |         |           |         |          |          
+|2        |       |           |        |         |           |915      |128       |2         
+|3        |1h40m  |20,000     |20,000  |20,000   |0          |960      |136       |3         
+|4        |4h     |50,000     |50,000  |50,000   |0          |1005     |144       |3         
+|5        |10h    |130,000    |130,000 |130,000  |0          |1050     |152       |4         
+|6        |       |           |        |         |           |         |          |          
+|7        |       |           |        |         |           |         |          |          
+|8        |       |           |        |         |           |         |          |          
+|==========================================================================================================
+
+==== Gun Turret ====
+
+[options="header,compact"]
+|==========================================================================================================
+|Lvl    5+|Costs                                          3+|Stats
+|         |*Time* |*Crystals* |*Gass* |*Energy* |*Uranium*  |*Health*  |*Damage*  |*Range*
+|1        |       |           |       |         |           |          |          |       
+|2        |       |           |       |         |           |          |          |       
+|3        |       |           |       |         |           |          |          |       
+|4        |       |           |       |         |           |640       |90        |325    
+|5        |40m    |8,000      |8,000  |0        |9,000      |720       |100       |350    
+|6        |1h40m  |20,000     |20,000 |0        |20,000     |800       |110       |350    
+|7        |       |           |       |         |           |          |          |       
+|8        |       |           |       |         |           |          |          |       
+|==========================================================================================================
+
+==== X-1 Cannon ====
+
+[options="header,compact"]
+|==========================================================================================================
+|Lvl    5+|Costs                                          2+|Stats
+|         |*Time* |*Crystals* |*Gass* |*Energy* |*Uranium*  |*Health*  |*Damage*  
+|1        |       |           |       |         |           |          |          
+|2        |       |           |       |         |           |          |          
+|3        |       |           |       |         |           |          |          
+|4        |       |           |       |         |           |          |          
+|5        |       |           |       |         |           |1120      |80        
+|6        |4h     |50,000     |50,000 |0        |50,000     |1200      |90        
+|7        |       |           |       |         |           |          |          
+|8        |       |           |       |         |           |          |          
+|==========================================================================================================
+
+==== Concussion Turret ====
+
+[options="header,compact"]
+|==========================================================================================================
+|Lvl    5+|Costs                                          2+|Stats
+|         |*Time* |*Crystals* |*Gass*  |*Energy* |*Uranium*  |*Health*  |*Damage*  
+|1        |       |           |        |         |           |          |          
+|2        |       |           |        |         |           |          |          
+|3        |       |           |        |         |           |760       |96        
+|4        |1h40m  |20,000     |20,000  |20,000   |0          |840       |104       
+|5        |4h     |50,000     |50,000  |50,000   |0          |920       |112       
+|6        |10h    |130,000    |130,000 |130,000  |0          |1000      |120       
+|7        |       |           |        |         |           |          |          
+|8        |       |           |        |         |           |          |          
+|==========================================================================================================
+
+==== Gas Refinery ====
+
+[options="header,compact"]
+|==========================================================================================================
+|Lvl    5+|Costs                                          3+|Stats
+|         |*Time* |*Crystals* |*Gass*  |*Energy* |*Uranium*  |*Health*  |*Capacity* |*Rate*  
+|1        |       |           |        |         |           |          |           |          
+|2        |       |           |        |         |           |          |           |          
+|3        |       |           |        |         |           |          |           |          
+|4        |       |           |        |         |           |          |           |          
+|5        |       |           |        |         |           |180       |18,000     |3,000/h   
+|6        |2h     |300,000    |0       |0        |0          |200       |35,000     |4,500/h   
+|7        |6h     |1,500,000  |0       |0        |0          |220       |100,000    |10,020/h   
+|8        |       |           |        |         |           |          |           |          
+|==========================================================================================================
+
+==== Solar Plant ====
+
+[options="header,compact"]
+|==========================================================================================================
+|Lvl    5+|Costs                                          3+|Stats
+|         |*Time* |*Crystals* |*Gass*    |*Energy* |*Uranium*  |*Health*  |*Capacity* |*Rate*  
+|1        |       |           |          |         |           |          |           |          
+|2        |       |           |          |         |           |          |           |          
+|3        |       |           |          |         |           |          |           |          
+|4        |       |           |          |         |           |          |           |          
+|5        |       |           |          |         |           |180       |18,000     |3,000/h   
+|6        |2h     |150,000    |150,000   |0        |0          |200       |35,000     |4,500/h   
+|7        |6h     |1,500,000  |1,500,000 |0        |0          |220       |100,000    |10,020/h   
+|8        |       |           |          |         |           |          |           |          
+|==========================================================================================================
+
+==== Crystal Mine ====
+
+[options="header,compact"]
+|==========================================================================================================
+|Lvl    5+|Costs                                          3+|Stats
+|         |*Time* |*Crystals* |*Gass*    |*Energy* |*Uranium*  |*Health*  |*Capacity* |*Rate*  
+|1        |       |           |          |         |           |          |           |          
+|2        |       |           |          |         |           |          |           |          
+|3        |       |           |          |         |           |          |           |          
+|4        |       |           |          |         |           |          |           |          
+|5        |       |           |          |         |           |180       |18,000     |3,000/h   
+|6        |2h     |0          |300,000   |0        |0          |200       |35,000     |4,500/h   
+|7        |6h     |           |1,500,000 |0        |0          |220       |100,000    |10,020/h  
+|8        |       |           |          |         |           |          |           |          
+|==========================================================================================================
+
+==== Reactor ====
+
+[options="header,compact"]
+|==========================================================================================================
+|Lvl    5+|Costs                                          3+|Stats
+|         |*Time* |*Crystals* |*Gass*    |*Energy* |*Uranium*  |*Health*  |*Capacity* |*Rate*  
+|1        |       |           |          |         |           |          |           |          
+|2        |       |           |          |         |           |          |           |          
+|3        |       |           |          |         |           |          |           |          
+|4        |       |           |          |         |           |          |           |          
+|5        |       |           |          |         |           |180       |18,000     |3,000/h   
+|6        |2h     |150,000    |150,000   |0        |0          |200       |35,000     |4,500/h   
+|7        |6h     |1,500,000  |1,500,000 |0        |0          |220       |100,000    |10,020/h  
+|8        |       |           |          |         |           |          |           |          
+|==========================================================================================================
+
+
+About This Document
+-------------------
+
+=== Copyrigth & License ===
+
+This document is (C) Cpyright 2011, Ferry Boender. 
+
+This document may be freely distributed, in part or as a whole, on any medium, without the prior authorization of the author, provided that this Copyright notice remains intact, and there will be no obstruction as to the further distribution of this document. You may not ask a fee for the contents of this document, though a fee to compensate for the distribution of this document is permitted.
+
+Modifications to this document are permitted, provided that the modified document is distributed under the same license as the original document and no copyright notices are removed from this document. All contents written by an author stays copyrighted by that author.
+
+Failure to comply to one or all of the terms of this license automatically revokes your rights granted by this license
+
+All brand and product names mentioned in this document are trademarks or registered trademarks of their respective holders.
+
+=== Contributions and help ===
+
+Many thanks to the follow people of the lmao alliance for their tips and help with this document.
+
+* Lord Esa, for various tips
+* Venom, for various tips
+* Lloyd, for help on finding and testing Faction vulnerabilities and Appendix II
+* Ill Be Back, for various tips
+* ManBearPig, for help on finding Faction vulnerabilities and Appendix II
+
+If you've got any tips, tricks, strategies, additions to the Appendices, or anything at all, email me at ferry DOT boender AT gmail DOT com
+
+=== Change history ===
+
+* v0.4
+** Fixed appendix II
+* v0.3
+** Clarified Zoot's Loot section
+** Improvements to the PvP/PvE Farming.
+** Improvements and new vulnerabilities to Appendix I
+** Added Appendix II, Building Upgrades
+* v0.2
+** Added appendix I: Vulnerabilities in Faction bases.
+** Improvements and updates on the \'Offense - Warping' In section.
+** Added info on the ability to warp in multiple times in a single attack. 
+* v0.1
+** Initial document
+
+
+// Unsorted stuff
+	// 
+// http://community.kabam.com/forums/showthread.php?32251-EdgeWorld-Building-Upgrade-Requirement-Chart
+
+
+// lvl3 titants; 2650 HP
