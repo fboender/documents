@@ -248,8 +248,9 @@ image::ew_strat_pos.png[]
 Notes:
 
 * The specters mentioned in (most of) these attacks can be *level 1 specters*. Send as many as you want for the zero-risk attacks, but you may want to start with one to see if you got the correct warp-in spot. In some cases, you have a very narrow spot where you can attack without getting hit. In this case it is *best not too send too many specters*, as they take up a larger area. The attack will take longer, but you will have zero loses with fewer specters.
-
 * *Zero-loss* means the attack can be accomplished without losing any troops, provided you got the tactics down.
+* Factions repair their base much faster than normal players, and for most of the zero-loss attacks below will not receive damage protection. If you spread your warps about 10 minutes apart, you can hit the zero-risk weakness three times in half an hour, netting for example 180,000 Uranium per hour from the level 50 Helio vulnerability.
+* While it makes for easy farming in most cases, note that you will gain more XP and resources by attacking real players or at the very least completely destroying a faction base. 
 
 The following vulnerabilities have been found and tested. If you have additional vulnerabilities, please let me know. See the Help and Contact sections on how to contact me.
 
