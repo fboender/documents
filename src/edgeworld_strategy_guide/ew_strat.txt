@@ -25,6 +25,8 @@ There are a bunch of ways to find players.
 
 *GPS* allows you to find a player by playername. They can be bought using platinum, or won in Zoot's Loot. They can be used only ONCE per GPS.
 
+*Battle Reports* received in the email from either offense or defense can be used to scout enemy bases.
+
 === Zoot's Loot ===
 
 Once a day (??is this true? I think I may have gotten it twice a day, once in the afternoon, one just after midnight, then one in the afternoon again), you will get chance to play Zoot's Loot. Zoot offers random prizes that can include anything in the shop (??true??). Chances of getting lesser prices are higher naturally. One trick is to *refresh the webpage before playing* until enough squares contain nice prizes. This way you enhance your chances of winning something good. *Don't forget to click "Claim"* to claim your prize, or else you will lose it
@@ -85,7 +87,7 @@ Sometimes, however, an enemy base (both real players and Factions controlled by 
 
 If all your warps are charged, *you get three warps*. There is *no way currently to increase this number*, nor is there a way to build additional warp gates (even though Factions can be seen to have more than one). Attacking a Faction always costs one warp per attack. Attacking a real player takes one warp if they are offline, and two if they are currently online. That means the first attack you try on an enemy must succeed if they are online, since you cannot attack immediately again.
 
-*If you are inactive during an attack for about 5 minutes*, you will automatically retreat.
+*If a battle takes more than 3 to 5 minutes, you will automatically retreat*.
 
 === Battle ===
 
@@ -569,6 +571,8 @@ If you've got any tips, tricks, strategies, additions to the Appendices, or anyt
 
 * v0.4
 ** Fixed appendix II
+** Added Battle Reports as a source of finding players.
+** Fixed automatic withdraw during battle after X minutes.
 * v0.3
 ** Clarified Zoot's Loot section
 ** Improvements to the PvP/PvE Farming.
