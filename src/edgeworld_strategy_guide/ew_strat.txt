@@ -63,10 +63,17 @@ The following troops are available:
 *Raiders*::
 	Raiders have medium health, and don't do a lot of damage. Their strength lies in the fact that when they hit any kind of mining facility, you will receive twice the resources from that mine. One hit by the raiders is enough, other troups can destroy the building for double resources. It's all about correct timing and warp-in placement with these troups, but they can significantly increase the spoils of war. Note that raiders will always go for turrets first, even if they're not being attacked by one. This makes it difficult to time their warp-in precisely so that they can hit mines first.
 *Pyros*::
-	Pyros have below-average health, but the deal alot of damage. Use to quickly take out defenses while rhinos or titans distract them. Warp in close to defenses once they're distracted. Easily wiped out by X-1 Cannons.
+	Pyros have below-average health, but the deal a lot of damage. Use to quickly take out defenses while rhinos or titans distract them. Warp in close to defenses once they're distracted. Easily wiped out by X-1 Cannons.
 *Specters*::
 	Arguably the most useful kind of troops, Specters can take out targets from a large distance. They operate outside of the range of X-1 cannons and Tesla's, allowing them to take out those units without loses. Most useful as a tactical unit dropped in to take care of X-1's and Tesla's, they make a good addition to a mixed group of units. Check the Appendix to see how to utilize these extremely useful units (is that too many U's? I never can tell) to farm Fractions.
-
+*Hornets*::
+	Hornets have average health and do average damage. Their attack slows the rate of fire of any defenses to 50%. Since they move at the same speed as titans and a little faster than rhinos, they make a good addition to those units. Just two hornets in your warp-in party can make the difference between losing many or few troops.
+*Titans*::
+	Titans have very high health and are fast. They do little damage, but they are excellent to draw fire away from the rest of your troops. Well placed Titans followed by warping in a bunch of specters and perhaps a hornet or two can often result in a victory with very few loses. They are well worth their price and time to train.
+*Shrikes*::
+	Shrike have a reasonable amount of health, but deal low damage. Their high speed often gets them killed quickly due to them outrunning all the other troops, making them not really worth the resources and time they cost. 
+*Disruptors*::
+	No information available at this time.
 
 
 FIXME: raiders double resource taking if they shoot mines/storage.
@@ -208,12 +215,17 @@ Tips:
 * *Protecting mines and storage facilities is key* to a good defense. Other buildings are not important.
 * *Before leveling up, collect the resources from your mines*. After leveling up, all your mines will be filled to storage capacity. If your mines are already full before leveling up, you will *not get any free resources* from the levelling.
 * *Level up your mines* so that they can go longer without having to collect the resources. Don't waste those hours you're not playing with low-level mines that stop producing when they're full.
+* *At later levels, mining becomes inconsequential*, as you will get many more resources from attacking enemy players or Factions. Don't build too many mines, because they will make you an attractive target later on in the game.
 
 ==== PvP / PvE farming ====
 
-*Destroying* enemy bases can be an advantageous method of getting resources, provided you can minimize the loses of your troops. Many PvP players, even some at high levels, have badly defended bases where resources are up for the grabbing. But be aware that those with low-level defenses may have put more time in building up their offenses and may retaliate.
+*Destroying* enemy bases is an advantageous method of getting resources, provided you can minimize the loses of your troops. Many PvP players, even some at high levels, have badly defended bases where resources are up for the grabbing. But be aware that those with low-level defenses may have put more time in building up their offenses and may retaliate.
 
 Some of the PvE (Player-vs-Environment, otherwise known as the AI, NPCs and Factions) bases have some kind of vulnerability that makes parts of their base easy targets for grabbing resources quickly. *Farming PvE bases can make the difference between being low on resources and always having enough*. For example, the lvl 19 Helio Legion base has a weak-spot in the North-West (upper-left) corner. The two reactors can be attacked with Specters, which can stay out of reach of the Tesla Coils. 
+
+At later levels (25+), destroying enemy bases will become your main method of collecting resources. 
+
+==== Trade ====
 
 The returns can be significant, and the risk of loosing troops is zero, if the warp-in is performed correctly. Try to find weaknesses in high-level Faction bases for larger returns. You can *farm resources very quickly in this way*. See Appendix 1 for a list of weak spots in Faction bases. Note that *you do not get resources by destroying Supply Depots of AI players*, unlike those of real players.
 
@@ -261,7 +273,7 @@ Lvl 19, Helio Legion, *Zero-loss*::
 // 	Weak spot in the South-West. With minimal losses, all the solar plants can easily be destroyed. Drop 2 rhinos in the far-South/South-West , giving you enough time to prepare the second warp-in. Once the rhinos are under attack by all defenses, warp in Specters close to the turrets/teslas. Loses will probably be the two rhinoes plus about one other offensive troop. Zero-loss success has been had with 1 titan (lvl1) and the rest Specters (lvl2) a little lower. Gians: * XP, Energy*.
 
 Lvl 25, Erazi Syndicate, *Minimal-loss / Zero-loss*::
-	Weak spot in the South-West. With minimal losses, all the solar plants can easily be destroyed. Drop 3 rhinos in the far-South/South-West , giving you enough time to prepare the second warp-in. Once the rhinos are under attack by all defenses, warp in 4 snipers, 3 hornets and 5 marines or similar close to the turrets/teslas. Loses will probably be the two rhinoes plus about one other offensive troop. Zero-loss success has been had with 1 titan (lvl1) and the rest Specters (lvl2) a little lower. If you manage to warp in a Raider at the right time and the right place, you can significantly increase your gains to about 75,000 - 85,000 energy. Gians: *1,611 to 1,856 XP, 45,600 to 85,000 Energy*.
+	Weak spot in the South-West. With minimal losses, all the solar plants can easily be destroyed. Drop 3 rhinos in the far-South/South-West , giving you enough time to prepare the second warp-in. Once the rhinos are under attack by all defenses, warp in 4 snipers, 3 hornets and 5 marines or similar close to the turrets/teslas. Loses will probably be the two rhinoes plus about one other offensive troop. Zero-loss success has been had with 1 titan (lvl1) and the rest Specters (lvl2) a little lower. If you manage to warp in one or more Raiders at the right time and the right place, you can significantly increase your gains to about 75,000 - 85,000 energy. Gians: *1,611 to 1,856 XP, 45,600 to 85,000 Energy*.
 
 Lvl 31, Erazi Syndicate, *Minimal-loss*::
 	Weak spot in the East corner. The Command Center is vulnerable. FIXME. This can be used to complete the "Erazi Spaceport" mission for 50,000 Energy and 6,000 XP (once).
@@ -269,7 +281,7 @@ Lvl 31, Erazi Syndicate, *Minimal-loss*::
 //	Weak spot in the South-West. With minimal losses, all the solar plants can be destroyed. On the South-West side there are two gun turrets and 2 tesla coils, if they can be taken out in an initial attack with titans/ rhinos / pyors etc, then the second wave of specters (lvl1) can snipe away 9 energy dishes with ease, each of them providing 30k energy. Alternatively, If you want to minimize losses you can use two attack waves and merely tactical retreat after your destroy said towers and than second in specters the 2nd time around. Gains: *3114 XP, 270,000 Energy*
 
 Lvl 50, Maar Confederacy, *Zero-loss*::
-	Weak spot in the North-West side. It is possible to destroy 5 of the 6 X-1 Canons with zero losses using Specters (lvl1), but your warp-in must be exactly right. Otherwise, loses will be minimal (2, maybe 3). Warp in just left and a little under where the north turret's range and the Concussion turret's range overlap.  Gains: *XP: 3,840*
+	Weak spots in the North-West and the South-East. It is possible to destroy 6 of the 6 Tesla's using Specters without losses, if your warp-in is correct. This will give you around 4108 XP. It is also possible to destroy 5 of the 6 X-1 Canons with zero losses using Specters (lvl1), but your warp-in must be exactly right. Otherwise, loses will be minimal (2, maybe 3). Warp in just left and a little under where the north turret's range and the Concussion turret's range overlap. Gains: *XP: 3,840 to 4,108*
 
 Lvl 50, Helio Legion *Zero-loss / Minimal-loss*::
 	Weak spot in the North corner. The exposed reactor can be taken out with Specters (lvl1) without them getting hit. An alternative strategy is to first send in 2 rhino's (lvl4). Once they've attracted the attention of the defense, quickly drop in a raider from the North corner as close to the reactor as possible. One hit to the Reactor from the Raider is enough. After that, drop in the Specters from a distance to take out the reactor for double the uranium. You will probably lose the rhinos and the raider, but at 60,000 Uranium, those are acceptable losses. Gains: *30,000 - 60,000 Uranium*.
