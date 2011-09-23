@@ -1,0 +1,37 @@
+set terminal png nocrop enhanced font "verdana" 10 size 320,200
+set nokey
+set offset 0, 0, 1, 1
+
+set boxwidth 0.4
+#set style line 1 lt rgb "#306090"
+set style fill solid 1.00 border rgb "#003080"
+
+set ylabel "Frequency"
+set xlabel "Random number"
+
+set xrange [0 to 21]
+set xtics 2
+
+set output "uniform.png"
+set yrange [0 to 600]
+plot "uniform.dat" with boxes lt rgb "#306090"
+
+set output "uniform_sum.png"
+set yrange [0 to 1000]
+plot "uniform_sum.dat" with boxes lt rgb "#306090"
+
+set output "uniform_sum2.png"
+set yrange [0 to 1200]
+plot "uniform_sum2.dat" with boxes lt rgb "#306090"
+
+set output "uniform_sum_folded.png"
+set yrange [0 to 1100]
+plot "uniform_sum_folded.dat" with boxes lt rgb "#306090"
+
+set output "uniform_prod.png"
+set yrange [0 to 2100]
+plot "uniform_prod.dat" with boxes lt rgb "#306090"
+
+set output "uniform_prod2.png"
+set yrange [0 to 5000]
+plot "uniform_prod2.dat" with boxes lt rgb "#306090"
