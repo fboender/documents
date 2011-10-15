@@ -1,7 +1,7 @@
 Edgeworld Strategy guide
 ========================
 Ferry Boender
-v0.4
+v0.5
 
 Preface
 -------
@@ -52,7 +52,7 @@ Depending on your goals, watch out for either weak spots in an enemy's base and 
 
 === Selecting troops ===
 
-You must then select troops to send by clicking on their icons. You can remove troops from the selection by clicking the small red minus icon on the troop icon. Which troops to select depends on the availability of your troops, the enemy base and where you want to attack it. Before FIXME: Expand
+You must then select troops to send by clicking on their icons. You can remove troops from the selection by clicking the small red minus icon on the troop icon. Which troops to select depends on the availability of your troops, the enemy base and where you want to attack it.
 
 The following troops are available:
 
@@ -75,9 +75,6 @@ The following troops are available:
 *Disruptors*::
 	No information available at this time.
 
-
-FIXME: raiders double resource taking if they shoot mines/storage.
-
 === Warping in ===
 
 After having selected your troops, you must pick the spot to warp in. This is done by moving the cursor around the battlefield and clicking it in a strategic point that is allowed. If you are not allowed to warp in at a particular spot, the cursor will be red; otherwise green.
@@ -94,7 +91,7 @@ Sometimes, however, an enemy base (both real players and Factions controlled by 
 
 If all your warps are charged, *you get three warps*. There is *no way currently to increase this number*, nor is there a way to build additional warp gates (even though Factions can be seen to have more than one). Attacking a Faction always costs one warp per attack. Attacking a real player takes one warp if they are offline, and two if they are currently online. That means the first attack you try on an enemy must succeed if they are online, since you cannot attack immediately again.
 
-*If a battle takes more than 3 to 5 minutes, you will automatically retreat*.
+*If a battle takes more than 5 minutes, you will automatically retreat*.
 
 === Battle ===
 
@@ -168,7 +165,7 @@ image::ew_strat_overlap.png[]
 
 About once a day you will get attacked by the AI. This is a random attack by a Faction, controlled by the computer. They are usually harmless and under-powered, and you get to delay the attack a bit so you can move some stuff around in your base in case you weren't prepared. The *AI always tries to attack the weakest spot* of your base.
 
-FIXME: Delay attack and collect resources before attack, so you don't lose them. (by Venom)
+Before the AI attacks, you may want to delay the attack and collect the resources from your mines. This way, when your mines are destroyed, you do not lose the resources. (FIXME: Do you even lose resources from Faction attacks?)
 
 When you are under attack from another player, you will be notified of the attack (if you are online at the moment). You cannot watch the actual battle as it progresses, but after the attack is over you will get a battle report in your mail. The battle report lists how you did in your defensive. You can hover over the blue information icons with your mouse to see which of your buildings were destroyed, what kind of troops the enemy sent and how much of them you destroyed. *Use this information to your advantage* by deducing weak spots in your base. If the enemy sent many Specters, and you lost a lot of resource mines or supply depots, it probably means you have a long-rage weak spot in your base. Try to find it and cover it with turrets. Much can be learned from the battle reports, so do not just ignore them.
 
@@ -242,7 +239,13 @@ Some tips:
 Leveling up
 -----------
 
-Leveling up is perhaps the main goal of the game. FIXME
+Leveling up is perhaps the main goal of the game. The three main methods of leveling up are:
+
+* Complete missions
+* Attack Factions
+* Attack other players
+
+*Completing missions* can give you significant XP for leveling up. Destroying the Level 50 Helio and Level 250 Helio are good examples which will give you lots of XP for minimal loses. See Appendix 1 (Vulnerabilities in Faction bases) for examples.
 
 Appendix
 --------
@@ -286,6 +289,9 @@ Lvl 50, Maar Confederacy, *Zero-loss*::
 Lvl 50, Helio Legion *Zero-loss / Minimal-loss*::
 	Weak spot in the North corner. The exposed reactor can be taken out with Specters (lvl1) without them getting hit. An alternative strategy is to first send in 2 rhino's (lvl4). Once they've attracted the attention of the defense, quickly drop in a raider from the North corner as close to the reactor as possible. One hit to the Reactor from the Raider is enough. After that, drop in the Specters from a distance to take out the reactor for double the uranium. You will probably lose the rhinos and the raider, but at 60,000 Uranium, those are acceptable losses. Gains: *30,000 - 60,000 Uranium*.
 
+Lvl 50, Helio Legion *Minimal-loss*::
+    Weak spot in the south-corner. Drop three Rhinos (lvl..) in just below the warp gate. Once the Rhinos have the Tesla and Gun Turret distracted, drop in a bunch of Specters close to the warp gate. Make sure to leave enough warp-in space for another one or two Rhinos, and drop them in when the other rhinos get distroyed. The Specters will take out the defenses and will then advance into the center of the base. They can take out the Reactors and Command Center easily. Retreat once they come into range of the Gun Turrets at the top. Gains: *XP: 12,444, 450,000 Uranium*.
+
 //Lvl 50, Erazi Syndicate::
 //	Weak spot in the South-West. To the left-bottom of the staging area is a single turret vulnerable to sniper fire. With minimal losses, you can destroy the turret quickly and then snipe out two tesla coils and the staging area. Gains: *??? XP*
 
@@ -295,8 +301,8 @@ Lvl 100, Erazi Syndicate, *Zero-loss*::
 Lvl 150, Helio Legion, *Zero-loss*::
 	Weak spot in the North corner. The barracks are weakly protected, and can be destroyed with Specters (lvl1). Gains: *1,300 XP*
 
-Lvl 250, Anything::
-	No, just.. no. Oh god no :'(
+Lvl 250, Helio Legion::
+    The Level 250 Legion base has a \"weakness" in the lower-left corner as outlined by http://www.youtube.com/watch?v=b4X_dq5NiWE This can be used to gain 5 million XP, allowing you to level up very quickly. The player in the video is level 98, but success has been gotten with level 55 (or so it is claimed). 
 
 // lvl 25 helio, 1 hornet, rest marines. Untested
 // lvl 25 helio, Command Center (mission?).
@@ -334,30 +340,32 @@ Notes:
 |==========================================================================================================
 |Lvl    5+|Costs                                    |Stats
 |         |*Time* |*Crystals* |*Gass*     |*Energy*  |*Uranium*  |*Health*  
-|1        |       |           |           |          |           |          
-|2        |1m     |200        |200        |0         |0          |          
-|3        |5m     |1,000      |1,000      |0         |0          |          
-|4        |30m    |6,000      |6,000      |0         |0          |          
-|5        |2h     |24,000     |24,000     |0         |0          |          
+|1        |       |           |           |          |           |300       
+|2        |1m     |200        |200        |0         |0          |600       
+|3        |5m     |1,000      |1,000      |0         |0          |900       
+|4        |30m    |6,000      |6,000      |0         |0          |1200      
+|5        |2h     |24,000     |24,000     |0         |0          |1500      
 |6        |15h    |200,000    |200,000    |0         |0          |1800   
 |7        |3d     |1,000,000  |1,000,000  |0         |0          |2100      
-|8        |4d     |15,000,000 |15,000,000 |15,000,000|15,000,000 |          
+|8        |4d     |15,000,000 |15,000,000 |15,000,000|15,000,000 |2500      
+|9        |6d     |20,000,000 |20,000,000 |20,000,000|20,000,000 |3000      
 |==========================================================================================================
 
 ==== Staging Area ====
 
 [options="header,compact"]
 |==========================================================================================================
-|Lvl    5+|Costs                                  2+|Stats
-|         |*Time* |*Crystals* |*Gass* |*Energy* |*Uranium*  |*Health*  |*Capacity*  
-|1        |       |           |       |         |           |          |       
-|2        |       |           |       |         |           |500       |80     
-|3        |2m     |200        |200    |0        |0          |550       |120    
-|4        |10m    |750        |750    |0        |0          |600       |160    
-|5        |30m    |5,000      |5,000  |0        |0          |650       |200    
-|6        |       |           |       |         |           |          |       
-|7        |       |           |       |         |           |          |       
-|8        |       |           |       |         |           |          |       
+|Lvl    5+|Costs                                              2+|Stats
+|         |*Time* |*Crystals* |*Gass*     |*Energy* |*Uranium*  |*Health*  |*Capacity*  
+|1        |       |           |           |         |           |400       |       
+|2        |60s    |100        |100        |0        |0          |500       |80     
+|3        |2m     |200        |200        |0        |0          |550       |120    
+|4        |10m    |750        |750        |0        |0          |600       |160    
+|5        |30m    |5,000      |5,000      |0        |0          |650       |200    
+|6        |2h     |30,000     |30,000     |0        |0          |850       |240    
+|7        |8h     |200,000    |200,000    |0        |0          |          |280    
+|8        |       |1,000,000  |1,000,000  |0        |0          |          |320    
+|9        |       |           |           |0        |0          |          |360    
 |==========================================================================================================
 
 ==== Barracks ====
@@ -365,15 +373,16 @@ Notes:
 [options="header,compact"]
 |==========================================================================================================
 |Lvl    5+|Costs                                    |Stats
-|         |*Time* |*Crystals* |*Gass* |*Energy* |*Uranium*  |*Health*  
-|1        |       |           |       |         |           |500       
-|2        |1m     |75         |75     |0        |0          |550       
-|3        |2m     |125        |125    |0        |0          |600       
-|4        |       |           |       |         |0          |650       
-|5        |30m    |4,500      |4,500  |0        |0          |700       
-|6        |       |           |       |         |           |          
-|7        |       |           |       |         |           |          
-|8        |       |           |       |         |           |          
+|         |*Time* |*Crystals* |*Gass*     |*Energy* |*Uranium*  |*Health*  
+|1        |       |           |           |         |           |500       
+|2        |1m     |75         |75         |0        |0          |550       
+|3        |2m     |125        |125        |0        |0          |600       
+|4        |10m    |1,000      |1,000      |0        |0          |650       
+|5        |30m    |4,500      |4,500      |0        |0          |700       
+|6        |2h     |30,000     |30,000     |0        |0          |750       
+|7        |8h     |175,000    |175,000    |0        |0          |800       
+|8        |10h    |1,000,000  |1,000,000  |0        |0          |850       
+|9        |20h    |           |           |         |           |900       
 |==========================================================================================================
 
 ==== Warp Gate ====
@@ -382,14 +391,15 @@ Notes:
 |==========================================================================================================
 |Lvl    5+|Costs                                            2+|Stats      
 |         |*Time*   |*Crystals* |*Gass*     |*Energy*   |*Uranium*  |*Health*  |*Capacity*          
-|1        |         |           |           |           |0          |          |      
-|2        |2m30s    |1,000      |1,000      |2.000      |0          |          |      
-|3        |25m      |10,000     |10,000     |20,000     |0          |          |      
+|1        |         |           |           |           |0          |100       |10    
+|2        |2m30s    |1,000      |1,000      |2.000      |0          |110       |15    
+|3        |25m      |10,000     |10,000     |20,000     |0          |120       |20    
 |4        |2h5m     |50,000     |50,000     |100,000    |0          |130       |25    
 |5        |20h50m   |500,000    |500,000    |1,000,000  |0          |140       |30        
-|6        |         |           |           |           |0          |          |          
-|7        |13d8h20m |8,000,000  |8,000,00   |16,000,000 |0          |          |          
-|8        |17d8h40m |17,500,000 |17,500,000 |35,000,000 |0          |          | 
+|6        |3d11h20m |2,000,000  |2,000,000  |4,000,000  |0          |150       |40        
+|7        |13d8h20m |8,000,000  |8,000,00   |16,000,000 |0          |160       |50        
+|8        |17d8h40m |17,500,000 |17,500,000 |35,000,000 |0          |200       |60
+|9        |20d20h0m |20,000,000 |20,000,000 |40,000,000 |0          |300       |75
 |==========================================================================================================
 
 ==== Factory ====
@@ -397,15 +407,16 @@ Notes:
 [options="header,compact"]
 |==========================================================================================================
 |Lvl    5+|Costs                                    |Stats
-|         |*Time* |*Crystals* |*Gass* |*Energy* |*Uranium*  |*Health*  
-|1        |       |           |       |         |           |500       
-|2        |7m30s  |100        |100    |0        |0          |550       
-|3        |30m    |500        |500    |0        |0          |600       
-|4        |       |           |       |         |           |650       
-|5        |       |           |       |         |           |700       
-|6        |       |           |       |         |           |          
-|7        |       |           |       |         |           |          
-|8        |       |           |       |         |           |          
+|         |*Time* |*Crystals* |*Gass*    |*Energy* |*Uranium*  |*Health*  
+|1        |       |           |          |         |           |500       
+|2        |7m30s  |100        |100       |0        |0          |550       
+|3        |30m    |500        |500       |0        |0          |600       
+|4        |2h     |750        |750       |0        |0          |650       
+|5        |8h     |5,000      |5,000     |0        |0          |700       
+|6        |8h     |30,000     |30,000    |0        |0          |750       
+|7        |8h     |250,000    |250,000   |0        |0          |800       
+|8        |10h    |1,000,000  |1,000,000 |0        |0          |850       
+|9        |20h    |1,000,000  |1,000,000 |0        |0          |900       
 |==========================================================================================================
 
 ==== Tech Lab ====
@@ -413,15 +424,16 @@ Notes:
 [options="header,compact"]
 |==========================================================================================================
 |Lvl    5+|Costs                                    |Stats
-|         |*Time* |*Crystals* |*Gass*  |*Energy* |*Uranium*  |*Health*  
-|1        |       |           |        |         |           |          
-|2        |       |           |        |         |           |          
-|3        |       |           |        |         |           |          
-|4        |       |           |        |         |           |          
-|5        |       |           |        |         |           |180       
-|6        |20h50m |250,000    |250,000 |500,000  |0          |200       
-|7        |       |           |        |         |           |          
-|8        |       |           |        |         |           |          
+|         |*Time*   |*Crystals* |*Gass*     |*Energy*   |*Uranium*  |*Health*  
+|1        |         |           |           |           |           |100       
+|2        |2m       |400        |400        |800        |0          |120       
+|3        |5m       |1,000      |1,000      |2,000      |0          |140       
+|4        |25m      |5,000      |5,000      |10,000     |0          |160       
+|5        |8h20m    |100,000    |100,000    |200,000    |0          |180       
+|6        |20h50m   |250,000    |250,000    |500,000    |0          |200       
+|7        |1d17h40m |500,000    |500,000    |1,000,000  |0          |220       
+|8        |3d       |12,000,000 |12,000,000 |24,000,000 |0          |240       
+|9        |11d      |15,000,000 |15,000,000 |30,000,000 |0          |300       
 |==========================================================================================================
 
 ==== Tesla Tower ====
@@ -429,15 +441,16 @@ Notes:
 [options="header,compact"]
 |==========================================================================================================
 |Lvl    5+|Costs                                           3+|Stats
-|         |*Time* |*Crystals* |*Gass*  |*Energy* |*Uranium*  |*Health* |*Damage*  |*Targets*  
-|1        |       |           |        |         |           |         |          |          
-|2        |       |           |        |         |           |915      |128       |2         
-|3        |1h40m  |20,000     |20,000  |20,000   |0          |960      |136       |3         
-|4        |4h     |50,000     |50,000  |50,000   |0          |1005     |144       |3         
-|5        |10h    |130,000    |130,000 |130,000  |0          |1050     |152       |4         
-|6        |       |           |        |         |           |         |          |          
-|7        |       |           |        |         |           |         |          |          
-|8        |       |           |        |         |           |         |          |          
+|         |*Time*   |*Crystals* |*Gass*     |*Energy*    |*Uranium*  |*Health* |*Damage*  |*Targets*  
+|1        |         |           |           |            |           |870      |120       |2         
+|2        |40m      |8,000      |8,000      |8,000       |0          |915      |128       |2         
+|3        |1h40m    |20,000     |20,000     |20,000      |0          |960      |136       |3         
+|4        |4h       |50,000     |50,000     |50,000      |0          |1005     |144       |3         
+|5        |10h      |130,000    |130,000    |130,000     |0          |1050     |152       |4         
+|6        |20h      |240,000    |240,000    |240,000     |0          |1095     |160       |5         
+|7        |1d9h20m  |400,000    |400,000    |400,000     |0          |1140     |168       |6         
+|8        |2d2h     |6,000,000  |6,000,000  |12,000,000  |0          |1350     |250       |6         
+|9        |3d       |12,000,000 |12,000,000 |24,000,000  |0          |1600     |330       |6         
 |==========================================================================================================
 
 ==== Gun Turret ====
@@ -445,15 +458,16 @@ Notes:
 [options="header,compact"]
 |==========================================================================================================
 |Lvl    5+|Costs                                          3+|Stats
-|         |*Time* |*Crystals* |*Gass* |*Energy* |*Uranium*  |*Health*  |*Damage*  |*Range*
-|1        |       |           |       |         |           |          |          |       
-|2        |       |           |       |         |           |          |          |       
-|3        |       |           |       |         |           |          |          |       
-|4        |       |           |       |         |           |640       |90        |325    
-|5        |40m    |8,000      |8,000  |0        |9,000      |720       |100       |350    
-|6        |1h40m  |20,000     |20,000 |0        |20,000     |800       |110       |350    
-|7        |       |           |       |         |           |          |          |       
-|8        |       |           |       |         |           |          |          |       
+|         |*Time* |*Crystals* |*Gass*    |*Energy* |*Uranium*  |*Health*  |*Damage*  |*Range*
+|1        |       |           |          |0        |500        |300       |60        |       
+|2        |       |500        |500       |0        |1,200      |480       |70        |275    
+|3        |       |1,200      |1,200     |0        |3,200      |560       |80        |300    
+|4        |       |3,200      |3,200     |0        |8,000      |640       |90        |325    
+|5        |40m    |8,000      |8,000     |0        |20,000     |720       |100       |350    
+|6        |1h40m  |20,000     |20,000    |0        |50,000     |800       |110       |350    
+|7        |       |50,000     |50,000    |0        |6,000,000  |880       |120       |375    
+|8        |       |3,000,000  |3,000,000 |0        |12,000,000 |1,250     |180       |375    
+|9        |       |6,000,000  |6,000,000 |0        |12,000,000 |1,750     |200       |375    
 |==========================================================================================================
 
 ==== X-1 Cannon ====
@@ -461,15 +475,16 @@ Notes:
 [options="header,compact"]
 |==========================================================================================================
 |Lvl    5+|Costs                                          2+|Stats
-|         |*Time* |*Crystals* |*Gass* |*Energy* |*Uranium*  |*Health*  |*Damage*  
-|1        |       |           |       |         |           |          |          
-|2        |       |           |       |         |           |          |          
-|3        |       |           |       |         |           |          |          
-|4        |       |           |       |         |           |          |          
-|5        |       |           |       |         |           |1120      |80        
-|6        |4h     |50,000     |50,000 |0        |50,000     |1200      |90        
-|7        |       |           |       |         |           |          |          
-|8        |       |           |       |         |           |          |          
+|         |*Time* |*Crystals* |*Gass*     |*Energy* |*Uranium*  |*Health*  |*Damage*  
+|1        |2m30s  |500        |500        |         |500        |800       |40           
+|2        |6m     |1,200      |1,200      |         |1,200      |880       |50           
+|3        |16m    |3,200      |3,200      |         |3,200      |960       |60           
+|4        |40m    |8,000      |8,000      |         |8,000      |1,040     |70           
+|5        |1h40m  |20,000     |20,000     |         |20,000     |1,120     |80           
+|6        |4h     |50,000     |50,000     |         |50,000     |1,200     |90           
+|7        |10h    |130,000    |130,000    |         |130,000    |1,280     |100          
+|8        |20h    |6,000,000  |6,000,000  |         |12,000,000 |1,800     |140          
+|9        |2d     |12,000,000 |12,000,000 |         |24,000,000 |2,500     |200          
 |==========================================================================================================
 
 ==== Concussion Turret ====
@@ -477,15 +492,16 @@ Notes:
 [options="header,compact"]
 |==========================================================================================================
 |Lvl    5+|Costs                                          2+|Stats
-|         |*Time* |*Crystals* |*Gass*  |*Energy* |*Uranium*  |*Health*  |*Damage*  
-|1        |       |           |        |         |           |          |          
-|2        |       |           |        |         |           |          |          
-|3        |       |           |        |         |           |760       |96        
-|4        |1h40m  |20,000     |20,000  |20,000   |0          |840       |104       
-|5        |4h     |50,000     |50,000  |50,000   |0          |920       |112       
-|6        |10h    |130,000    |130,000 |130,000  |0          |1000      |120       
-|7        |       |           |        |         |           |          |          
-|8        |       |           |        |         |           |          |          
+|         |*Time* |*Crystals* |*Gass*     |*Energy*   |*Uranium*  |*Health*  |*Damage*  
+|1        |6m     |1,200      |1,200      |1,200      |0          |600       |80           
+|2        |16m    |3,200      |3,200      |3,200      |0          |680       |88           
+|3        |40m    |8,000      |8,000      |8,000      |0          |760       |96           
+|4        |1h 40m |20,000     |20,000     |20,000     |0          |840       |104          
+|5        |4h     |50,000     |50,000     |50,000     |0          |920       |112          
+|6        |10h    |130,000    |130,000    |130,000    |0          |1,000     |120          
+|7        |20h    |240,000    |240,000    |240,000    |0          |1,080     |128          
+|8        |2d     |6,000,000  |6,000,000  |12,000,000 |0          |1,525     |180          
+|9        |3d     |12,000,000 |12,000,000 |24,000,000 |0          |2,150     |250          
 |==========================================================================================================
 
 ==== Gas Refinery ====
@@ -493,31 +509,16 @@ Notes:
 [options="header,compact"]
 |==========================================================================================================
 |Lvl    5+|Costs                                          3+|Stats
-|         |*Time* |*Crystals* |*Gass*  |*Energy* |*Uranium*  |*Health*  |*Capacity* |*Rate*  
-|1        |       |           |        |         |           |          |           |          
-|2        |       |           |        |         |           |          |           |          
-|3        |       |           |        |         |           |          |           |          
-|4        |       |           |        |         |           |          |           |          
-|5        |       |           |        |         |           |180       |18,000     |3,000/h   
-|6        |2h     |300,000    |0       |0        |0          |200       |35,000     |4,500/h   
-|7        |6h     |1,500,000  |0       |0        |0          |220       |100,000    |10,020/h   
-|8        |       |           |        |         |           |          |           |          
-|==========================================================================================================
-
-==== Solar Plant ====
-
-[options="header,compact"]
-|==========================================================================================================
-|Lvl    5+|Costs                                          3+|Stats
-|         |*Time* |*Crystals* |*Gass*    |*Energy* |*Uranium*  |*Health*  |*Capacity* |*Rate*  
-|1        |       |           |          |         |           |          |           |          
-|2        |       |           |          |         |           |          |           |          
-|3        |       |           |          |         |           |          |           |          
-|4        |       |           |          |         |           |          |           |          
-|5        |       |           |          |         |           |180       |18,000     |3,000/h   
-|6        |2h     |150,000    |150,000   |0        |0          |200       |35,000     |4,500/h   
-|7        |6h     |1,500,000  |1,500,000 |0        |0          |220       |100,000    |10,020/h   
-|8        |       |           |          |         |           |          |           |          
+|         |*Time* |*Crystals* |*Gass*     |*Energy* |*Uranium*  |*Health*  |*Capacity* |*Rate*  
+|1        |9s     |100        |0          |0        |0          |100       |600        |600             
+|2        |36s    |100        |0          |0        |0          |120       |1,800      |900             
+|3        |1m 30s |150        |0          |0        |0          |140       |4,000      |1,320           
+|4        |5m     |850        |0          |0        |0          |160       |8,000      |1,980           
+|5        |30m    |6,000      |0          |0        |0          |180       |18,000     |3,000           
+|6        |2h     |300,000    |0          |0        |0          |200       |35,000     |4,500           
+|7        |6h     |3,000,000  |0          |0        |0          |220       |100,000    |10,020          
+|8        |24h    |4,000,000  |0          |0        |0          |240       |250,000    |25,020          
+|9        |2d     |6,000,000  |0          |0        |0          |260       |400,000    |40,020          
 |==========================================================================================================
 
 ==== Crystal Mine ====
@@ -526,14 +527,32 @@ Notes:
 |==========================================================================================================
 |Lvl    5+|Costs                                          3+|Stats
 |         |*Time* |*Crystals* |*Gass*    |*Energy* |*Uranium*  |*Health*  |*Capacity* |*Rate*  
-|1        |       |           |          |         |           |          |           |          
-|2        |       |           |          |         |           |          |           |          
-|3        |       |           |          |         |           |          |           |          
-|4        |       |           |          |         |           |          |           |          
-|5        |       |           |          |         |           |180       |18,000     |3,000/h   
-|6        |2h     |0          |300,000   |0        |0          |200       |35,000     |4,500/h   
-|7        |6h     |           |1,500,000 |0        |0          |220       |100,000    |10,020/h  
-|8        |       |           |          |         |           |          |           |          
+|1        |9s     |0          |100       |0        |0          |100       |600        |600             
+|2        |36s    |0          |100       |0        |0          |120       |1,800      |900             
+|3        |1m 30s |0          |150       |0        |0          |140       |4,000      |1,320           
+|4        |5m     |0          |850       |0        |0          |160       |8,000      |1,980           
+|5        |30m    |0          |6,000     |0        |0          |180       |18,000     |3,000           
+|6        |2h     |0          |300,000   |0        |0          |200       |35,000     |4,500           
+|7        |6h     |0          |3,000,000 |0        |0          |220       |100,000    |10,020          
+|8        |24h    |0          |4,000,000 |0        |0          |240       |250,000    |25,020          
+|9        |2d     |0          |6,000,000 |0        |0          |260       |400,000    |40,020          
+|==========================================================================================================
+
+==== Solar Plant ====
+
+[options="header,compact"]
+|==========================================================================================================
+|Lvl    5+|Costs                                          3+|Stats
+|         |*Time* |*Crystals* |*Gass*    |*Energy* |*Uranium*  |*Health*  |*Capacity* |*Rate*  
+|1        |9s     |50         |50        |0        |0          |100       |600        |600             
+|2        |36s    |50         |50        |0        |0          |120       |1,800      |900             
+|3        |1m 30s |75         |75        |0        |0          |140       |4,000      |1,320           
+|4        |5m     |425        |425       |0        |0          |160       |8,000      |1,980           
+|5        |30m    |3,000      |3,000     |0        |0          |180       |18,000     |3,000           
+|6        |2h     |150,000    |150,000   |0        |0          |200       |35,000     |4,500           
+|7        |6h     |1,500,000  |1,500,000 |0        |0          |220       |100,000    |10,020          
+|8        |24h    |2,000,000  |2,000,000 |0        |0          |240       |250,000    |25,020          
+|9        |2d     |3,000,000  |3,000,000 |0        |0          |260       |400,000    |40,020          
 |==========================================================================================================
 
 ==== Reactor ====
@@ -542,14 +561,15 @@ Notes:
 |==========================================================================================================
 |Lvl    5+|Costs                                          3+|Stats
 |         |*Time* |*Crystals* |*Gass*    |*Energy* |*Uranium*  |*Health*  |*Capacity* |*Rate*  
-|1        |       |           |          |         |           |          |           |          
-|2        |       |           |          |         |           |          |           |          
-|3        |       |           |          |         |           |          |           |          
-|4        |       |           |          |         |           |          |           |          
-|5        |       |           |          |         |           |180       |18,000     |3,000/h   
-|6        |2h     |150,000    |150,000   |0        |0          |200       |35,000     |4,500/h   
-|7        |6h     |1,500,000  |1,500,000 |0        |0          |220       |100,000    |10,020/h  
-|8        |       |           |          |         |           |          |           |          
+|1        |9s     |50         |50        |0        |0          |100       |600        |600             
+|2        |36s    |50         |50        |0        |0          |120       |1,800      |900             
+|3        |1m 30s |75         |75        |0        |0          |140       |4,000      |1,320           
+|4        |5m     |425        |425       |0        |0          |160       |8,000      |1,980           
+|5        |30m    |3,000      |3,000     |0        |0          |180       |18,000     |3,000           
+|6        |2h     |150,000    |150,000   |0        |0          |200       |35,000     |4,500           
+|7        |6h     |1,500,000  |1,500,000 |0        |0          |220       |100,000    |10,020          
+|8        |24h    |2,000,000  |2,000,000 |0        |0          |240       |250,000    |25,020          
+|9        |2d     |3,000,000  |3,000,000 |0        |0          |260       |400,000    |40,020          
 |==========================================================================================================
 
 
@@ -577,11 +597,19 @@ Many thanks to the follow people of the lmao alliance for their tips and help wi
 * Lloyd, for help on finding and testing Faction vulnerabilities and Appendix II
 * Ill Be Back, for various tips
 * ManBearPig, for help on finding Faction vulnerabilities and Appendix II
+* Bkins, for Faction vulnerability and Appendix II
 
 If you've got any tips, tricks, strategies, additions to the Appendices, or anything at all, email me at ferry DOT boender AT gmail DOT com
 
 === Change history ===
 
+* v0.5
+** Added vulnerability of lvl 50 Helio base
+** Added vulnerability of lvl 250 Helio base
+** Updated Appendix II (upgrade costs)
+** Fixed battle duration before automatic retreat
+** Fixed some FIXMEs
+** Added some info about leveling up.
 * v0.4
 ** Fixed appendix II
 ** Added Battle Reports as a source of finding players.
@@ -598,10 +626,7 @@ If you've got any tips, tricks, strategies, additions to the Appendices, or anyt
 * v0.1
 ** Initial document
 
-
 // Unsorted stuff
-	// 
+// 
 // http://community.kabam.com/forums/showthread.php?32251-EdgeWorld-Building-Upgrade-Requirement-Chart
-
-
 // lvl3 titants; 2650 HP
