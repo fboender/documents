@@ -1,7 +1,7 @@
 Edgeworld Strategy guide
 ========================
 Ferry Boender
-v0.5
+v0.6
 
 Preface
 -------
@@ -222,9 +222,9 @@ Some of the PvE (Player-vs-Environment, otherwise known as the AI, NPCs and Fact
 
 At later levels (25+), destroying enemy bases will become your main method of collecting resources. 
 
-==== Trade ====
-
 The returns can be significant, and the risk of loosing troops is zero, if the warp-in is performed correctly. Try to find weaknesses in high-level Faction bases for larger returns. You can *farm resources very quickly in this way*. See Appendix 1 for a list of weak spots in Faction bases. Note that *you do not get resources by destroying Supply Depots of AI players*, unlike those of real players.
+
+==== Trade ====
 
 *Trading* resources in your alliance is a great way to get rid of excess resource of one kind while gaining resources you are low on. Ask in the alliance chat for a trade. Make sure to be clear on what you need versus what you can spare, so deals can be made quickly without confusion. *Begging for resources without trading back equally is considered bad mentality*. Some players continually beg for resources while giving or trading little back. They level up over the backs of their fellow players in an Alliance, and may get kicked out!
 
@@ -598,31 +598,34 @@ Many thanks to the follow people of the lmao alliance for their tips and help wi
 * Ill Be Back, for various tips
 * ManBearPig, for help on finding Faction vulnerabilities and Appendix II
 * Bkins, for Faction vulnerability and Appendix II
+* Sean Forehand, pointing out document discrepancies
 
 If you've got any tips, tricks, strategies, additions to the Appendices, or anything at all, email me at ferry DOT boender AT gmail DOT com
 
 === Change history ===
 
+* v0.6
+** Fixed misplacement of section header (Trade)
 * v0.5
 ** Added vulnerability of lvl 50 Helio base
 ** Added vulnerability of lvl 250 Helio base
 ** Updated Appendix II (upgrade costs)
 ** Fixed battle duration before automatic retreat
 ** Fixed some FIXMEs
-** Added some info about leveling up.
+** Added some info about leveling up
 * v0.4
 ** Fixed appendix II
-** Added Battle Reports as a source of finding players.
-** Fixed automatic withdraw during battle after X minutes.
+** Added Battle Reports as a source of finding players
+** Fixed automatic withdraw during battle after X minutes
 * v0.3
 ** Clarified Zoot's Loot section
-** Improvements to the PvP/PvE Farming.
+** Improvements to the PvP/PvE Farming
 ** Improvements and new vulnerabilities to Appendix I
 ** Added Appendix II, Building Upgrades
 * v0.2
-** Added appendix I: Vulnerabilities in Faction bases.
-** Improvements and updates on the \'Offense - Warping' In section.
-** Added info on the ability to warp in multiple times in a single attack. 
+** Added appendix I: Vulnerabilities in Faction bases
+** Improvements and updates on the \'Offense - Warping' In section
+** Added info on the ability to warp in multiple times in a single attack
 * v0.1
 ** Initial document
 
