@@ -1,7 +1,7 @@
 Edgeworld Strategy guide
 ========================
 Ferry Boender
-v0.6
+v0.7
 
 Preface
 -------
@@ -304,6 +304,9 @@ Lvl 150, Helio Legion, *Zero-loss*::
 Lvl 250, Helio Legion::
     The Level 250 Legion base has a \"weakness" in the lower-left corner as outlined by http://www.youtube.com/watch?v=b4X_dq5NiWE This can be used to gain 5 million XP, allowing you to level up very quickly. The player in the video is level 98, but success has been gotten with level 55 (or so it is claimed). 
 
+Lvl 1000, Maar Confederacy::
+    The level 1000 Maar base has a vulnerability in the South corner. The Staging Area can be taken out using (lvl1) Specters with zero losses. Gains: *9,090 XP*.
+
 // lvl 25 helio, 1 hornet, rest marines. Untested
 // lvl 25 helio, Command Center (mission?).
 // lvl 25 helio, North, lots of buildings
@@ -599,11 +602,14 @@ Many thanks to the follow people of the lmao alliance for their tips and help wi
 * ManBearPig, for help on finding Faction vulnerabilities and Appendix II
 * Bkins, for Faction vulnerability and Appendix II
 * Sean Forehand, pointing out document discrepancies
+* Cam Arnold, for Faction vulnerability.
 
 If you've got any tips, tricks, strategies, additions to the Appendices, or anything at all, email me at ferry DOT boender AT gmail DOT com
 
 === Change history ===
 
+v0.7
+** Added vulnerability of lvl1000 Maar base
 * v0.6
 ** Fixed misplacement of section header (Trade)
 * v0.5
