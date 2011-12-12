@@ -438,6 +438,9 @@ Here are the program so you can download them and play with it a bit (ignore the
 
 * http://www.electricmonk.nl/docs/evolutionary_algorithm/evo_simple.py[Simple Algorithm]
 * http://www.electricmonk.nl/docs/evolutionary_algorithm/evo_better.py[Better Algorithm]
+* http://www.electricmonk.nl/docs/evolutionary_algorithm/evo_clean.py[Clean Algorithm]
+
+The Clean Algorithm is a clean implementation which allows the user to easily change the parameters (fitness, mutation probability, mutation distance, etc) of the algorithm.
 
 == Further reading ==
 
