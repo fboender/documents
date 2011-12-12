@@ -101,5 +101,15 @@ div.image-title {
 	font-style: italic;
 	font-size: small;
 }
-
+td {
+	padding: 2px 2px 2px 2px;
+}
+p.table {
+	padding: 0px;
+	margin: 0px;
+}
+div.quoteblock {
+    margin-left: 30px;
+    font-style: italic;
+}
 /* vim: set ft=css ts=4 sw=4 noexpandtab: */
