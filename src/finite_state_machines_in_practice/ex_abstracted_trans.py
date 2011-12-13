@@ -11,7 +11,9 @@ class Transducer(object):
         for symbol in self.input:
             method = getattr(self, 'state_%s' % (self.cur_state), None)
             if not method:
-                raise TransducerError('No method handler found for state \'%s\'' % (self.cur_state))
+                raise TransducerError(
+                    'No method handler found for state \'%s\'' % (self.cur_state)
+                )
             method(symbol)
         return(self.output)
 
