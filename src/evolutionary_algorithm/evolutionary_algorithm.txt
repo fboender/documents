@@ -1,7 +1,7 @@
 Evolutionary Algorithm: Evolving "Hello, World!"
 ================================================
 Ferry Boender
-1.0, Oct 01, 2011
+1.0, Dec 13, 2011
 :Author Initials: FB
 
 Preface
@@ -9,7 +9,7 @@ Preface
 
 My interest in Evolutionary Algorithms started when I read link:http://www.damninteresting.com/on-the-origin-of-circuits/[On the Origin of Circuits] over at DamnInteresting.com. I always wanted to try something like that out for myself, but never really found the time. Now I have, and I think I've found some interesting results.
 
-*Disclaimer*: I know next to nothing about Evolutionary Algorithms. Everything you read in here is the product of my own imagination and tests. I may use the wrong algorithms, nomenclature, methodology and might just be getting very bad results. They are, however, interesting to me, and I do know something about evolution, so here it is anyway.
+*Disclaimer*: I know next to nothing about Evolutionary Algorithms. Everything you read in here is the product of my own imagination and tests. I may use the wrong algorithms, nomenclature, methodology and might just be getting very bad results. They are, however, interesting to me, and I do know something about evolution, so here it is anyway. After writing this article I have gone over it once more and have added the correct names (crossover, elitism, etc) to the corresponding sections.
 
 How Evolution Works
 -------------------
