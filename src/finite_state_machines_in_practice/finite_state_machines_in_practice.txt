@@ -54,11 +54,23 @@ The *Acceptors/Recognisers* read bits of input and in the end tell you only if t
 
 *Transducer* on the other hand continuously read pieces of input and for each piece of input produce either some output or nothing. What it produces can depend on the input and the current state of the machine. A good example of this is a string parser that allows the user to enclose a part of the string in quotes so that it is treated as a single item. On the Unix shell this is used to refer to file names with a space in them. The State Machine reads one character at a time. When a space is read, it assumes a new element is starting. If it encounters a quote, it enters the QUOTED state. Any characters read while in the QUOTED state are assumed to be part of the same element. When another quote is encountered, the State Machine transitions to the UNQUOTED state.
 
+A simple acceptor example
+-------------------------
+
+Acceptors are, in my humble opinion, less useful than transducers. Still, let's look at a simple example of an acceptor, using the above mentioned Dutch ZIP code example. 
+
+--------------------------------------------------------------------------------
+include::ex_acceptor.py[]
+--------------------------------------------------------------------------------
+
+This acceptor state machine has two states: numeric and alpha. The state machine starts in the numeric state, and starts reading the characters of the string to check. If invalid characters are encountered during any of the states, the function returns with a +False+ value, rejecting the input as invalid.
+
+In this example we do not check the maximum allowed length of the two parts of the ZIP code. The example is merely to demonstrate a potential Acceptor State Machine. This problem would obviously be better solved with a regular expression (which incidentally are usually implemented using State Machines).
 
 A simple transducer example
 ---------------------------
 
-Let's look at an example of a simple state machine. I've already mentioned the quote-example, so here it is in the flesh:
+Let's look at an example of a simple transducer state machine. I've already mentioned the quote-example, so here it is in the flesh:
 
 --------------------------------------------------------------------------------
 include::ex_simple.py[]
@@ -120,7 +132,7 @@ This example produces the following output:
 
 	{'where': ['a', '>', '5'], 'from': ['table'], 'order': ['b'], 'select': ['a,', 'b']}
 
-Of course this example is far from complete. It lacks proper syntax checking, is case-sensitive and doesn't properly sanitize various values. It demonstrates how one could create a very clear parser for structured statements.
+Of course this example is far from complete. It lacks proper syntax checking, is case-sensitive and doesn't properly sanitize various values. It demonstrates how one could create a very clear parser for structured statements. In the real world, the program would have access to which fields and tables are available, which can be used to check the parameters to the various SQL elements.
 
 Conclusion
 ----------
