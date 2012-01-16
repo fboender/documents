@@ -1,7 +1,7 @@
 Edgeworld Strategy guide
 ========================
 Ferry Boender
-v0.7
+v0.8
 
 Preface
 -------
@@ -290,7 +290,7 @@ Lvl 50, Helio Legion *Zero-loss / Minimal-loss*::
 	Weak spot in the North corner. The exposed reactor can be taken out with Specters (lvl1) without them getting hit. An alternative strategy is to first send in 2 rhino's (lvl4). Once they've attracted the attention of the defense, quickly drop in a raider from the North corner as close to the reactor as possible. One hit to the Reactor from the Raider is enough. After that, drop in the Specters from a distance to take out the reactor for double the uranium. You will probably lose the rhinos and the raider, but at 60,000 Uranium, those are acceptable losses. Gains: *30,000 - 60,000 Uranium*.
 
 Lvl 50, Helio Legion *Minimal-loss*::
-    Weak spot in the south-corner. Drop three Rhinos (lvl..) in just below the warp gate. Once the Rhinos have the Tesla and Gun Turret distracted, drop in a bunch of Specters close to the warp gate. Make sure to leave enough warp-in space for another one or two Rhinos, and drop them in when the other rhinos get distroyed. The Specters will take out the defenses and will then advance into the center of the base. They can take out the Reactors and Command Center easily. Retreat once they come into range of the Gun Turrets at the top. Gains: *XP: 12,444, 450,000 Uranium*.
+    Weak spot in the south-corner. Drop three Rhinos (lvl..) in just below the warp gate. Once the Rhinos have the Tesla and Gun Turret distracted, drop in a bunch of Specters close to the warp gate. Make sure to leave enough warp-in space for another one or two Rhinos, and drop them in when the other rhinos get distroyed. The Specters will take out the defenses and will then advance into the center of the base. They can take out the Reactors and Command Center easily. Retreat once they come into range of the Gun Turrets at the top. Gains: *XP: 12,444, 450,000 Uranium*. *UPDATE:* This vulnerability has been nerfed. An incendiary turret has been added to the defenses to make it more difficult to advance with few losses.
 
 //Lvl 50, Erazi Syndicate::
 //	Weak spot in the South-West. To the left-bottom of the staging area is a single turret vulnerable to sniper fire. With minimal losses, you can destroy the turret quickly and then snipe out two tesla coils and the staging area. Gains: *??? XP*
@@ -300,9 +300,6 @@ Lvl 100, Erazi Syndicate, *Zero-loss*::
 
 Lvl 150, Helio Legion, *Zero-loss*::
 	Weak spot in the North corner. The barracks are weakly protected, and can be destroyed with Specters (lvl1). Gains: *1,300 XP*
-
-Lvl 250, Helio Legion::
-    The Level 250 Legion base has a \"weakness" in the lower-left corner as outlined by http://www.youtube.com/watch?v=b4X_dq5NiWE This can be used to gain 5 million XP, allowing you to level up very quickly. The player in the video is level 98, but success has been gotten with level 55 (or so it is claimed). 
 
 Lvl 1000, Maar Confederacy::
     The level 1000 Maar base has a vulnerability in the South corner. The Staging Area can be taken out using (lvl1) Specters with zero losses. Gains: *9,090 XP*.
@@ -603,11 +600,15 @@ Many thanks to the follow people of the lmao alliance for their tips and help wi
 * Bkins, for Faction vulnerability and Appendix II
 * Sean Forehand, pointing out document discrepancies
 * Cam Arnold, for Faction vulnerability.
+* madstork91, for Faction vulnerability updates.
 
 If you've got any tips, tricks, strategies, additions to the Appendices, or anything at all, email me at ferry DOT boender AT gmail DOT com
 
 === Change history ===
 
+v0.8
+** Updated Lvl 50 Helio vulnerability.
+** Removed lvl 250 Helio vulnerability.
 v0.7
 ** Added vulnerability of lvl1000 Maar base
 * v0.6
