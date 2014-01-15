@@ -1,14 +1,17 @@
 Edgeworld Strategy guide
 ========================
-Ferry Boender
-v0.8
+:author:    Ferry Boender
+:email:     ferry.boender@electricmonk.nl
+:revdate:   Jan 15, 2014
+:revnumber: 0.9
+
 
 Preface
 -------
 
 This is a small strategy guide for Edgeworld, most useful to newer players, but with some tips for the rest too.
 
-Got a tip? Correction? Addition to an appendix? Email me at ferry DOT boender AT gmail DOT com, and I'll add them to the guide!
+This document may be outdated and is no longer maintained by me since I no longer play the game. If you feel like taking over, see the chapter "About this document".
 
 Generic
 -------
@@ -17,7 +20,7 @@ Generic
 
 There are a bunch of ways to find players. 
 
-*The Scout & Attack Bases* screen (the little globe in the middle of your command panel). The Players PvP tab lists all players in your current sector. The Feuds PvP tab lists players you've attacked or that have attacked you. Factions PvE are computer players.
+*The Scout & Attack Bases* screen (the little warp gate in the middle of your command panel). The Players PvP tab lists all players in your current sector. The Feuds PvP tab lists players you've attacked or that have attacked you. Factions PvE are computer players.
 
 *Global, alliance and group chats* are another way to find players. You can click on players names to message and scout them or invite them to a group (more on that later). It is not possible to send resources to players via this menu. For that, see the Alliance method of finding players.
 
@@ -29,9 +32,10 @@ There are a bunch of ways to find players.
 
 === Zoot's Loot ===
 
-Once a day (??is this true? I think I may have gotten it twice a day, once in the afternoon, one just after midnight, then one in the afternoon again), you will get chance to play Zoot's Loot. Zoot offers random prizes that can include anything in the shop (??true??). Chances of getting lesser prices are higher naturally. One trick is to *refresh the webpage before playing* until enough squares contain nice prizes. This way you enhance your chances of winning something good. *Don't forget to click "Claim"* to claim your prize, or else you will lose it
+Once a day (??is this true? I think I may have gotten it twice a day, once in the afternoon, one just after midnight, then one in the afternoon again), you will get chance to play Zoot's Loot. Zoot offers random prizes that can include anything in the shop (??true??). Chances of getting lesser prices are higher naturally. 
 
 You will not get your prize immediately. The item you've won gets added to the store. You first have to find the item in the store and click the Use button before it takes effect. 
+
 
 Offense
 -------
@@ -80,6 +84,8 @@ The following troops are available:
 After having selected your troops, you must pick the spot to warp in. This is done by moving the cursor around the battlefield and clicking it in a strategic point that is allowed. If you are not allowed to warp in at a particular spot, the cursor will be red; otherwise green.
 
 A warp gate has a limit on how much troops you can warp in per attack. This limit is determined by the level of your warp gate, and the space used up by a unit. A Marine, for instances, uses up one space, while a Titan uses 4. That means if your warp gate has 20 spaces, you can only send four titant and four marines. It is therefor important to *level up your warpgate for more powerful attacks*.
+
+When your Command Center reaches level 11, you can build a second warp-gate. 
 
 You can *warp in way beyond the borders of a base*. This allows certain fast troops such as rhinos to sprint ahead and take the brunt of the attack before your other troops come into range of the enemy's defenses or to give you time to prepare for the next warp-in. Once defenses are locked on to a target, they will continue to fire until the target is dead, making rhinos and titans good cannon fodder to distract enemy defenses while you warp in more units with high damage to kill the defenses off.
 
@@ -163,11 +169,14 @@ image::ew_strat_overlap.png[]
 
 === Getting attacked ===
 
+When you are under attack from another player, you will be notified of the attack (if you are online at the moment). You cannot watch the actual battle as it progresses, but after the attack is over you will get a battle report in your mail. The battle report lists how you did in your defensive. You can hover over the blue information icons with your mouse to see which of your buildings were destroyed, what kind of troops the enemy sent and how much of them you destroyed. *Use this information to your advantage* by deducing weak spots in your base. If the enemy sent many Specters, and you lost a lot of resource mines or supply depots, it probably means you have a long-rage weak spot in your base. Try to find it and cover it with turrets. Much can be learned from the battle reports, so do not just ignore them.
+
+*UPDATE*: The information below is no longer accurate. You are no longer attacked by the AI once a day.
+
 About once a day you will get attacked by the AI. This is a random attack by a Faction, controlled by the computer. They are usually harmless and under-powered, and you get to delay the attack a bit so you can move some stuff around in your base in case you weren't prepared. The *AI always tries to attack the weakest spot* of your base.
 
 Before the AI attacks, you may want to delay the attack and collect the resources from your mines. This way, when your mines are destroyed, you do not lose the resources. (FIXME: Do you even lose resources from Faction attacks?)
 
-When you are under attack from another player, you will be notified of the attack (if you are online at the moment). You cannot watch the actual battle as it progresses, but after the attack is over you will get a battle report in your mail. The battle report lists how you did in your defensive. You can hover over the blue information icons with your mouse to see which of your buildings were destroyed, what kind of troops the enemy sent and how much of them you destroyed. *Use this information to your advantage* by deducing weak spots in your base. If the enemy sent many Specters, and you lost a lot of resource mines or supply depots, it probably means you have a long-rage weak spot in your base. Try to find it and cover it with turrets. Much can be learned from the battle reports, so do not just ignore them.
 
 === Attack Aftermath ===
 
@@ -200,7 +209,7 @@ There are three ways to get resources:
 
 * *Crystals (Blue)*. Used for upgrades of all building types except Crystal Mines themselves.
 * *Gas (Purple)*. Used for upgrades of all building types except Gas Mines themselves.
-* *Energy (Yellow)*. Used for upgrades of Concussion turrets, Tesla Coils, Warp Gates, Research Faciliies and for doing Research
+* *Energy (Yellow)*. Used for upgrades of Concussion turrets, Tesla towers, Warp Gates, Research Faciliies and for doing Research
 * *Uranium (Green)*. Used for doing upgrades of X-1 Canons and for research and training troops.
 
 A mine has both an *hourly rate* and a *storage capacity*. The hourly rate is how much the mine produces per hour. The capacity determines how much resources the mine can hold before the resources must be collected manually. This means that the higher level your mines are, the less attention you have to pay to them. A mine with capacity of 18000 and an hourly rate of 3000 can go 6 hours without you having to collect the resources.
@@ -218,7 +227,7 @@ Tips:
 
 *Destroying* enemy bases is an advantageous method of getting resources, provided you can minimize the loses of your troops. Many PvP players, even some at high levels, have badly defended bases where resources are up for the grabbing. But be aware that those with low-level defenses may have put more time in building up their offenses and may retaliate.
 
-Some of the PvE (Player-vs-Environment, otherwise known as the AI, NPCs and Factions) bases have some kind of vulnerability that makes parts of their base easy targets for grabbing resources quickly. *Farming PvE bases can make the difference between being low on resources and always having enough*. For example, the lvl 19 Helio Legion base has a weak-spot in the North-West (upper-left) corner. The two reactors can be attacked with Specters, which can stay out of reach of the Tesla Coils. 
+Some of the PvE (Player-vs-Environment, otherwise known as the AI, NPCs and Factions) bases have some kind of vulnerability that makes parts of their base easy targets for grabbing resources quickly. *Farming PvE bases can make the difference between being low on resources and always having enough*. For example, the lvl 19 Helio Legion base has a weak-spot in the North-West (upper-left) corner. The two reactors can be attacked with Specters, which can stay out of reach of the Tesla tower. 
 
 At later levels (25+), destroying enemy bases will become your main method of collecting resources. 
 
@@ -576,6 +585,8 @@ Notes:
 About This Document
 -------------------
 
+This document is available from http://www.electricmonk.nl/Writings/HomePage in HTML, PDF and Asciidoc source format.
+
 === Copyrigth & License ===
 
 This document is (C) Cpyright 2011, Ferry Boender. 
@@ -588,7 +599,7 @@ Failure to comply to one or all of the terms of this license automatically revok
 
 All brand and product names mentioned in this document are trademarks or registered trademarks of their respective holders.
 
-=== Contributions and help ===
+=== Credits ===
 
 Many thanks to the follow people of the lmao alliance for their tips and help with this document.
 
@@ -601,11 +612,13 @@ Many thanks to the follow people of the lmao alliance for their tips and help wi
 * Sean Forehand, pointing out document discrepancies
 * Cam Arnold, for Faction vulnerability.
 * madstork91, for Faction vulnerability updates.
+* Coolkidsback, Skyler Star, for updates on the game mechanics.
 
-If you've got any tips, tricks, strategies, additions to the Appendices, or anything at all, email me at ferry DOT boender AT gmail DOT com
 
 === Change history ===
 
+v0.9
+** Updates.
 v0.8
 ** Updated Lvl 50 Helio vulnerability.
 ** Removed lvl 250 Helio vulnerability.
