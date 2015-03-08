@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:y="http://www.yworks.com/xml/graphml" xmlns:yed="http://www.yworks.com/xml/yed/3" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.1/ygraphml.xsd">
+  <!--Created by yFiles for Java 2.9-->
+  <key for="graphml" id="d0" yfiles.type="resources"/>
+  <key for="port" id="d1" yfiles.type="portgraphics"/>
+  <key for="port" id="d2" yfiles.type="portgeometry"/>
+  <key for="port" id="d3" yfiles.type="portuserdata"/>
+  <key attr.name="url" attr.type="string" for="node" id="d4"/>
+  <key attr.name="description" attr.type="string" for="node" id="d5"/>
+  <key for="node" id="d6" yfiles.type="nodegraphics"/>
+  <key attr.name="Description" attr.type="string" for="graph" id="d7"/>
+  <key attr.name="url" attr.type="string" for="edge" id="d8"/>
+  <key attr.name="description" attr.type="string" for="edge" id="d9"/>
+  <key for="edge" id="d10" yfiles.type="edgegraphics"/>
+  <graph edgedefault="directed" id="G">
+    <data key="d7"/>
+    <node id="n0">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="56.0" width="515.0" x="503.0" y="194.0"/>
+          <y:Fill color="#CCFFCC" transparent="false"/>
+          <y:BorderStyle hasColor="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="10.0" fontFamily="Liberation Mono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="44.78125" modelName="internal" modelPosition="l" textColor="#000000" visible="true" width="464.875" x="10.0" y="5.609375">LOCATION:http://192.168.1.254:80/upnp/IGD.xml
+SERVER:SpeedTouch 546 5.4.0.14 UPnP/1.0 (0612BH95K)
+USN:uuid:UPnP_SpeedTouch546-1_00-14-7F-08-7E-0D::upnp:rootdevice</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n1">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="187.0" width="515.0" x="503.0" y="358.0"/>
+          <y:Fill color="#CCFFCC" transparent="false"/>
+          <y:BorderStyle hasColor="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="10.0" fontFamily="Liberation Mono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="180.71875" modelName="internal" modelPosition="l" textColor="#000000" visible="true" width="306.44921875" x="10.0" y="3.140625">&lt;device&gt;
+  &lt;serviceList&gt;
+    &lt;service&gt;
+      &lt;controlURL&gt;/ctl/IPConn&lt;/controlURL&gt;
+      &lt;SCPDURL&gt;/WANIPCn.xml&lt;/SCPDURL&gt;
+    &lt;/service&gt;
+  &lt;/serviceList&gt;
+  &lt;deviceList&gt;
+    &lt;device&gt;
+      ...RECURSION...
+    &lt;/device&gt;
+  &lt;/deviceList&gt;
+&lt;/device&gt;</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n2">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="48.0" width="515.0" x="419.0" y="280.0"/>
+          <y:Fill color="#66CCFF" transparent="false"/>
+          <y:BorderStyle hasColor="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="10.0" fontFamily="Liberation Mono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.59375" modelName="internal" modelPosition="l" textColor="#000000" visible="true" width="292.046875" x="10.0" y="15.203125">GET http://192.168.1.254:80/upnp/IGD.xml</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n3">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="48.0" width="515.0" x="419.0" y="116.0"/>
+          <y:Fill color="#66CCFF" transparent="false"/>
+          <y:BorderStyle hasColor="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="10.0" fontFamily="Liberation Mono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.59375" modelName="internal" modelPosition="l" textColor="#000000" visible="true" width="112.017578125" x="10.0" y="15.203125">HTTPU broadcast</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n4">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="125.0" width="515.0" x="419.0" y="910.8000000000001"/>
+          <y:Fill color="#66CCFF" transparent="false"/>
+          <y:BorderStyle hasColor="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="10.0" fontFamily="Liberation Mono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="112.75" modelName="internal" modelPosition="l" textColor="#000000" visible="true" width="436.0703125" x="10.0" y="6.125">POST http://192.168.0.1:40833/ctl/IPConn
+
+&lt;SOAP-ENV:Envelope xmlns:SOAP-ENV=".."&gt;
+  &lt;SOAP-ENV:Body&gt;
+    &lt;m:GetExternalIPAddress xmlns:m="...:WANIPConnection:1"&gt;
+    &lt;/m:GetExternalIPAddress&gt;
+   &lt;/SOAP-ENV:Body&gt;
+&lt;/SOAP-ENV:Envelope&gt;
+</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n5">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="116.0" width="515.0" x="503.0" y="1065.8000000000002"/>
+          <y:Fill color="#CCFFCC" transparent="false"/>
+          <y:BorderStyle hasColor="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="10.0" fontFamily="Liberation Mono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="99.15625" modelName="internal" modelPosition="l" textColor="#000000" visible="true" width="464.875" x="10.0" y="8.421875">&lt;Envelope&gt;
+  &lt;Body&gt;
+    &lt;GetExternalIPAddressResponse&gt;
+      &lt;NewExternalIPAddress&gt;212.187.48.56&lt;/NewExternalIPAddress&gt;
+    &lt;/GetExternalIPAddressResponse&gt;
+  &lt;/Body&gt;
+&lt;/Envelope&gt;</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n6">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="48.0" width="515.0" x="419.0" y="575.0"/>
+          <y:Fill color="#66CCFF" transparent="false"/>
+          <y:BorderStyle hasColor="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="10.0" fontFamily="Liberation Mono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.59375" modelName="internal" modelPosition="l" textColor="#000000" visible="true" width="292.046875" x="10.0" y="15.203125">GET http://192.168.0.1:40833/WANIPCn.xml</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n7">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="227.80000000000007" width="515.0" x="503.0" y="653.0"/>
+          <y:Fill color="#CCFFCC" transparent="false"/>
+          <y:BorderStyle hasColor="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="10.0" fontFamily="Liberation Mono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="221.5" modelName="internal" modelPosition="l" textColor="#000000" visible="true" width="493.6796875" x="10.0" y="3.150000000000091">&lt;action&gt;
+  &lt;name&gt;GetExternalIPAddress&lt;/name&gt;
+  &lt;argumentList&gt;
+    &lt;argument&gt;
+      &lt;name&gt;NewExternalIPAddress&lt;/name&gt;
+      &lt;direction&gt;out&lt;/direction&gt;
+      &lt;relatedStateVariable&gt;ExternalIPAddress&lt;/relatedStateVariable&gt;
+    &lt;/argument&gt;
+  &lt;/argumentList&gt;
+&lt;/action&gt;
+&lt;serviceStateTable&gt;
+  &lt;stateVariable sendEvents="yes"&gt;
+    &lt;name&gt;ExternalIPAddress&lt;/name&gt;
+    &lt;dataType&gt;string&lt;/dataType&gt;
+  &lt;/stateVariable&gt;
+&lt;/serviceStateTable&gt;</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+  </graph>
+  <data key="d0">
+    <y:Resources/>
+  </data>
+</graphml>
