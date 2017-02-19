@@ -1,7 +1,7 @@
 BoxBackup setup (Debian/Ubuntu)
 ===============================
 Ferry Boender
-1.1, Feb 20, 2011
+1.2, Feb 19, 2017
 :Author Initials: FB
 
 Introduction
@@ -493,13 +493,13 @@ Now we generate the configuration ourselves. We supply the +lazy+ mode parameter
     Remember to make a secure, offsite backup of your backup keys,
     as described in step 1 above. If you do not, you have no backups.
 
+IMPORTANT: As mentioned in the output, it is vital that you keep a copy of +/etc/boxbackup//bbackupd/00000001-FileEncKeys.raw+ in a secure place, otherwise you will NOT be able to restore backups!
+
 === Signing certificates ===
 
-The previous step has generated a file encryption key (+/etc/boxbackup/bbackupd/00000001-FileEncKeys.raw+) and a client SSL certificate sign request at +/etc/boxbackup/bbackupd/00000001-csr.pem+. These must be sent to the server so they can be signed and added to the server's known SSL certificates. Here we use +scp+ to copy the files to the server, but you can use any other means to get them there.
+The previous step has generated a client SSL certificate sign request at +/etc/boxbackup/bbackupd/00000001-csr.pem+. This file must be sent to the server so that it can be signed and added to the server's known SSL certificates. Here we use +scp+ to copy the file to the server, but you can use any other means to get them there.
 
-    client:/root# scp /etc/boxbackup/bbackupd/00000001-FileEncKeys.raw user@server.electricmonk.nl:
-        00000001-FileEncKeys.raw           100% 1024     1.0KB/s   00:00    
-    client:/root# scp /etc/boxbackup/bbackupd/00000001-csr.pem user@server.electricmonk.nl:
+    client:/root# scp /etc/boxbackup/bbackupd/00000001-csr.pem user@server.example.com:
         00000001-csr.pem                   100%  899     0.9KB/s   00:00    
 
 Now we must sign the certificate on the server. *Note* that the following commands are ran *on the server, not the client*. Also note that your current working directory must be the one in which we previously ran the +bbstored-certs ca init+ command. (the +ca+ directory must be present).
