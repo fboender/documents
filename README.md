@@ -3,7 +3,7 @@ Documents
 
 This is the source code (and accompanying tools, stylesheets and other matter)
 for the document I wrote. You can probably find some of them
-[https://www.electricmonk.nl/#writings](here).
+[here](https://www.electricmonk.nl/#writings).
 
 Most of these documents are written in Asciidoc. This is then converted into:
 
