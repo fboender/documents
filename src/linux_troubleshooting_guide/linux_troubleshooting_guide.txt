@@ -1,0 +1,363 @@
+Linux Troubleshooting Guide
+===========================
+Ferry Boender
+1.0, Mar 18, 2016
+:Author Initials: FB
+
+Preface
+-------
+
+Troubleshooting problems on Linux systems can be a daunting task. There are a
+multitude of tools and concepts to understand. Problems may be related to
+memory, disk, networking or applications themselves. This guide tries to cover
+the basics of troubleshooting on Linux. It covers basic guidelines for
+troubleshooting, how to gather data and what that data means and gives
+specific pointers on how to figure out what is going wrong on your machine.
+
+
+The Art Of Troubleshooting
+--------------------------
+
+=== The Science of Troubleshooting ===
+
+Troubleshooting is basically science:
+
+1. *Make observations*: First, we make observations. What error message are we
+   getting? What application does the error come from, which user, what
+   browser, what network location, etc. This includes reproducing the problem
+   to make it easier to find out and fix the problem. If the error is
+   unfamiliar, you might for instance try to google it.
+   +
+   +
+   For example, an application might complain about not being able to connect
+   to a database with the error message "Connection timed out". We determine
+   from where the application is trying to connect, and where it's trying to
+   connect to.
+
+2. *Hypothesis and prediction*: We construct a hypothesis based on our
+   observations, knowledge and experience. This is often the trickiest part
+   because our knowledge might be lacking, or worse: we may not have a clear
+   picture of the problem at all. Sometimes its a matter of guesswork. An
+   example of a hypothesis could be: "The connection is timing out because a
+   firewall is dropping the network traffic"
+   +
+   +
+   If we have a hypothesis, we can make predictions. If we suspect the
+   firewall, we should be unable to connect to the service from one location,
+   but we should be able to connect from, say, the local network. Or we
+   should be able to connect if we disable the firewall.
+
+3. *Perform an experiment*: Next we test our prediction through
+   experimentation. For instance, we disable the firewall and try to connect
+   to the service again. If its still not working (and we're sure we've
+   properly disabled the firewall), we can conclude that the firewall is not
+   the problem.
+
+We repeat these steps until we've identified the problem and solution.
+
+=== Working from First Principles ===
+
+According to Wikipedia:
+
+__
+A first principle is a basic, foundational, self-evident proposition or
+assumption that cannot be deduced from any other proposition or assumption.
+__
+
+When troubleshooting a problem, its extremely important to work from First
+Principles. In other words, we have to remove as much of the assumptions we
+generally make and stay as close to the "truth" as we can.
+
+Let's say we're troubleshooting a network problem. We have three networks: A,
+B and C. There's a service on network A that can't connect to a service on
+network C. Our assumptions might trick us into thinking the problem is with
+network C and so we test connectivity from network C or B. But the *actual*
+problem might be with network A, in which case everything might appear to work
+fine from the point of view of network B and C. Or even worse, we also see the
+problem on network B, but it's not actually the same problem!
+
+Another good example is Cron jobs. We write a shell script to clean up some
+outdated files, test it in the shell and all seems to be working fine. But
+when we run it from cron, it suddenly fails! This is because we assumed that
+the environment that cron is using is the same as the one our shell is using.
+But that's an incorrect assumption. Cronjobs have a very different
+environment. For instance, it may not have a `HOME` env var set, or the `PATH`
+may lack `/usr/sbin`.
+
+=== Reproducibility ===
+
+One of the best ways of troubleshooting a problem is being able to reproduce
+it. If we can see the problem happening for ourselves, we can easily inspect
+things, tweak settings and make changes until the problem disappears.
+
+Before being able to reproduce a problem, we often need to gather more data
+or try some experiments. We might have to ask the user for some more
+information and instruct them in how to obtain that information. Do not
+hesitate to invest time into reproducing a problem.
+
+If you're not able to reproduce the problem, and the problem isn't easy, then
+you're going to have an extremely hard time finding and fixing the problem.
+And it will be impossible to test whether you've fixed it.
+
+=== Emulate ===
+
+It is often necessary to emulate the environment in which the problem is
+occurring, in order to reproduce it. You should always do this as closely to
+the real environment as you can. Refuse the temptation to cut corners here!
+That will just cost more time in the long run.
+
+Emulating environments is a bit of an art itself. It takes a fair amount of
+knowledge of the environment to do this. For instance, in the case of Cron
+jobs failing, you have to be aware that Cron uses a different Environment as
+normal shells, and it generally also uses a different shell than your normal
+session does.
+
+Let's look at a few examples:
+
+A web application is complaining that it can't write to a file. The web
+application runs under the Apache webserver which runs as user `www-data. You
+check the permissions on the directory, and the `www-data` user which the
+does have rights to write in that directory. Now you're at a loss as to what
+the problem could be. The solution is to emulate the environment the web
+application is running in. Change to the `www-data` user using `su` and
+actually try to write something in the same directory:
+
+    fboender $ sudo su - www-data
+    www-data $ cd /var/www/mywebsite/attachments/2017
+    bash: cd /var/www/mywebsite/attachments/2017: Permission denied
+    www-data $ cd /var/wwww/mywebsite/attachments
+    bash: cd /var/www/mywebsite/attachments/: Permission denied
+
+Now you've reproduced the actual problem: The `www-data` user doesn't have
+permission to view `/var/www/mywebsite/attachments/` directory.
+
+Another example:
+
+An application is complaining that it can't connect to the MySQL database
+server:
+
+    ERROR 1045 (28000): Access denied for user 'web'@'localhost' (using password: YES)
+
+You look up the settings its using:
+
+    host=127.0.0.1
+    port=3306
+    user=web
+    password=s3cr3t
+
+You try to connect to the database:
+
+    mysql -u web -p -h localhost
+    Enter password: s3cr3t
+    mysql>
+
+That's weird, it seems to be working for us just fine? But look at the host
+we're connecting to. We're using `localhost`, while the web app is using
+`127.0.0.1`. "But those are the same, aren't they?", I hear you think. But
+MySQL treats `127.0.0.1` and `localhost` differently. If it sees `localhost`
+it will try to connect through a socket (usually in
+`/var/run/mysqld/mysqld.sock`), but if it sees `127.0.0.1`, it will try to
+connect through the network stack. So we try again:
+
+    mysql -u web -p -h 127.0.0.1
+    Enter password: s3cr3t
+    ERROR 1045 (28000): Access denied for user 'web'@'localhost' (using password: YES)
+
+Now we've reproduced the problem, and we can figure out why it's not working
+properly. In this case, MySQL needs to be reconfigured to listen on the
+network instead of a socket.
+
+The lesson here is to always emulate as closely as possible what is happening.
+Later on in this guide we'll learn more about what makes up an applications
+environment and how to reproduce that.
+
+
+=== Tips ===
+
+Some tips:
+
+Knowledge is power:
+
+* Know what you're looking at. You'll need a decent amount of knowledge on how
+  operating systems work and what information your tools are actually showing
+  you. If you think a high load means your CPUs are busy, you need to brush up
+  on your knowledge ;-)
+
+Reproducing problems:
+
+* Ask the user for more details, such as actual error messages, screenshots,
+  which software they're using and the exact steps they performed to get the
+  problem. Ask the to try those steps again, because often the problem will
+  disappear in a puff of smoke when they do.
+
+* Make sure you're actually reproducing the problem you're trying to diagnose.
+  Are you getting the exact same error message? Are you testing from the same
+  location using the same software and steps as where the problem you're
+  trying to diagnose is happening? Too often it seems you're reproducing a
+  problem, but it turns out you're actually debugging a completely different
+  thing.
+
+
+The five elements of a computer
+-------------------------------
+
+=== CPU ===
+
+A computer has one or more CPUs. Tasks such as processes and threads are
+scheduled by the kernel to be run on one of the CPUs. They are placed in a
+queue and the task at the top of the queue gets to run for a bit on a CPU.
+If there are multiple CPUs, more than one task can run at the same time. After
+running for a few milliseconds, the kernel schedules the next task to be run
+and puts the task that just ran at the back of the queue. This is called
+preemptive multitasking and a single run on a CPU is called a 'slice'. 
+
+If a task cannot continue executing, for instance because it needs to wait for
+incoming data from the disk or network, it will tell the kernel and its time
+slice will be cut short. A program that never instructs the kernel that it is
+done before its time slice is over will consume 100% CPU time of a single CPU. 
+
+There are many different ways in which tasks can be scheduled. There are
+different schedulers and tasks can get higher priority in the queue than other
+tasks. This is called a process `niceness`. Process niceness can be set with
+the `nice` command.
+
+The *load average* of a system gives us an indication about how busy the system
+is. It does *not* necessarily show how busy the CPUs are! If a process keeps
+requesting data from disk and then gives up it time share and is immediately
+rescheduled for execution, the load average will show `1.0`, even though the
+CPU may not really be doing anything at all and it's the disk activity that is
+the problem. 
+
+A load average of `1.0` usually means there is always one task waiting to be
+executed. If you have only one CPU, that means one of the CPUs is constantly
+getting tasks scheduled on it. That might still leave other CPUs available, so
+a load of 1.0 might be just fine.
+
+We can inspect the load average with the `uptime` command:
+
+     $ uptime 12:27:22 up 3 days, 15:51, 12 users,  load average: 0.11, 0.20, 0.22
+
+This shows us three load averages: `0.11`, `0.20`, and `0.22`. These are
+averages over the last 1, 5 and 15 minutes. So for these values it means one
+CPU has had a task scheduled on it for 1/5th of the time over the last 15 and
+5 minutes, but over the last minute it's only had tasks scheduled on it about
+1/10th of a single CPU. In other words, it's less busy now than it was for the
+last 5 to 15 minutes. Note that the load might be spread out over multiple
+CPUs, so load of 1.0 could mean that two processes have been keeping two CPUs
+busy for 50% of the time.
+
+A high load can indicate a few different things:
+
+* One or more processes are consuming actual CPU time.
+* One or more processes are constantly demanding data from the network or disk
+* A misbehaving process is not giving up its slice, cause high load while it's
+  not actually doing anything useful (infinite loop for example).
+
+We can get more information on CPU usage through the `top` command:
+
+    $ top
+
+image::scrsht_top.png[]
+
+The `top` command shows a constantly updating view of basic system information
+along with a list of processes. Included is information about the load, the
+tasks, the CPU, memory and swap usage and a list of processes.
+
+At the top of the output we see five lines. These display some time info and
+the load averages, summaries about the number of tasks and which state they're
+in, info about the CPU(s), information about the memory and information about
+the swap usage.
+
+The *`Tasks:`* line shows us how many processes are running, sleeping, stopped
+and zombies. You'll want to see many sleeping processes here. Sleeping doesn't
+mean these processes aren't running. They're not just not currently waiting to
+be scheduled on the CPU. Stopped processes are those that have been put in the
+background, for instance by pressing Ctrl-Z in the shell.
+
+The *`CPU(s):`* line shows an aggregate of CPUs on a single line. You can
+press the `1` key to show all CPUs separately. The numbers shown are
+percentages (0-100):
+
+* *us*: `User`: The amount of CPU used by user (non-kernel) processes that
+  haven't been niced.
+* *sy*: `System`: The amount used by system (kernel) processes.
+* *ni*: `Nice`: The amount of CPU used by user (non-kernel) processes that
+  have been niced.
+* *id*: `Idle`: How much the CPU is not doing anything. This should always be
+  100 minus the other `us`, `sy` and `ni` fields.
+* *wa*: `I/O Wait`: The percentage of time the CPU was waiting for I/O to be
+  completed.
+* *hi*: `Hardware Interrupts`: The amount spent servicing hardware interrupts.
+  Hardware interrupts are a signaling mechanism between hardware and the
+  kernel. For example, the CPU will instruct a harddisk to read some
+  information from disk. While its doing so, the CPU continues execution. When
+  the reading from disk is done, the disk sends an interrupt to the CPU.
+* *si*: `Software Interrupts`: The amount spent servicing software interrupts.
+  Software interrupts are a signaling mechanism between the kernel and
+  user-space software. Software interrupts are usually caused by the sending
+  of signals.
+* *st*: `Stolen`: Amount of CPU time stolen by the hypervisor. If you're
+  running on a virtual platform and this number is high, other VMs or the host
+  are stealing your CPU time.
+
+There are a near infinite number of ways to interpret these numbers. Here are
+a few of them:
+
+If `us` and / or `ni` is high, it means one or more user applications are busy
+on the CPU. Again, that doesn't have to mean they're actually busy crunching
+numbers or other things we'd normally associate with CPU usage. If `hi` and /
+or `si` are high, it means the applications are busy waiting for hardware such
+as disks, memory, network or peripherals. If `wa` is high, processes are
+waiting a lot for disk reads or writes.
+
+So if we're seeing high `us`, low `wa` but high `hi`, it probably means the
+application is busy with reading or writing from some piece of hardware that
+is not a disk (network, for instance).
+
+You can often get better insight by showing all CPUs (with the `1` key).
+
+The fourth and fifth line show memory usage, which we'll go into in the
+chapter.
+
+
+=== Memory ===
+
+Memory usage is probably the most complex part of any Operating System.
+*Nothing* you believe about memory usage is probably true. Everything you see,
+everything you measure, it's all nothing but a glimpse into how the kernel
+manages the memory. 
+
+* buffers
+* top
+* swap
+* free
+
+=== Disk ===
+
+*
+
+=== Networking ===
+
+
+=== Software ===
+
+context:
+
+* environment
+* user / group
+* current working dir
+* Security context (selinux, etc)
+
+how to emulate
+
+Tools
+-----
+
+
+Dump
+----
+
+* log files
+* debugging mode
+* /proc for inspecting an environment
+
