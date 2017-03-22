@@ -59,7 +59,7 @@ pre {
 	margin-left: 40px;
 	padding-left: 5px;
 }
-pre, tt {
+pre, tt, .monospaced {
 	font-family: monospace;
 	color: #353535;
 }
