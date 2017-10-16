@@ -1,7 +1,7 @@
 Apache, FastCGI and Python
 ==========================
 Ferry Boender
-1.0, Feb 12, 2009
+1.1, Oct 16, 2017
 :Author Initials: FB
 
 Preface
@@ -27,14 +27,14 @@ Assumptions:
 
 Here we go:
 
-* Install Apache mod_fastcgi and enable it. For Debian/Ubuntu:
+Install Apache mod_fastcgi and enable it. For Debian/Ubuntu:
 
 ------------------------------------------------------------------------------
-# aptitude install libapache2-mod-fastcgi
+# apt-get install libapache2-mod-fastcgi
 # a2enmod fastcgi
 ------------------------------------------------------------------------------
 
-* Modify your Virtual Host configuration:
+Modify your Virtual Host configuration:
 
 ------------------------------------------------------------------------------
 <VirtualHost *:80>
@@ -42,7 +42,7 @@ Here we go:
 
     DocumentRoot /var/www/test/htdocs/
     <Directory />
-        Options FollowSymLinks +ExecCGI
+        Options +FollowSymLinks +ExecCGI
         AllowOverride All
     </Directory>
 
@@ -54,54 +54,54 @@ Here we go:
 </VirtualHost>
 ------------------------------------------------------------------------------
 
-* Download the Python FastCGI server library:
+Install Flup, which contians a Python FastCGI server library:
 
 ------------------------------------------------------------------------------
-# cd /var/www/test/htdocs/
-# wget http://svn.saddi.com/py-lib/trunk/fcgi.py
+# pip install flup
 ------------------------------------------------------------------------------
 
-* Create a file +/var/www/test/htdocs/app.py+, and put the following in it:
+Create a file +/var/www/test/htdocs/app.py+, and put the following in it:
 
 ------------------------------------------------------------------------------
 #!/usr/bin/python
 
-import fcgi
+from flup.server.fcgi import WSGIServer
 
 def app(environ, start_response):
-     start_response('200 OK', [('Content-Type', 'text/html')])
-     return('''<html>
-     <head>
-          <title>Hello World!</title>
-     </head>
-     <body>
-          <h1>Hello world!</h1>
-     </body>
+    start_response('200 OK', [('Content-Type', 'text/html')])
+    return('''<html>
+    <head>
+         <title>Hello World!</title>
+    </head>
+    <body>
+         <h1>Hello world!</h1>
+    </body>
 </html>''')
 
-fcgi.WSGIServer(app, bindAddress = '/tmp/fcgi.sock').run()
+if __name__ == "__main__":
+    WSGIServer(app, bindAddress = '/tmp/fcgi.sock').run()
 ------------------------------------------------------------------------------
 
-* Change its permissions and ownership/group:
+Change its permissions and ownership/group:
 
 ------------------------------------------------------------------------------
 # chmod 755 /var/www/test/htdocs/app.py
 # chown www-data:www-data /var/www/test/htdocs/app.py
 ------------------------------------------------------------------------------
 
-* Make sure no old sockets remain:
+Make sure no old sockets remain:
 
 ------------------------------------------------------------------------------
 # rm /tmp/fcgi.sock
 ------------------------------------------------------------------------------
 
-* Restart Apache:
+Restart Apache:
 
 ------------------------------------------------------------------------------
 # /etc/init.d/apache2 restart
 ------------------------------------------------------------------------------
 
-* Surf to http://test/app.py.
+Surf to http://test/app.py.
 
 You should now see the +Hello World!+ message. If not, check the 'Troubleshooting' chapter, of read the rest of this document for help on troubleshooting FastCGI problems.
 
@@ -200,7 +200,7 @@ The first thing to do is to install the FastCGI Apache module.
 For Debian and Ubuntu machines, this is as easy as:
 
 ------------------------------------------------------------------------------
-# aptitude install libapache2-mod-fastcgi
+# apt-get install libapache2-mod-fastcgi
 ------------------------------------------------------------------------------
 
 For other Operating Systems, look for an Apache FastCGI package in your package repository and install it. If no package exists for your OS, you can http://www.fastcgi.com/dist/[download] and compile the FastCGI module yourself for Apache. Look in the +docs/+ directory within the archive for instructions.
@@ -253,27 +253,36 @@ You should see a line similar to the last one in the output of that command.
 
 Before we can continue our FastCGI setup, we need an actual FastCGI application. For this article, we'll create our own simple application. The application you may be trying to get to work with FastCGI might be completely different. In that case, consult the appropriate documentation for setting up that application with FastCGI, or simply continue with this example script so you at least know FastCGI is working properly.
 
-Okay, download the simple FastCGI Python handler at http://svn.saddi.com/py-lib/trunk/fcgi.py, and put it in +/var/www/test/htdocs/+.
+Okay, install Flup, which is a bunch of different wrappers around WSGI
+servers. Amongst them is a a Python FastCGI server library.
+
+------------------------------------------------------------------------------
+# pip install flup
+------------------------------------------------------------------------------
+
+Alternatively, if you don't have (or want) pip, you can just download it from
+https://pypi.python.org/pypi/flup/1.0
 
 Create a new file +/var/www/test/htdocs/app.py+, and put the following in it:
 
 ------------------------------------------------------------------------------
 #!/usr/bin/python
 
-import fcgi
+from flup.server.fcgi import WSGIServer
 
 def app(environ, start_response):
-     start_response('200 OK', [('Content-Type', 'text/html')])
-     return('''<html>
-     <head>
-          <title>Hello World!</title>
-     </head>
-     <body>
-          <h1>Hello world!</h1>
-     </body>
+    start_response('200 OK', [('Content-Type', 'text/html')])
+    return('''<html>
+    <head>
+         <title>Hello World!</title>
+    </head>
+    <body>
+         <h1>Hello world!</h1>
+    </body>
 </html>''')
 
-fcgi.WSGIServer(app, bindAddress = '/tmp/fcgi.sock').run()
+if __name__ == "__main__":
+    WSGIServer(app, bindAddress = '/tmp/fcgi.sock').run()
 ------------------------------------------------------------------------------
 
 *Important*: The last line of the script will 'need to be changed for each different mode you wish to run in'! What the line should be will be explained further along.
@@ -289,7 +298,6 @@ Test the script by running it on the command-line:
 
 ------------------------------------------------------------------------------
 # /var/www/test/htdocs/app.py
-
 ------------------------------------------------------------------------------
 
 The application will now create a socket at +/tmp/fcgi.sock+ if it does not exist already and start its main loop. It will then wait for connections to the socket and handle them. *Make sure the application shows no errors, and that the socket at +/tmp/fcgi.sock+ exists*. The application will not exit automatically, as it is waiting for requests. It is supposed to do this.
@@ -329,7 +337,7 @@ This is basically all you have to do. You should now be able to call your applic
 In static mode with a socket, FastCGI's Process Manager creates a socket and then spawns a fixed amount of Python interpreters and scripts. The number of interpreters will not change, even if there are more requests than the amount can handle. The number of interpreters started depends on the +-processes+ parameter value. The default is 1 interpreter. If you want the script to be run in static mode, first change the last line of +app.py+ to:
 
 ------------------------------------------------------------------------------
-fcgi.WSGIServer(app, bindAddress = '/tmp/fcgi.sock').run()
+WSGIServer(app, bindAddress = '/tmp/fcgi.sock').run()
 ------------------------------------------------------------------------------
 
 Now, add the following to the virtual host configuration:
@@ -363,7 +371,7 @@ You can now point your browser to the URL +http://test/app.py+ (in our case), an
 In Static mode with a port, FastCGI's PM spawns a fixed amount of Python interpreters. To run in Static mode with a port, change the last line of +app.py+ to:
 
 ------------------------------------------------------------------------------
-fcgi.WSGIServer(app, bindAddress = ('127.0.0.1', '8080').run()
+WSGIServer(app, bindAddress = ('127.0.0.1', '8080')).run()
 ------------------------------------------------------------------------------
 
 You may want to change the port, but you shouldn't change the IP, or your application will be available to the entire network. Since Static mode does not support remote hosts anyway, this is an avoidable security issue.
@@ -388,7 +396,7 @@ In the external mode, we must first shut down Apache, and make sure the socket i
 Next, change the last line of +app.py+ to:
 
 ------------------------------------------------------------------------------
-fcgi.WSGIServer(app, bindAddress = '/tmp/fcgi.sock').run()
+WSGIServer(app, bindAddress = '/tmp/fcgi.sock').run()
 ------------------------------------------------------------------------------
 
 Now, we modify our Apache virtual host configuration, and add the following line:
@@ -427,7 +435,7 @@ In the external mode with hostname/port, we must first shut down Apache, and mak
 Next, change the last line of +app.py+ to:
 
 ------------------------------------------------------------------------------
-fcgi.WSGIServer(app, bindAddress = ('10.1.1.1', '8080')).run()
+WSGIServer(app, bindAddress = ('10.1.1.1', '8080')).run()
 ------------------------------------------------------------------------------
 
 Change the IP and port to the IP of the machine which will run your application and the port on which your application will run on.
@@ -584,7 +592,7 @@ def app(environ, start_response):
 
     return('Hello. Your name is %s' % (cgi.escape(name)))
 
-fcgi.WSGIServer(app, bindAddress = '/tmp/fcgi.sock').run()
+WSGIServer(app, bindAddress = '/tmp/fcgi.sock').run()
 ------------------------------------------------------------------------------
 
 If we now enter the URL +http://test/app.py?name=John+, our example will output:
@@ -615,7 +623,7 @@ About this document
 
 === Copyright / License ===
 
-Copyright (c) 2008, Ferry Boender
+Copyright (c) 2008-2017, Ferry Boender
 
 This document may be freely distributed, in part or as a whole, on any medium, without the prior authorization of the author, provided that this Copyright notice remains intact, and there will be no obstruction as to the further distribution of this document. You may not ask a fee for the contents of this document, though a fee to compensate for the distribution of this document is permitted.
 
