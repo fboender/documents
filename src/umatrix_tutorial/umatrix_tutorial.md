@@ -4,16 +4,21 @@
 
 ## About
 
-umatrix is a content blocker and filter plugin for Firefox, Chrome and Opera.
+Umatrix is a content blocker and filter plugin for Firefox, Chrome and Opera.
 It gives the user fine-grained control over blocking and allowing of cookies,
-css, images, media, scripts, XHR, frames and other requests done by the
-browser. Effectively, it replaces cookie blockers, ad blockers and
-script blockers, as well as all privacy enhancing extensions such as Privacy Badger.
+CSS, images, media, scripts, XHR, frames and other requests done by the
+browser. Think of it as a firewall for your browser. Effectively, it replaces
+cookie blockers, ad blockers and script blockers, as well as all privacy
+enhancing extensions such as Privacy Badger.
 
-umatrix is an extremely powerful tool and unfortunately that means it comes
+Because umatrix blocks everything by default, you always remain in control of
+exactly what each website is allowed to do. Many sites will of course break,
+but umatrix makes it easy to unblock things either by default or on a
+site-by-site basis.
+
+Umatrix is an extremely powerful tool and unfortunately that means it comes
 with a bit of a learning curve. This tutorial tries to make that learning
 curve a little less steep.
-
 
 ## First steps
 
@@ -34,9 +39,10 @@ Whenever you visit a site, the icon will change to show what's being blocked
 and what is being allowed. Clicking on the icon brings up the filtering
 interface for that website.
 
-For this tutorial I'll be using [an article from The
-Independent](http://www.independent.co.uk/news/world/americas/puerto-rico-latest-drinking-water-aid-response-superfund-dorado-site-a8000686.html)
-as the sites which we'll be blocking and allowing content on.
+For this tutorial I'll use 
+[the first article](http://www.independent.co.uk/news/world/americas/puerto-rico-latest-drinking-water-aid-response-superfund-dorado-site-a8000686.html)
+I found on reddit's front page as the site which we'll be blocking and
+allowing content on.
 
 If we click the umatrix icon, the main interface pops up:
 
@@ -68,7 +74,7 @@ I've labeled each element with a number. Here's what those numbers mean:
    columns of the "All" row lets you toggle blocking of that resource for all
    rows in the matrix. 
 10. **Domain dividers** are marked by a larger border between rows than other
-    rows. This subdivides the matrix into areas that have affect on a single
+    rows. This subdivides the matrix into areas that have effect on a single
     domain. The top row in a subdivision toggles blocking for all subdomains
     in that division.
 11. The **All Cell**, when clicked, toggles between blocking and allowing
@@ -83,17 +89,6 @@ I've labeled each element with a number. Here's what those numbers mean:
     column point to either manaully blocked or filter list blocked domains.
     Umatrix supports filter lists just like most ad blockers do.
 
-## Colors
-
-Umaxtrix shows cells with different colors:
-
-* **light-red**: The resource is blocked by default.
-* **dark-red**: The resource has been manually set to be blocked. Dark-red
-  in the domain column (the first one) means that website is being blocked by
-  a block list.
-* **light-green**: The resource is allowed by default.
-* **Dark-green**: The resource has been manually set to be allowed.
-
 ## Rows, Columns and cells
 
 Like all matrices, or tables if you will, umatrix consists of rows, columns
@@ -101,6 +96,15 @@ and cells. Each can be clicked in the top and bottom part of the cell. The top
 of the cell unblocks that resource and the bottom of the cell blocks it:
 
 ![](ani_cell.gif)
+
+Umatrix shows cells with different colors:
+
+* **light-red**: The resource is blocked by default.
+* **dark-red**: The resource has been manually set to be blocked. Dark-red
+  in the domain column (the first one) means that website is being blocked by
+  a block list.
+* **light-green**: The resource is allowed by default.
+* **Dark-green**: The resource has been manually set to be allowed.
 
 The columns in the "All" row block or unblock that resource for all rows:
 
@@ -124,22 +128,30 @@ wanted to selectively allow scripts from "static.independent.co.uk" and
 "www.independent.co.uk", we can click in the top part of those cells and hit
 reload to refresh the current page.
 
-   ![](ani_cell_save.gif)
+![](ani_cell_save.gif)
 
-If you do so, you may notice new rows appearing in the matrix. Scripts may try
-to load additional resources, which may be blocked by umatrix. Once we are
+We can also enable whole sections at once by clicking the top of the cell in
+the first row of a section:
+
+![](ani_sections.gif)
+
+After reloading, you may notice new rows appearing in the matrix. Scripts may
+try to load additional resources, which may be blocked by umatrix. Once we are
 satisfied with our changes, we can click the "Save" icon to save those changes
 for next time we visit this website.
 
 You may have noticed the tiny little triangle in the top-left corner of each
-cell. That triangle indicates the default value for that cell.
+cell. That triangle indicates the default value for that cell. If you click
+the `Revert` button (the little eraser), the cell will revert to the color in
+this little corner.
 
 ## The Scope selector
 
-This is the scope selector. It determines on what level blocking and
-unblocking elements has an effect. Clicking it brings up a popup:
+The blue cell in the top left corner is the scope selector. It determines on
+what level blocking and unblocking elements has an effect. Clicking it brings
+up a pop-up:
    
-   ![](scope_selector.png)
+![](scope_selector.png)
 
 As you can see there are three scopes: "`*`" is the global scope. If you
 select this scope and block a resource or group of resources (such as a cookie
@@ -161,12 +173,40 @@ normal scope:
 
 ![](ani_scope_1stparty.gif)
 
-We see that the images and css are now enabled for `*.independent.co.uk`. If
+We see that the images and CSS are now enabled for `*.independent.co.uk`. If
 we browse to a different site, such as `github.com`, we'd see that images and
-css are allowed for `*.github.com`.
+CSS are allowed for `*.github.com`.
 
-If we want to allow css and image loading for every domain, regardless of
+If we want to allow CSS and image loading for every domain, regardless of
 whether it's a first party domain:
 
 ![](ani_scope_allcols.gif)
 
+You won't be using the scope selector much, except for when you just installed
+umatrix and want to set some defaults. I suggest blocking everything by
+default and only enabling CSS and images for first-party sites by default (the
+"`*`" scope). Don't forget to save your changes!
+
+## Conclusion
+
+You should now have a decent idea on how to use umatrix:
+
+1. Set your personal default blocking preferences in the "`*`" scope, save
+   your changes and switch back to the default scope.
+1. Visit a website.
+1. Unblock blocked requests if the site does not work properly.
+1. Reload using the "reload" button.
+1. Repeat until the site works for you.
+1. Save your changes if you'll be visiting this site again.
+
+Within a few hours of browsing, most of your regular sites will work properly.
+
+Don't forget that once you're used to umatrix, you don't need any other
+blocking extensions anymore! You can get rid of *ublock origin*, *privacy
+badger*, *noscript*, and any other extension you may have installed to protect
+you.
+
+One tip before this article ends: You may want to install the 
+[Mercury Reader plugin](https://chrome.google.com/webstore/detail/mercury-reader/oknpjjbmpnndlpmnhmekjpocelpnlfdi?hl=en)
+for Chrome. It lets you view articles without all the clutter. It works great
+in combination with umatrix.
