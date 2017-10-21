@@ -1,0 +1,83 @@
+<style>
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+/* Generic elements */
+body { line-height: 1.4em; font-family: 'Roboto', sans-serif; font-weight: 300; margin: 0px auto 0px auto; max-width: 900px; padding-left: 24px; padding-right: 24px; }
+b, strong { font-weight: bold; }
+i, em { font-style: italic; }
+a { color: #004C9E; text-decoration: None; border-bottom: 1px solid #C0C0C0; }
+pre { margin: 1.5em 0em 1.5em 0em; font-family: monospace; background-color: #404040; color: #FFFFFF; padding: 10px 16px 10px 16px; }
+code, tt { font-family: monospace; }
+p { margin: 0.6em 0em 0.6em 0em;  text-align: justify; }
+img { margin: 1.5em 0em 1.5em 0em; max-width:100%; }
+blockquote { margin-left: 1em; border-left: 4px solid #D0D0D0; padding-left: 1em; color: #707070; }
+
+/* Heading */
+h1 { font-weight: bold; font-size: 3em; margin: 3em 0em 3em 0em; line-height: 1.4em; }
+h2 { font-weight: bold; font-size: 2em; margin: 1.5em 0em 1.5em 0em; line-height: 1.4em; }
+h3 { font-weight: bold; font-size: 1.2em; margin: 1.5em 0em 1.5em 0em; line-height: 1.4em; }
+h4 { font-style: italic; font-size: 1.2em; margin: 1.5em 0em 1.5em 0em; line-height: 1.4em; }
+
+/* Headings in the header (title, author, date). Overrides Headings above */
+div#header h2 { font-weight: bold; font-size: 1.2em; margin-bottom: 0; }
+div#header h3 { font-weight: normal; font-size: 1.2em; margin-top: 0; }
+
+/* Lists */
+ol { list-style: decimal; margin-left: 48px; margin-bottom: 1em; }
+ul { list-style: square; margin-left: 48px; margin-bottom: 1em; }
+ul li * { color: #000000; }
+ul li a { color: #004C9E; }
+ul li p { margin-bottom: 0.8em; }
+
+/* Tables */
+table { margin: 1.5em 0em 1.5em 0em; }
+tr.header { border-bottom: 2px solid #000000; }
+tr.header th { padding: 5px; font-weight: bold; }
+td { padding: 5px 10px 5px 10px; }
+tr.even { background-color: #F0F0F0; }
+
+/* vim: set ft=css ts=4 sw=4 noexpandtab: */
+</style>
