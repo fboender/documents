@@ -26,7 +26,8 @@ b, strong { font-weight: bold; }
 i, em { font-style: italic; }
 a { color: #004C9E; text-decoration: None; border-bottom: 1px solid #C0C0C0; }
 pre { margin: 1.5em 0em 1.5em 0em; font-family: monospace; background-color: #404040; color: #FFFFFF; padding: 10px 16px 10px 16px; }
-code, tt { font-family: monospace; }
+code, tt { font-family: monospace; background-color: #F0F0F0; }
+pre code { background-color: #404040; }
 p { margin: 0.6em 0em 0.6em 0em;  text-align: justify; }
 img { margin: 1.5em 0em 1.5em 0em; max-width:100%; }
 blockquote { margin-left: 1em; border-left: 4px solid #D0D0D0; padding-left: 1em; color: #707070; }
