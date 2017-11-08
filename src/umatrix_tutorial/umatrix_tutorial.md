@@ -153,12 +153,13 @@ up a pop-up:
    
 ![](scope_selector.png)
 
-As you can see there are three scopes: "`*`" is the global scope. If you
-select this scope and block a resource or group of resources (such as a cookie
-or all scripts), that block will be applied on every website. Think of it as
-the **default blocking settings**. To change them, select the "`*`" scope,
-make your changes and hit the save button. Afterwards, you'll want to switch
-back to the second scope ("independent.co.uk" in this case).
+As you can see there are three scopes: "`*`" is the global scope,
+"`independent.co.uk`" is the 1st-party scope (domain) and
+"`www.independent.co.uk`" is the current site scope.
+
+The scope determines to which site the blocks and unblocks in the matrix
+*apply*, while the various domain rows determines which domains the site may
+make requests to. 
 
 Say we start with all resources blocked for everything. Now, we want to enable
 the loading of images and CSS, but *only* for 1st party domains. So if we
@@ -182,10 +183,31 @@ whether it's a first party domain:
 
 ![](ani_scope_allcols.gif)
 
-You won't be using the scope selector much, except for when you just installed
-umatrix and want to set some defaults. I suggest blocking everything by
-default and only enabling CSS and images for first-party sites by default (the
-"`*`" scope). Don't forget to save your changes!
+A few more examples:
+
+* We visit `www.independent.co.uk`. On scope `www.independent.co.uk` we
+  unblock `media` for the `independent.co.uk` domain / row.
+  `www.independent.co.uk` may now load media from `independent.co.uk`.
+  However, `independent.co.uk`'s blocks and unblocks have not changed, so if
+  we were to visit `independent.co.uk`, it will not have any new rights.
+* We visit `www.independent.co.uk`. On scope `independent.co.uk` we unblock
+  `media` for the `independent.co.uk` domain / row. We see that this also
+  enabled media for all other domains under `independent.co.uk` as multiple
+  rows turn green. Now site `independent.co.uk` as well as any other site
+  under it may load media from any other domain under `independent.co.uk`.
+* On scope "`*`", we unblock CSS for the 1st-party row. Now any site may
+  request any CSS from any of the other sites in that domain. For example,
+  `www.independent.co.uk` may request CSS from `independent.co.uk` or from
+  `css.independent.co.uk`.
+* On scope "`*`", we unblock scripts for `cdn.coolscripts.com`. Any site can
+  now request and run scripts from `cdn.coolscripts.com`.
+
+I suggest blocking everything by default and only enabling CSS and images for
+first-party sites by default (the "`*`" scope). This will break a fair amount
+of sites. You could chose to allow CSS and images from all sites. This will
+make many sites work a lot better, but you can still be tracked by all those
+sites. Umatrix puts the amount of convenience you're willing to sacrifice for
+security and privacy entirely in your own hands.
 
 ## Conclusion
 
