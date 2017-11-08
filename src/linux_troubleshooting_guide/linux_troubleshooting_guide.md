@@ -1,8 +1,6 @@
-Linux Troubleshooting Guide
-===========================
-Ferry Boender
-1.0, Mar 18, 2016
-:Author Initials: FB
+% Linux Troubleshooting Guide
+% Ferry Boender
+% October 16, 2017
 
 Preface
 -------
@@ -18,51 +16,51 @@ specific pointers on how to figure out what is going wrong on your machine.
 The Art Of Troubleshooting
 --------------------------
 
-=== The Science of Troubleshooting ===
+### The Science of Troubleshooting
 
 Troubleshooting is basically science:
 
-1. *Make observations*: First, we make observations. What error message are we
-   getting? What application does the error come from, which user, what
+1. **Make observations**: First, we make observations. What error message are
+   we getting? What application does the error come from, which user, what
    browser, what network location, etc. This includes reproducing the problem
    to make it easier to find out and fix the problem. If the error is
-   unfamiliar, you might for instance try to google it.
-   +
-   +
+   unfamiliar, you might for instance try to google it.\
+   \
    For example, an application might complain about not being able to connect
    to a database with the error message "Connection timed out". We determine
    from where the application is trying to connect, and where it's trying to
    connect to.
 
-2. *Hypothesis and prediction*: We construct a hypothesis based on our
+2. **Hypothesis and prediction**: We construct a hypothesis based on our
    observations, knowledge and experience. This is often the trickiest part
    because our knowledge might be lacking, or worse: we may not have a clear
    picture of the problem at all. Sometimes its a matter of guesswork. An
    example of a hypothesis could be: "The connection is timing out because a
-   firewall is dropping the network traffic"
-   +
-   +
+   firewall is dropping the network traffic".\
+   \
    If we have a hypothesis, we can make predictions. If we suspect the
    firewall, we should be unable to connect to the service from one location,
    but we should be able to connect from, say, the local network. Or we
    should be able to connect if we disable the firewall.
 
-3. *Perform an experiment*: Next we test our prediction through
+3. **Perform an experiment**: Next we test our prediction through
    experimentation. For instance, we disable the firewall and try to connect
    to the service again. If its still not working (and we're sure we've
    properly disabled the firewall), we can conclude that the firewall is not
    the problem.
 
-We repeat these steps until we've identified the problem and solution.
+We repeat these steps until we've identified the problem and solution. This
+may mean we have to add additional instrumentation to make better observations
+before we can properly diagnose a problem. For example, we may turn on debug
+logging in an application so we can better diagnose the problem next time it
+happens.
 
-=== Working from First Principles ===
+### Working from First Principles
 
 According to Wikipedia:
 
-__
-A first principle is a basic, foundational, self-evident proposition or
-assumption that cannot be deduced from any other proposition or assumption.
-__
+> A first principle is a basic, foundational, self-evident proposition or
+> assumption that cannot be deduced from any other proposition or assumption.
 
 When troubleshooting a problem, its extremely important to work from First
 Principles. In other words, we have to remove as much of the assumptions we
@@ -84,7 +82,11 @@ But that's an incorrect assumption. Cronjobs have a very different
 environment. For instance, it may not have a `HOME` env var set, or the `PATH`
 may lack `/usr/sbin`.
 
-=== Reproducibility ===
+If you cannot reproduce a problem or find its cause, there's a good chance
+that you've made a wrong assumption somewhere. It's often easiest (and
+quickest) to return to first principles. I.e. start over at the beginning.
+
+### Reproducibility
 
 One of the best ways of troubleshooting a problem is being able to reproduce
 it. If we can see the problem happening for ourselves, we can easily inspect
@@ -99,7 +101,7 @@ If you're not able to reproduce the problem, and the problem isn't easy, then
 you're going to have an extremely hard time finding and fixing the problem.
 And it will be impossible to test whether you've fixed it.
 
-=== Emulate ===
+### Emulate
 
 It is often necessary to emulate the environment in which the problem is
 occurring, in order to reproduce it. You should always do this as closely to
@@ -115,21 +117,27 @@ session does.
 Let's look at a few examples:
 
 A web application is complaining that it can't write to a file. The web
-application runs under the Apache webserver which runs as user `www-data. You
-check the permissions on the directory, and the `www-data` user which the
-does have rights to write in that directory. Now you're at a loss as to what
-the problem could be. The solution is to emulate the environment the web
-application is running in. Change to the `www-data` user using `su` and
-actually try to write something in the same directory:
+application runs under the Apache webserver which runs as user `www-data`. You
+check the permissions on the directory, and the `www-data` user which the does
+have rights to write in that directory. 
 
-    fboender $ sudo su - www-data
-    www-data $ cd /var/www/mywebsite/attachments/2017
-    bash: cd /var/www/mywebsite/attachments/2017: Permission denied
-    www-data $ cd /var/wwww/mywebsite/attachments
-    bash: cd /var/www/mywebsite/attachments/: Permission denied
+    root # ls -la /var/www/mywebsite/attachments/2017
+    total 24
+    drwxr-xr-x  6 www-data www-data 4096 Oct 21 14:23 .
+    drwxr-xr-x 13 www-data www-data 4096 Jan 11  2017 ..
+
+Now you're at a loss as to what the problem could be. The solution is to
+emulate the environment the web application is running in. Change to the
+`www-data` user using `su` and actually try to write something in the same
+directory:
+
+    root # sudo su - www-data
+    www-data $ cd /var/www/
+    root # cd website
+    bash: cd website: Permission denied
 
 Now you've reproduced the actual problem: The `www-data` user doesn't have
-permission to view `/var/www/mywebsite/attachments/` directory.
+permission to view `/var/www/mywebsite/` directory.
 
 Another example:
 
@@ -165,14 +173,16 @@ connect through the network stack. So we try again:
 
 Now we've reproduced the problem, and we can figure out why it's not working
 properly. In this case, MySQL needs to be reconfigured to listen on the
-network instead of a socket.
+network instead of a socket. Side-note: MySQL still reports us as connecting
+from "localhost". This is because `127.0.0.1` is resolved into `localhost`
+when MySQL display the error. I consider this a bug in MySQL.
 
 The lesson here is to always emulate as closely as possible what is happening.
 Later on in this guide we'll learn more about what makes up an applications
 environment and how to reproduce that.
 
 
-=== Tips ===
+### Tips
 
 Some tips:
 
@@ -182,6 +192,21 @@ Knowledge is power:
   operating systems work and what information your tools are actually showing
   you. If you think a high load means your CPUs are busy, you need to brush up
   on your knowledge ;-)
+* More data means more insight. If all you have is the load average, it's
+  going to be hard to pin down the problem. If, however, you have graphs of
+  historic CPU, memory, swap and disk I/O usage going back three months, it's
+  going to be a lot easier to see if problems are recurring at, for example,
+  the same time each month.
+
+Top down or bottom up?
+
+* It's nearly always wrong to start somewhere in the middle.
+* If a problem is application specific, start from the bottom up. E.g. look at
+  the log files for that application to see if there are any errors.
+* If a problem is vague or feels like it may be hard to pin down (e.g.
+  multiple applications on different machines are suddenly slow), the best
+  approach is a top-down approach. For example, look at network graphs for the
+  entire network.
 
 Reproducing problems:
 
@@ -201,7 +226,7 @@ Reproducing problems:
 The five elements of a computer
 -------------------------------
 
-=== CPU ===
+### CPU
 
 A computer has one or more CPUs. Tasks such as processes and threads are
 scheduled by the kernel to be run on one of the CPUs. They are placed in a
@@ -257,7 +282,7 @@ We can get more information on CPU usage through the `top` command:
 
     $ top
 
-image::scrsht_top.png[]
+![](top.png)
 
 The `top` command shows a constantly updating view of basic system information
 along with a list of processes. Included is information about the load, the
@@ -320,26 +345,142 @@ The fourth and fifth line show memory usage, which we'll go into in the
 chapter.
 
 
-=== Memory ===
+### Memory
 
 Memory usage is probably the most complex part of any Operating System.
-*Nothing* you believe about memory usage is probably true. Everything you see,
-everything you measure, it's all nothing but a glimpse into how the kernel
-manages the memory. 
+*Nothing* you believe about memory usage is probably true. Memory management
+on modern OS kernels is highly complex. 
 
-* buffers
-* top
-* swap
-* free
+For example, the kernel automatically assigns unused memory to processes that
+might be able to use it for caching.  This may give the impression that we
+have very little free memory. In reality, the kernel might take away assigned
+memory from one process and give it to another if free memory becomes low.
 
-=== Disk ===
+Another thing that often throws people off is multiple of the same processes
+(say, Firefox) all using a large amount of memory. In reality, much of that
+memory may be shared between all the processes. It's difficult to say how
+much.
+
+We can view the current memory usage using the `free` command:
+
+                 total       used       free     shared    buffers     cached
+    Mem:          3.9G       3.5G       331M        65M       654M       1.6G
+    -/+ buffers/cache:       1.3G       2.5G
+    Swap:         4.0G       197M       3.8G
+
+How do we read this output? Here's a rough schematic representation of how
+memory usage works:
+
+![](memory_breakdown.png)
+
+You'll notice immediately that the numbers from the `free` command do not add
+up with the schematic representation, or even within the `free` command
+itself. This is because some, but not all, of the `buffers`, `cached` and
+`shared` memory may be counted against `used` memory. Remember, all of this is
+an approximation! I cannot give you a definitive answer on how all of this is
+calculated, because it changes with each kernel version and version of the
+`free` tool. 
+
+Let's look at the individual elements:
+
+* **RAM**
+    - **total**: This should speak for itself.
+    - **used**: This is the amount of memory actually allocated by programs. That
+      is, the programs explicitly asked the kernel for this memory. Say a program
+      wants to read a 150 Mb text file into memory. This will increase `used` by
+      150 Mb. It also includes some memory from the `buffers` and `cached`
+      memory.
+    - **free**: Memory that is completely and immediately free for use. This
+      should be low, because unused memory in a system is a waste. It does **not
+      have to mean** your system is out of memory! Lots of memory may be used by
+      buffers and caches, which could be freed by the kernel in case more memory
+      is required. The (almost) real value of how much memory is *available* is:
+      `avail = free + buffers + cache`. This is not *quite* true, because not all
+      memory in buffers and cache might be eligable to be freed.
+    - **shared**: Memory shared between processes. For example, for
+      interprocess communications (SHM). This is generally low, unless there
+      are applications running that make heavy use of shared memory.
+    - **buffers**: It's nearly impossible to find out exactly what buffers are
+      used for in Linux. Every source (including various authoritative sources)
+      says something different. In general, it seems buffers are used for, well,
+      buffering. For example, you can't write 10 bytes to a disk. A disk only
+      accepts writes in, e.g. 4kb blocks. So written contents must be buffered
+      before it is written to disk. Some of the memory in `buffers` may be
+      freed by the kernel when other processes need more memory.
+    - **cache**: Like with buffers, the story is complicated. Cache seems mostly
+      used to keep data read from disk in memory, so if it needs to be read again,
+      it won't have to be read from disk again. Most of the memory in `cached` is
+      eligible to be freed by the kernel if other processes need it.
+* **swap** memory is used when the system runs out of normal memory.
+    - **used**: Used swap memory is generally a sign that the system does not
+      have enough free memory. A small amount of used swap space is fairly
+      normal, as long running processes that don't use some of their allocated
+      memory for a long time may have that memory swapped out.
+    - **free**: Basically the reverse of `used` swap space.
+
+Notes:
+
+* Some applications use their own memory management to handle buffering and
+  caching, rather than let the kernel handle this for them. Notably Java and
+  most databases do this. They can be configured with a pre-allocated amount
+  of memory, which counts against the `used` column. If you want to get
+  insight into the memory usage of such programs, `free` may not be of too
+  much use.
+
+We can also use the `top` tool to view per process memory usage:
+
+    # Sort by RES field
+    $ top -o RES
+
+![](top_sort_res.png)
+
+Here, `top` is sorted by the `RES` field. `RES` is the resident memory used by
+the process. This is analogous with the `used` memory *minus* any extra memory
+granted to the process by the kernel for caching and such.
+
+The `VIRT` field display the memory usage *including* any additional memory
+for caching. It also included any files that have been mapped to memory. This
+is important, because some programs may map positively *huge* files into
+memory, making it look like they're using much more memory than they're
+actually using. For example, the `gnome-software` process at the bottom seems
+to be using 1.6 Gb, but is in reality only using 77 Mb with the rest of the
+usage actually mapped to file on disk.
+
+Monitoring memory and swap usage over time is a good idea. It gives insights
+that `top` and `free` can't give you. For example:
+
+![](memory_hist_stable.png)
+
+The graph above shows very stable memory usage over a period of 14 days. Most
+memory is in the `used` and `cached` categories. This machine is running a
+Java application and MySQL database, both of which largely do their own memory
+management.
+
+Here we see a different machine with a much less stable memory usage over 14
+days:
+
+![](memory_hist_unstable.png)
+
+When we look at the swap, we see some periods in which swap was being used,
+which is not a good thing:
+
+![](swap_hist_unstable.png)
+
+We can conclude that the machine needs to be tuned to prevent the use of swap
+space. We may also tweak the Java and MySQL parameters on that system so the
+memory usage stays more stable over time.
+
+
+OOM killer.
+
+### Disk
 
 *
 
-=== Networking ===
+### Networking
 
 
-=== Software ===
+### Software
 
 context:
 
@@ -360,4 +501,10 @@ Dump
 * log files
 * debugging mode
 * /proc for inspecting an environment
+* Monitoring:
+    - disk I/O activity
+    - Network activity
+    - Memory usage
+    - Swap usage
+    - CPU usage
 
