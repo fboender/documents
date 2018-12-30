@@ -1,3 +1,4 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 /* Reset.css */
 html, body, div, span, applet, object, iframe,
@@ -25,11 +26,11 @@ body { line-height: 1.4em; font-family: 'Roboto', sans-serif; font-weight: 300; 
 b, strong { font-weight: bold; }
 i, em { font-style: italic; }
 a { color: #004C9E; text-decoration: None; border-bottom: 1px solid #C0C0C0; }
-pre { margin: 1.5em 0em 1.5em 0em; font-family: monospace; background-color: #404040; color: #FFFFFF; padding: 10px 16px 10px 16px; }
-code, tt { font-family: monospace; background-color: #F0F0F0; }
-pre code { background-color: #404040; }
+code, pre, tt { font-family: monospace; font-size: 1em; }
+tt { background-color: #F0F0F0; }
+pre { margin: 1.5em 0em 1.5em 0em; background-color: #404040; color: #FFFFFF; padding: 10px 16px 10px 16px; }
 p { margin: 0.6em 0em 0.6em 0em;  text-align: justify; }
-img { margin: 1.5em 0em 1.5em 0em; max-width:100%; }
+img { max-width:100%; }
 blockquote { margin-left: 1em; border-left: 4px solid #D0D0D0; padding-left: 1em; color: #707070; }
 
 /* Heading */
@@ -55,6 +56,10 @@ tr.header { border-bottom: 2px solid #000000; }
 tr.header th { padding: 5px; font-weight: bold; }
 td { padding: 5px 10px 5px 10px; }
 tr.even { background-color: #F0F0F0; }
+
+/* Figures */
+div.figure { text-align: center; margin-top: 2em; margin-bottom: 2em; }
+div.figure p.caption { text-align: center; font-size: 0.6em; }
 
 /* vim: set ft=css ts=4 sw=4 noexpandtab: */
 </style>
