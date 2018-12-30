@@ -6,6 +6,8 @@
 #   $ bash -c ". build.sla && test"
 #
 
+ONLINE_DOCPATH="electricmonk.nl:/var/www/electricmonk.nl/htdocs/docs/"
+
 pandoc () {
     # Generate with pandoc
 
@@ -28,4 +30,19 @@ pandoc () {
 
     # Generate EPUB
     env pandoc -s -S --toc -H ../../style/pandoc/index.css "$BASENAME.md" -o "$BASENAME.epub"
+}
+
+upload () {
+    # Upload doc to electricmonk
+
+    BASENAME=$(basename $1 .md)
+    DOCDIR="src/$BASENAME/"
+    DOCPATH="src/$BASENAME/$BASENAME.md"
+    
+    if [ \! -f "$DOCPATH" ]; then
+        echo "$DOCPATH not found. Aborting"
+        exit 1
+    fi
+
+    scp -r "$DOCDIR" "$ONLINE_DOCPATH"
 }
