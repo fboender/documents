@@ -1,0 +1,31 @@
+#
+# This is a script containing functions that are used as build rules. You can
+# use the Simple Little Automator (https://github.com/fboender/sla.git) to run
+# these rules, or you can run them directly in your shell:
+#
+#   $ bash -c ". build.sla && test"
+#
+
+pandoc () {
+    # Generate with pandoc
+
+    BASENAME=$(basename $1 .md)
+    DOCDIR="src/$BASENAME/"
+    DOCPATH="src/$BASENAME/$BASENAME.md"
+    
+    if [ \! -f "$DOCPATH" ]; then
+        echo "$DOCPATH not found. Aborting"
+        exit 1
+    fi
+
+    cd "$DOCDIR"
+
+    # Generate HTML
+    env pandoc -s -S --toc -H ../../style/pandoc/index.css "$BASENAME.md" -o "$BASENAME.html"
+
+    # Generate PDF
+    env pandoc -s -S --toc  "$BASENAME.md" -o "$BASENAME.pdf"
+
+    # Generate EPUB
+    env pandoc -s -S --toc -H ../../style/pandoc/index.css "$BASENAME.md" -o "$BASENAME.epub"
+}
