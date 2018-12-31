@@ -1,6 +1,6 @@
 % Apache, FastCGI and Python
 % Ferry Boender
-% Ocotber 16 2017
+% Oct 16, 2017 (last updated Dec 31, 2018)
 
 ## Preface
 
