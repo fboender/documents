@@ -26,7 +26,7 @@ pandoc () {
     env pandoc -s -S --toc -H ../../style/pandoc/index.css "$BASENAME.md" -o "$BASENAME.html"
 
     # Generate PDF
-    env pandoc -s -S --toc  "$BASENAME.md" -o "$BASENAME.pdf"
+    env pandoc -s -S --toc -f markdown-implicit_figures "$BASENAME.md" -o "$BASENAME.pdf"
 
     # Generate EPUB
     env pandoc -s -S --toc -H ../../style/pandoc/index.css "$BASENAME.md" -o "$BASENAME.epub"
