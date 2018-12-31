@@ -51,7 +51,7 @@ ul li a { color: #004C9E; }
 ul li p { margin-bottom: 0.8em; }
 
 /* Tables */
-table { margin: 1.5em 0em 1.5em 0em; }
+table { margin: 1.5em 0em 1.5em 0em; overflow: auto; }
 tr.header { border-bottom: 2px solid #000000; }
 tr.header th { padding: 5px; font-weight: bold; }
 td { padding: 5px 10px 5px 10px; }
