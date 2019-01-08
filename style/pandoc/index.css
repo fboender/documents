@@ -29,9 +29,9 @@ a { color: #004C9E; text-decoration: None; border-bottom: 1px solid #C0C0C0; }
 code, pre, tt { font-family: monospace; font-size: 1em; }
 tt { background-color: #F0F0F0; }
 pre { margin: 1.5em 0em 1.5em 0em; background-color: #404040; color: #FFFFFF; padding: 10px 16px 10px 16px; overflow: auto; }
-p { margin: 0.6em 0em 0.6em 0em;  text-align: justify; }
+p { margin: 1.0em 0em 1.0em 0em;  text-align: justify; }
 img { max-width:100%; }
-blockquote { margin-left: 1em; border-left: 4px solid #D0D0D0; padding-left: 1em; color: #707070; }
+blockquote { margin-bottom: 2em; margin-left: 1em; border-left: 4px solid #D0D0D0; padding-left: 1em; color: #707070; }
 
 /* Heading */
 h1 { font-weight: bold; font-size: 3em; margin: 3em 0em 3em 0em; line-height: 1.4em; }
