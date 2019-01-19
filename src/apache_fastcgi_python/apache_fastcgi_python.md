@@ -1,6 +1,6 @@
 % Apache, FastCGI and Python
 % Ferry Boender
-% Oct 16, 2017 (last updated Dec 31, 2018)
+% Oct 16, 2017 (last updated Jan 19, 2019)
 
 ## Preface
 
@@ -59,7 +59,7 @@ Modify your Virtual Host configuration:
 
         DocumentRoot /var/www/test/htdocs/
         <Directory />
-            Options `FollowSymLinks `ExecCGI
+            Options FollowSymLinks +ExecCGI
             AllowOverride All
         </Directory>
 
