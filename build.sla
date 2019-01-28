@@ -23,13 +23,13 @@ pandoc () {
     cd "$DOCDIR"
 
     # Generate HTML
-    env pandoc -s -S --toc -H ../../style/pandoc/index.css "$BASENAME.md" -o "$BASENAME.html"
+    pp "$BASENAME.md" | env pandoc -s -S --toc -H ../../style/pandoc/index.css -o "$BASENAME.html"
 
     # Generate PDF
-    env pandoc -s -S --toc -f markdown-implicit_figures "$BASENAME.md" -o "$BASENAME.pdf"
+    pp "$BASENAME.md" | env pandoc -s -S --toc -f markdown-implicit_figures -o "$BASENAME.pdf"
 
     # Generate EPUB
-    env pandoc -s -S --toc -H ../../style/pandoc/index.css "$BASENAME.md" -o "$BASENAME.epub"
+    pp "$BASENAME.md" | env pandoc -s -S --toc -o "$BASENAME.epub"
 }
 
 upload () {
