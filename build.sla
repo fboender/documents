@@ -32,6 +32,22 @@ pandoc () {
     pp "$BASENAME.md" | env pandoc -s -S --toc -o "$BASENAME.epub"
 }
 
+pandoc_auto () {
+    # Watch doc and auto-build when changed
+
+    BASENAME=$(basename $1 .md)
+    DOCDIR="src/$BASENAME/"
+    DOCPATH="src/$BASENAME/$BASENAME.md"
+    
+    if [ \! -f "$DOCPATH" ]; then
+        echo "$DOCPATH not found. Aborting"
+        exit 1
+    fi
+
+    echo "$DOCPATH" | entr sla pandoc "$BASENAME"
+
+}
+
 upload () {
     # Upload doc to electricmonk
 
@@ -46,3 +62,4 @@ upload () {
 
     scp -r "$DOCDIR" "$ONLINE_DOCPATH"
 }
+
